@@ -42,7 +42,42 @@ function render(plan){
  $('external').innerHTML=Object.entries(e).map(([name,x])=>`<div class="line"><div><strong>${esc(name)}</strong><small>${esc(x.reason||'')}</small></div>${badge(x.state||'UNKNOWN')}</div>`).join('')||'<div class="empty">No external source has been polled. Configure authorized keys and a verified corridor to connect them.</div>';
  document.dispatchEvent(new CustomEvent('plan-rendered',{detail:plan}));
 }
-async function refresh(){error('');try{render(await api('/api/plan'));if(view==='decisions')loadAudit()}catch(e){error(e.message)}}
+function renderProcessMining(summary){
+  const target=$('process-mining');
+  if(!summary || summary.status === 'unavailable'){
+    target.innerHTML=`<div class="empty">PM4Py is not available in this environment: ${esc(summary?.error || 'unknown error')}</div>`;
+    return;
+  }
+  if(summary.status === 'empty'){
+    target.innerHTML='<div class="empty">No operational audit events yet. Import or approve records to build a process log.</div>';
+    return;
+  }
+  const activities = summary.activities.length ? summary.activities.map(x => `<span class="badge">${esc(x)}</span>`).join(' ') : '<span class="empty">No activities</span>';
+  const start = summary.start_activities.length ? summary.start_activities.map(([name, count]) => `<div class="line"><span>${esc(name)}</span><b>${fmt(count)}</b></div>`).join('') : '<div class="empty">No start activities</div>';
+  const end = summary.end_activities.length ? summary.end_activities.map(([name, count]) => `<div class="line"><span>${esc(name)}</span><b>${fmt(count)}</b></div>`).join('') : '<div class="empty">No end activities</div>';
+  const edges = summary.dfg.length ? summary.dfg.slice(0, 8).map(edge => `<div class="line"><span>${esc(edge.from)} → ${esc(edge.to)}</span><b>${fmt(edge.count)}</b></div>`).join('') : '<div class="empty">No flow edges identified</div>';
+  target.innerHTML = `
+    <div class="line"><div><strong>Events</strong><small>PM4Py event log</small></div>${badge(`${fmt(summary.event_count)}`)}</div>
+    <div class="line"><div><strong>Cases</strong><small>distinct process instances</small></div>${badge(`${fmt(summary.case_count)}`)}</div>
+    <div class="line"><div><strong>Activities</strong><small>distinct event labels</small></div>${badge(`${fmt(summary.activity_count)}`)}</div>
+    <div class="note">${activities}</div>
+    <div class="grid two"><div class="card"><h3>Start</h3>${start}</div><div class="card"><h3>End</h3>${end}</div></div>
+    <div class="card"><h3>Directly-follows graph</h3>${edges}</div>
+  `;
+}
+async function loadProcessMining(){
+  try {
+    const summary = await api('/api/process-mining');
+    renderProcessMining(summary);
+    $('process-overview').textContent = summary.status === 'ok'
+      ? `Observed ${fmt(summary.event_count)} events across ${fmt(summary.case_count)} cases.`
+      : 'No process-mining data available yet.';
+  } catch (e) {
+    renderProcessMining({status: 'unavailable', error: e.message});
+    $('process-overview').textContent = 'Process-mining analysis could not run.';
+  }
+}
+async function refresh(){error('');try{render(await api('/api/plan'));if(view==='decisions')loadAudit();await loadProcessMining()}catch(e){error(e.message)}}
 async function loadAudit(){try{const rows=await api('/api/audit');$('audit').innerHTML=rows.filter(r=>r.event==='DECISION').slice(0,15).map(r=>{let detail={};try{detail=JSON.parse(r.detail)}catch{}return `<div class="line"><div><strong>${esc(detail.status||r.event)} · ${esc(detail.action_id||'')}</strong><small>${esc(detail.actor||'')} · ${esc(detail.reason||'')}</small></div><small>${esc(r.at)}</small></div>`}).join('')||'<div class="empty">No decisions recorded.</div>'}catch(e){error(e.message)}}
 document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{view=button.dataset.view;document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===button));document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===view));if(view==='decisions')loadAudit()}));
 $('refresh').addEventListener('click',refresh);

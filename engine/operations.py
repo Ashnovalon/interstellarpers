@@ -372,6 +372,80 @@ class Store:
                 result[r["source"]] = {**json.loads(r["payload"]), "observed_at": r["at"]}
         return result
 
+    def process_mining_summary(self, limit=500) -> dict:
+        try:
+            import pandas as pd
+            import pm4py
+        except Exception as exc:  # pragma: no cover - depends on optional library
+            return {"status": "unavailable", "error": str(exc)}
+
+        rows = self.db.execute(
+            "SELECT at, event, detail FROM audit ORDER BY seq ASC LIMIT ?",
+            (limit,),
+        ).fetchall()
+        if not rows:
+            return {"status": "empty", "event_count": 0, "activity_count": 0, "case_count": 0,
+                    "activities": [], "start_activities": [], "end_activities": [], "dfg": []}
+
+        def event_label(event: str, detail: dict) -> str:
+            if event == "INGEST":
+                kind = str(detail.get("kind", "INGEST")).upper()
+                return f"INGEST_{kind}"
+            if event == "DECISION":
+                status = str(detail.get("status", "DECISION")).upper()
+                return f"DECISION_{status}"
+            if event == "EXTERNAL_POLL":
+                source = str(detail.get("source", "EXTERNAL")).upper()
+                return f"EXTERNAL_{source}"
+            return event
+
+        events = []
+        for row in rows:
+            detail = json.loads(row["detail"]) if row["detail"] else {}
+            case_name = "case"
+            if row["event"] == "DECISION":
+                action_id = detail.get("action_id") or detail.get("version") or "decision"
+                case_name = f"decision:{action_id}"
+            elif row["event"] == "INGEST":
+                kind = detail.get("kind") or "ingest"
+                case_name = f"ingest:{kind}"
+            elif row["event"] == "EXTERNAL_POLL":
+                source = detail.get("source") or "external"
+                case_name = f"external:{source}"
+            events.append({
+                "case:concept:name": case_name,
+                "time:timestamp": row["at"],
+                "concept:name": event_label(row["event"], detail),
+            })
+
+        frame = pd.DataFrame(events)
+        frame["time:timestamp"] = pd.to_datetime(frame["time:timestamp"], errors="coerce")
+        frame = frame.dropna(subset=["time:timestamp"]).copy()
+        if frame.empty:
+            return {"status": "empty", "event_count": 0, "activity_count": 0, "case_count": 0,
+                    "activities": [], "start_activities": [], "end_activities": [], "dfg": []}
+
+        dfg, start_activities, end_activities = pm4py.discover_dfg(
+            frame,
+            activity_key="concept:name",
+            timestamp_key="time:timestamp",
+            case_id_key="case:concept:name",
+        )
+        ordered_edges = [
+            {"from": src, "to": dst, "count": count}
+            for (src, dst), count in sorted(dfg.items(), key=lambda item: (-item[1], item[0][0], item[0][1]))
+        ]
+        return {
+            "status": "ok",
+            "event_count": int(len(frame)),
+            "case_count": int(frame["case:concept:name"].nunique()),
+            "activity_count": int(frame["concept:name"].nunique()),
+            "activities": sorted(frame["concept:name"].unique().tolist()),
+            "start_activities": sorted(start_activities.items(), key=lambda item: (-item[1], item[0])),
+            "end_activities": sorted(end_activities.items(), key=lambda item: (-item[1], item[0])),
+            "dfg": ordered_edges[:25],
+        }
+
 
 def baseline_daily(sku: str, depot: str, channel: str, catalog: dict | None = None) -> float:
     catalog = catalog or {"skus": SKUS, "depots": DEPOTS, "channels": CHANNELS}

@@ -4,8 +4,34 @@
 'use strict';
 const flavors=[['Mango Peach Basil',.38],['Guava Chilli',.20],['Passionfruit Punch',.16],['Dragonfruit Bloom',.14],['Dragon Passion',.12]];
 const depots=[['D1','Delhi','North',.13,1],['D2','Jaipur','North',.09,0],['D3','Mumbai','West',.16,1],['D4','Pune','West',.12,1],['D5','Ahmedabad','West',.08,0],['D6','Bengaluru','South',.16,1],['D7','Chennai','South',.12,0],['D8','Kolkata','East',.08,0],['D9','Bhubaneswar','East',.06,0]];
-const $=id=>document.getElementById(id);const fmt=n=>Math.round(n).toLocaleString('en-IN');const L=n=>(n/100000).toFixed(2)+' L';let decisions={};
-function compute(){const qc=+($('qc').value)||1,closure=+($('closure').value)||0,cover=+($('cover').value)||0;const hotWeight=.57,hotCandidate=qc+1,other=(qc-hotWeight*hotCandidate)/(1-hotWeight);const hot=other>=1?hotCandidate:qc,quiet=other>=1?other:qc;
+const $=id=>document.getElementById(id);const fmt=n=>Math.round(n).toLocaleString('en-IN');const L=n=>(n/100000).toFixed(2)+' L';
+const STORE_KEY='pulp-riot-approval-demo-v2';
+const readSaved=()=>{try{return JSON.parse(localStorage.getItem(STORE_KEY)||'{}')}catch{return {}}};
+const saved=readSaved();
+let decisions=saved.decisions&&typeof saved.decisions==='object'?saved.decisions:{};
+let audit=Array.isArray(saved.audit)?saved.audit:[];
+let approvedScenario=saved.scenario||null;
+const signature=()=>JSON.stringify([+$('qc').value,+$('closure').value,+$('cover').value]);
+function saveApprovals(){try{localStorage.setItem(STORE_KEY,JSON.stringify({decisions,audit,scenario:approvedScenario}))}catch{ /* temporary browser storage may be unavailable */ }}
+function logAction(action,detail){audit.push({time:new Date().toISOString(),action,detail,scenario:signature()});saveApprovals();}
+function invalidateApprovals(){
+  const next=signature();
+  if(approvedScenario&&approvedScenario!==next){
+    const changed=Object.entries(decisions).filter(([k,v])=>v!=='PENDING');
+    if(changed.length){decisions={};logAction('INVALIDATED',changed.length+' prior decisions reset after scenario change');}
+  }
+  approvedScenario=next;saveApprovals();
+}
+function exportAudit(){
+  const header=['time','action','detail','scenario'];
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const csv=[header.join(','),...audit.map(r=>header.map(k=>q(r[k])).join(','))].join('\r\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download='pulp-riot-approval-history.csv';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function compute(){invalidateApprovals();const qc=+($('qc').value)||1,closure=+($('closure').value)||0,cover=+($('cover').value)||0;const hotWeight=.57,hotCandidate=qc+1,other=(qc-hotWeight*hotCandidate)/(1-hotWeight);const hot=other>=1?hotCandidate:qc,quiet=other>=1?other:qc;
 const rows=[],byFlavor={};const normal=(1-.45*1.3-.14*.65)/.41;
 for(const [id,city,region,w,isHot] of depots)for(const [name,mix] of flavors){let base=96000000*mix/16*w,factor=1;if(name==='Dragon Passion')factor=.8+.2*(isHot?hot:quiet);else if(['Mango Peach Basil','Guava Chilli'].includes(name))factor=['D1','D3','D6'].includes(id)?1.3:(['D8','D9'].includes(id)?.65:normal);let demand=base*factor,stock=3*base,coverage=stock*7/demand,ageExposure=Math.max(0,stock-demand*23/7)*.45;rows.push({id,city,region,name,base,demand,stock,coverage,ageExposure,flag:coverage<14?'RED':coverage>23?'AGE WATCH':'OK',shortage:Math.max(0,demand*2-stock),donor:Math.max(0,stock-demand*2)});}
 let red=rows.filter(x=>x.flag==='RED').length,age=rows.filter(x=>x.flag==='AGE WATCH').length,weekly=720000*.2*(qc-1),gap=Math.max(0,weekly-250000),road=Math.max(0,closure-cover);
@@ -19,8 +45,12 @@ $('timeline').innerHTML=timeline.map(([when,title,txt])=>`<div class="time">${wh
 const donor=rows.filter(r=>r.name==='Dragon Passion'&&r.donor>0).sort((a,b)=>b.donor-a.donor),sink=rows.filter(r=>r.name==='Dragon Passion'&&r.shortage>0).sort((a,b)=>b.shortage-a.shortage);let available=donor.reduce((n,r)=>n+r.donor,0),need=sink.reduce((n,r)=>n+r.shortage,0),transfer=Math.floor(Math.min(available,need)/1000)*1000;
 const tasks=[['DEMAND','Confirm viral signal & issue a 2-week reforecast','Sales + Marketing','No inferred consumer sale if out of stock'],['INVENTORY',`Review up to ${fmt(transfer)} Dragon Passion bottles in donor / recipient matching`, 'Distribution + Regional Sales',`Indicative transfer cost ≤₹${fmt(transfer*1.5)}; check 2–4d transit & expiry`],['SUPPLY',road?`Cover ${road}-week passionfruit pulp exposure`:'Maintain prequalified supplier and buffer trigger','Procurement + Finance','Real pulp cover, cold storage and working-capital sign-off'],['OPERATIONS',`Resolve ${L(gap)}/week residual factory gap`, 'COO + Finance','Mix allocation; co-packer only after 2w notice'],['TRANSPORT','Approve emergency freight only for validated deficit','COO + Logistics','No alternate road exists; compare incremental spend']];
 $('approvals').innerHTML=tasks.map(([typ,desc,owner,guard],idx)=>{const key=idx,sel=decisions[key]||'PENDING';return `<div class="approval"><div><h4>${typ} — ${desc}</h4><p>${owner}<br>${guard}</p></div><select data-key="${key}"><option ${sel==='PENDING'?'selected':''}>PENDING</option><option ${sel==='APPROVED'?'selected':''}>APPROVED</option><option ${sel==='REJECTED'?'selected':''}>REJECTED</option></select></div>`}).join('');
-document.querySelectorAll('select[data-key]').forEach(e=>e.addEventListener('change',()=>{decisions[e.dataset.key]=e.value;updatePending()}));updatePending();
+document.querySelectorAll('select[data-key]').forEach(e=>e.addEventListener('change',()=>{decisions[e.dataset.key]=e.value;logAction('DECISION',tasks[+e.dataset.key][0]+' → '+e.value);updatePending()}));updatePending();
 }
 function updatePending(){$('pending').textContent=Array.from({length:5},(_,i)=>decisions[i]||'PENDING').filter(x=>x==='PENDING').length+' pending';}
-['qc','closure','cover'].forEach(id=>$(id).addEventListener('input',compute));$('replay').onclick=()=>{$('qc').value=4;$('closure').value=3;$('cover').value=2;decisions={};compute()};$('noSpike').onclick=()=>{$('qc').value=1;compute()};$('prebuild').onclick=()=>{$('cover').value=3;compute()};compute();
+const auditBar=document.createElement('div');
+auditBar.className='row';auditBar.style.margin='0 0 12px';
+auditBar.innerHTML='<span class="small" id="auditNote">Demo decisions are stored only in this browser; no dispatches occur.</span><button type="button" id="exportAudit" style="border:1px solid #cbd4e0;border-radius:8px;background:white;padding:9px;font-weight:700;cursor:pointer">Export decision history (CSV)</button>';
+$('approvals').before(auditBar);$('exportAudit').addEventListener('click',exportAudit);
+['qc','closure','cover'].forEach(id=>$(id).addEventListener('input',compute));$('replay').onclick=()=>{$('qc').value=4;$('closure').value=3;$('cover').value=2;decisions={};approvedScenario=null;logAction('RESET','Restored last summer baseline; approvals reset');compute()};$('noSpike').onclick=()=>{$('qc').value=1;compute()};$('prebuild').onclick=()=>{$('cover').value=3;compute()};compute();
 </script></body></html>

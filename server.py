@@ -205,6 +205,8 @@ class Handler(BaseHTTPRequestHandler):
                     result = self.server.store.catalog(local_today())
                 elif path == "/api/external":
                     result = self.server.store.external_latest()
+                elif path == "/api/process-mining":
+                    result = self.server.store.process_mining_summary()
                 elif path == "/api/config":
                     result = {"kinds": sorted(KINDS), "token_required": bool(self.server.token),
                               "external_configured": {"road": bool(os.getenv("TOMTOM_API_KEY") and os.getenv("PULP_ROUTE_BBOX")),

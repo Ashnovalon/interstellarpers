@@ -1,3 +1,4 @@
 # Serving needs only Python's standard library. These packages train new artifacts.
 scikit-learn>=1.5,<1.9
 numpy>=1.26,<3
+pm4py>=2.7,<3

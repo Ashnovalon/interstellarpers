@@ -1,5 +1,13 @@
 # Pulp Riot Live Operations Control Tower
 
+Decision evidence update: comparisons now share live timing and use action-specific
+horizons (32 days for co-packer review), approvals record projected/realized
+outcomes, and Model & evidence includes a paired forecast benchmark. Disruption
+Studio supports timed recovery and the board marks events. Adaptive production
+uses shared-resource allocation. See [Decision evidence and verification](docs/DECISION_EVIDENCE.md)
+for the current calculations, limits and reproduction commands; it supersedes
+the older fixed 14-day comparison descriptions below.
+
 A working Python and browser decision system for the Pulp Riot case. The home page is now a **second-by-second operating simulation**: synthetic order batches arrive, model forecasts and stock update, disruptions change the business, and a named user's timed approvals reserve stock, commit cash and execute simulated interventions. Demand and Inventory are the two deep modules; Supply, Distribution and Transportation constrain their decisions.
 
 **The included data is synthetic and case-constrained.** The case provides no real SKU recipe, actual batch ledger, supplier corridor coordinates, transactions, or API credentials. The sample is for testing the pipeline; its scenario improvements are not measured savings. Nothing in this app orders ingredients, dispatches freight or moves stock.
@@ -15,9 +23,12 @@ Open **http://127.0.0.1:8765** and select **Start live**. Each wall-clock second
 
 1. Watch **Live board**: observed demand, trained-model + adaptive-nowcast predictions, stock cover, contribution and the comparison policy.
 2. Use a quick disruption or **Disruption studio**. It supports viral attention, attention with no conversion, road closure, traffic delay, plant outage, imported-pulp delay, heatwave, competitor pressure, feed loss and quality quarantine. The guided run introduces viral demand at day 1, closure at day 6 and a plant outage at day 12. Sandbox mode leaves every disruption to you.
-3. Open **Compare & decide**. Waiting, full quantity, half quantity where supported, and acting two days late are projected over the same next 14 days. Pause the clock while reviewing if needed. Supply your name, reason and operational-check confirmation, then approve or reject.
+3. Open **Compare & decide**. The server automatically pauses the whole simulation while you review. Click a feasible path card: wait, full quantity, half where supported, or execute after two business days. Supply your name and reason; confirm checks for an intervention. Offers get at least ten active simulation ticks (normally ten wall-clock seconds), while physical urgency is tracked separately. Closing or submitting restores the prior clock state.
 4. **Outcomes & ledger** shows dispatched/received shipments, scheduled/completed repairs and tests, budget commitments and contribution against the identical no-intervention policy. A bad or late decision can reduce contribution.
 5. **New run** creates a separate seeded season; previous runs remain archived. Restarts resume the latest saved state **paused**. The simulation never resets imported operational records.
+6. **Incoming data** exposes all 135 latest order records, their baseline, generator factors, interval quantities, fulfillment and whether the model actually observed them. Filter by flavor/channel/depot and use **Freeze table** to inspect a record without stopping the business. Every disruption gets an explicit before/after receipt. Applying one while paused produces one affected batch; manual changes switch guided mode to sandbox so later scripted events cannot override your controls.
+
+The board now offers separate cumulative and interval charts. Cumulative gross sales normally rise; interval sales/contribution and unfulfilled-demand rate expose worsening performance. A completed 112-day season cannot advance further—use **New run**. Detailed calculations and model limitations are in `docs/WORKING_AND_NUMBERS.md`.
 
 The original operational import/forecast workbench is at **http://127.0.0.1:8765/operations**. Real imported records and the synthetic live run use separate tables; importing a company record does not silently alter a synthetic scenario.
 
@@ -112,6 +123,9 @@ Configured feeds poll when the server starts and every 15 minutes. **Check confi
 For local bearer-token protection set `CONTROL_TOWER_TOKEN`; the browser prompts for it when needed. A shared deployment needs an authenticated gateway, managed database, durable workers and vendor operations before real company data or execution integrations are introduced. The server refuses non-loopback binding unless the token is set. Current role labels record the claimant; they do not independently verify company identity.
 
 ## Main files
+
+See [the critical audit](docs/CRITICAL_AUDIT.md) for corrected logic defects,
+control coverage, verification commands and remaining simulation limitations.
 
 - `server.py` — local HTTP API, persistent store, authenticated event stream and web serving.
 - `engine/live.py` — server-clocked simulation, conservation, adaptive forecasts, timed decisions, execution and financial counterfactuals.

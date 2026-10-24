@@ -3,6 +3,7 @@ import json
 import os
 import tempfile
 import threading
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -110,6 +111,31 @@ class LiveTests(unittest.TestCase):
         self.assertFalse(state["running"])
         self.assertTrue(all(row["factors"]["weather"]==1.25 for row in state["latest_inputs"]["rows"]))
         self.assertEqual(state["last_input_change"]["changes"][0]["field"],"heatwave")
+
+    def test_manual_inputs_cancel_future_guided_overrides(self):
+        self.engine.control({"action":"reset","scenario":"guided","seed":77})
+        self.engine.inject("rumor")
+        self.step(8)
+        self.assertEqual(self.engine.state["scenario"],"sandbox")
+        self.assertEqual(self.engine.state["inputs"]["conversion"],0)
+        self.assertTrue(all(x["done"] for x in self.engine.state["scheduled_events"]))
+
+    def test_interval_contribution_includes_costs_paid_between_ticks(self):
+        self.step()
+        self.engine.inject("closure")
+        self.decide(self.offer("AIR"))
+        self.step()
+        tape=self.engine.state["tape"]
+        from engine.live import contribution
+        self.assertAlmostEqual(sum(x["tick_contribution"] for x in tape),contribution(self.engine.state["world"]),places=5)
+        self.assertLess(tape[-1]["tick_contribution"],0)
+        self.assertGreater(tape[-1]["tick_revenue"],0)
+
+    def test_demand_regimes_are_not_identical_after_a_week(self):
+        first=generate_inputs(self.engine.state)
+        other=copy.deepcopy(self.engine.state);other["day"]=7
+        week_later=generate_inputs(other)
+        self.assertNotEqual([x["daily_rate"] for x in first],[x["daily_rate"] for x in week_later])
 
     def test_comparison_financial_identity_and_service_arithmetic(self):
         self.engine.inject("viral");self.step(8)
@@ -319,6 +345,34 @@ class LiveTests(unittest.TestCase):
 
 
 class LiveHttpTests(unittest.TestCase):
+    def test_real_disruption_and_review_endpoints_expose_inputs_and_hold_time(self):
+        app=AppServer(("127.0.0.1",0),":memory:")
+        thread=threading.Thread(target=app.serve_forever,daemon=True);thread.start()
+        root=f"http://127.0.0.1:{app.server_port}"
+        def request(path,body=None):
+            payload=json.dumps(body).encode() if body is not None else None
+            headers={"Content-Type":"application/json"} if payload else {}
+            with urlopen(Request(root+path,data=payload,headers=headers),timeout=10) as response:return json.loads(response.read())
+        try:
+            changed=request('/api/live/inject',{'preset':'heatwave','step_if_paused':True})
+            self.assertEqual(changed['tick'],1)
+            self.assertEqual(changed['scenario'],'sandbox')
+            self.assertTrue(all(r['factors']['weather']==1.25 for r in changed['latest_inputs']['rows']))
+            request('/api/live/inject',{'preset':'quality'})
+            before=request('/api/live/control',{'action':'start'})
+            offer=next(x for x in before['actions'] if x['kind']=='LAB_TEST')
+            opened=request('/api/live/review/open',{'id':offer['id'],'version':offer['version']})
+            frozen_tick=opened['state']['tick']
+            time.sleep(1.1)
+            self.assertEqual(request('/api/live/state')['tick'],frozen_tick)
+            result=request('/api/live/decide',{'id':offer['id'],'version':offer['version'],'choice':'wait',
+                'actor':'API operator','reason':'Wait for further evidence','review_token':opened['review_token']})
+            self.assertTrue(result['running'])
+            self.assertEqual(result['decisions'][-1]['status'],'WAITED')
+            request('/api/live/control',{'action':'pause'})
+        finally:
+            app.shutdown();thread.join(timeout=3);app.server_close()
+
     def test_stream_publishes_state_and_manual_tick_without_page_polling(self):
         app=AppServer(("127.0.0.1",0),":memory:")
         thread=threading.Thread(target=app.serve_forever,daemon=True);thread.start()

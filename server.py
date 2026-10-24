@@ -9,6 +9,7 @@ CONTROL_TOWER_TOKEN and never executes freight or stock dispatches.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import socket
@@ -176,6 +177,14 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/live/events":
                 self._send(self.server.live.export_events())
                 return
+            if path == "/api/live/benchmarks":
+                report=ROOT/"data/forecast_benchmark.json"
+                result=json.loads(report.read_text(encoding="utf-8")) if report.exists() else {"summary":[],"status":"NOT_RUN"}
+                result["current_source"]=bool(result.get("source_sha256")) and all(
+                    (ROOT/name).is_file() and hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==sha
+                    for name,sha in result.get("source_sha256",{}).items())
+                self._send(result)
+                return
             with self.server.lock:
                 if path == "/api/health":
                     result = {"status": "ok", "date": local_today().isoformat(),
@@ -226,9 +235,9 @@ class Handler(BaseHTTPRequestHandler):
                 if path == "/api/live/control":
                     result = live.control(body)
                 elif path == "/api/live/inputs":
-                    result = live.inputs(body.get("changes",body),step_if_paused=body.get("step_if_paused",False) if "changes" in body else False)
+                    result = live.inputs(body.get("changes",body),step_if_paused=body.get("step_if_paused",False) if "changes" in body else False,lifecycle=body.get("lifecycle"))
                 elif path == "/api/live/inject":
-                    result = live.inject(body.get("preset"),step_if_paused=body.get("step_if_paused",False))
+                    result = live.inject(body.get("preset"),step_if_paused=body.get("step_if_paused",False),lifecycle=body.get("lifecycle"))
                 elif path == "/api/live/review/open":
                     result = live.begin_review(body)
                 elif path == "/api/live/review/close":

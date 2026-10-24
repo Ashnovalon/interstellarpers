@@ -19,6 +19,48 @@ from pathlib import Path
 
 from .forecast import features, load_model, model_card, predict_tree_model
 from .operations import CASE, CHANNELS, DEPOTS, SKUS, baseline_daily, digest, local_today
+from .allocation import allocate
+
+FORECAST_MODES = ("blend", "nowcast", "trained", "seasonal")
+
+
+def interval_at(day, speed, end=112):
+    """Identical midnight/season boundaries for live, projection and audit replay."""
+    return min(speed, end-day, 1-(day-math.floor(day)))
+
+
+def simulation_interval(state, end=112):
+    day=state["day"]
+    boundaries=[end]
+    if state.get("road_reopens") is not None:
+        boundaries.append(state["road_reopens"])
+    for life in state.get("lifecycles",[]):
+        if life["status"] in {"ACTIVE","RECOVERING"}:
+            boundaries.extend((life["recover_at"],life["end_day"]))
+    boundaries.extend(j["execute_day"] for j in state.get("scheduled_decisions",[]) if j["status"]=="WAITING")
+    boundaries.extend(t["end_day"] for t in state.get("outcome_tracks",[]) if t["status"]=="TRACKING")
+    return min(interval_at(day,state["days_per_tick"],end),min((b-day for b in boundaries if b>day+1e-7),default=end-day))
+
+
+def forecast_at(state, offset=0):
+    mode = state.get("forecast_mode", "blend")
+    h = min(13, max(0,math.floor(state["day"]+offset)-math.floor(state["day"])))
+    result = {}
+    for k, curve in state["model_curves"].items():
+        if mode == "nowcast":
+            value = state["nowcast"][k]
+        elif mode == "trained":
+            value = curve[h]
+        elif mode == "seasonal":
+            history = state["history"][k]
+            target = date.fromisoformat(state["start_date"])+timedelta(days=math.floor(state["day"]+offset))
+            matches = [r["requested"] for r in history[-14:] if date.fromisoformat(r["date"]).weekday()==target.weekday()]
+            value = sum(matches)/len(matches) if matches else sum(r["requested"] for r in history[-7:])/max(1,len(history[-7:]))
+        else:
+            blend = .65*math.exp(-offset/4)
+            value = (1-blend)*curve[h]+blend*state["nowcast"][k]
+        result[k] = max(0, value)
+    return result
 
 PRICE = CASE["price_rupees"]
 UNIT_CONTRIBUTION = PRICE * CASE["contribution_margin"]
@@ -166,6 +208,7 @@ def advance_world(world, day, dt, rates, inputs, forecast_rates=None):
     """Conserve stock and material mass for both human and no-intervention policies."""
     end = day+dt
     events = []
+    plant_capacity_days=world.get("capacity_factor",inputs["plant_availability"])*dt
     for receipt in world["raw_receipts"]:
         if receipt["status"]!="IN_TRANSIT" or receipt["eta"]>end:
             continue
@@ -187,6 +230,7 @@ def advance_world(world, day, dt, rates, inputs, forecast_rates=None):
         if command["status"]=="SCHEDULED" and command["eta"]<=end:
             command["status"]="COMPLETED"
             if command["kind"]=="REPAIR_PLANT":
+                plant_capacity_days+=(1-world["capacity_factor"])*max(0,end-max(day,command["eta"]))
                 world["capacity_factor"]=1.0
                 events.append(("PLANT_RESTORED","Maintenance restored installed plant capacity; no new summer line was added"))
             if command["kind"]=="LAB_TEST":
@@ -235,8 +279,9 @@ def advance_world(world, day, dt, rates, inputs, forecast_rates=None):
     adaptive = world["allocation_until"]>=end and forecast_rates is not None
     targets={key(s,d):sum((forecast_rates if adaptive else rates_base())[key(s,d,c)] for c in CHANNELS)
              for s in SKUS for d in DEPOTS}
-    plant=PLANT_CAPACITY*world.get("capacity_factor",inputs["plant_availability"])*dt
-    copack=PLANT_CAPACITY*.1*dt if world["copacker_start"]<=end<=world["copacker_end"] and world["copacker_start"]>=0 else 0
+    plant=PLANT_CAPACITY*plant_capacity_days
+    copack_days=max(0,min(end,world["copacker_end"])-max(day,world["copacker_start"])) if world["copacker_start"]>=0 else 0
+    copack=PLANT_CAPACITY*.1*copack_days
     capacity=plant+copack
     # Proportional targets keep every product supplied; adaptive weights favor short cover.
     weights={p:(max(0.25, min(3,14/max(stock_total(world,p,end)/max(target,1),1))) if adaptive else 1)*target
@@ -247,10 +292,12 @@ def advance_world(world, day, dt, rates, inputs, forecast_rates=None):
         else:
             world["allocation_weights"]=dict(weights)
     total_weight=max(sum(weights.values()),1)
+    caps={p:target*dt*(1.5 if adaptive else 1) for p,target in targets.items()}
+    allocation=allocate(caps,weights,capacity,world["raw"],{p:SKUS[p.split("|")[0]]["recipe"] for p in targets}) if adaptive else None
     produced=0
     for p,target in targets.items():
         sku,depot=p.split("|")
-        units=min(target*dt*1.5 if adaptive else target*dt,capacity*weights[p]/total_weight)
+        units=allocation[p] if adaptive else min(target*dt,capacity*weights[p]/total_weight)
         for material,kg in SKUS[sku]["recipe"].items():
             units=min(units,world["raw"][material]/kg)
         qty=max(0,int(units))
@@ -259,7 +306,7 @@ def advance_world(world, day, dt, rates, inputs, forecast_rates=None):
             world["raw"][material]-=consumed;m["raw_consumed"][material]+=consumed
         produced+=qty
         if qty:
-            lot={"id":f"production:{math.floor(end)}:{sku}:{depot}","qty":qty,"made":end,"expires":end+90,"hold":False}
+            lot={"id":f"production:{end:.8f}:{sku}:{depot}","qty":qty,"made":end,"expires":end+90,"hold":False}
             world["shipments"].append({"id":f"prod:{end}:{sku}:{depot}","sku":sku,"from":"PLANT","to":depot,
                 "quantity":qty,"lots":[lot],"eta":end+2+inputs["traffic_delay_days"],"status":"IN_TRANSIT","type":"PRODUCTION"})
     m["produced"]+=produced
@@ -306,6 +353,11 @@ class LiveEngine:
         self.state.setdefault("scheduled_decisions",[])
         self.state.setdefault("latest_inputs",None)
         self.state.setdefault("last_input_change",None)
+        self.state.setdefault("lifecycles",[])
+        self.state.setdefault("markers",[])
+        self.state.setdefault("outcome_tracks",[])
+        self.state.setdefault("forecast_mode","blend")
+        self.comparison_cache={}
         self.state["generator_version"]="v2-correlated"
         for offer in self.state["offers"].values():
             if offer["status"]=="PENDING" and "review_until_tick" not in offer:
@@ -326,6 +378,7 @@ class LiveEngine:
         state={"run_id":uuid.uuid4().hex[:12],"seed":seed,"scenario":scenario,"day":0.0,"tick":0,"event_seq":0,
             "revision":0,"start_date":start.isoformat(),"running":False,"days_per_tick":.25,
             "review":None,"scheduled_decisions":[],"latest_inputs":None,"last_input_change":None,"generator_version":"v2-correlated",
+            "lifecycles":[],"markers":[],"outcome_tracks":[],"forecast_mode":"blend",
             "inputs":dict(DEFAULT_INPUTS),"trend_changed_day":0,"road_reopens":None,
             "world":new_world(),"baseline":new_world(),"history":{},"nowcast":{},
             "model_curves":{},"model_used":False,"forecast_rates":{},"bucket":{},"bucket_coverage":0.0,
@@ -366,7 +419,7 @@ class LiveEngine:
             complete=all(d in lookup for d in days)
             values=[lookup[d] for d in days] if complete else [r["requested"] for r in history[-14:]]
             fallback=sum(values[-7:])/max(1,len(values[-7:]))
-            eligible=bool(model and complete and model["card"]["status"]=="VALIDATED"
+            eligible=bool(s.get("forecast_mode","blend") in {"blend","trained"} and model and complete and model["card"]["status"]=="VALIDATED"
                 and model["card"]["synthetic"] and today.isoformat()>=model["card"]["data_end"])
             curve=[]
             for horizon in range(1,15):
@@ -383,8 +436,7 @@ class LiveEngine:
 
     def _refresh_forecasts(self):
         s=self.state
-        for k,curve in s["model_curves"].items():
-            s["forecast_rates"][k]=max(0,.35*curve[0]+.65*s["nowcast"][k])
+        s["forecast_rates"]=forecast_at(s)
         if s.get("forecast_origin_day")!=math.floor(s["day"]):
             s["forecast_origin_day"]=math.floor(s["day"])
             s["forecast_origin_fraction"]=s["day"]-math.floor(s["day"])
@@ -399,6 +451,9 @@ class LiveEngine:
         if kind=="TICK":
             visible["detail"]={k:detail[k] for k in ("requested","fulfilled","production","feed_observed","dt") if detail and k in detail}
         s["events"].append(visible)
+        if kind in {"DISRUPTION","INPUT","DECISION","ROAD_OPEN","RECOVERY_START","RECOVERY_END"}:
+            s.setdefault("markers",[]).append({"day":event["day"],"kind":kind,"message":message})
+            s["markers"]=s["markers"][-300:]
         s["events"]=s["events"][-100:]
         self.pending_events.append(event)
         return event
@@ -457,7 +512,12 @@ class LiveEngine:
                 scenario=body.get("scenario","guided")
                 if scenario not in {"guided","sandbox"}:
                     raise ValueError("Scenario must be guided or sandbox")
+                mode=body.get("forecast_mode","blend")
+                if mode not in FORECAST_MODES:
+                    raise ValueError("Unknown forecast mode")
                 self.state=self._new_state(seed,scenario)
+                self.state["forecast_mode"]=mode
+                self.comparison_cache.clear()
                 self._refresh_model();self._refresh_forecasts();self._refresh_offers()
             elif action in {"start","pause"}:
                 if action=="start" and self.state["day"]>=112:
@@ -498,33 +558,97 @@ class LiveEngine:
             raise ValueError("Lab outcome must be PASS or FAIL")
         return dict(body)
 
-    def inputs(self, body, step_if_paused=False):
+    @staticmethod
+    def _validate_lifecycle(config):
+        config=config or {}
+        if not isinstance(config,dict) or set(config)-{"duration_days","recovery_days"}:
+            raise ValueError("Lifecycle accepts duration_days and recovery_days")
+        result={"duration_days":config.get("duration_days",0),"recovery_days":config.get("recovery_days",0)}
+        for name,maximum in (("duration_days",56),("recovery_days",28)):
+            value=result[name]
+            if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not 0<=value<=maximum:
+                raise ValueError(f"{name} must be between 0 and {maximum}")
+        if not result["duration_days"] and result["recovery_days"]:
+            raise ValueError("A recovery period requires a positive duration")
+        return result
+
+    def _schedule_lifecycle(self, before, changes, config, label):
+        s=self.state
+        fields={k:v for k,v in changes.items() if before[k]!=v and k not in {"closure_days","quality_result"}}
+        for life in s["lifecycles"]:
+            for field in changes:
+                life["from"].pop(field,None);life["to"].pop(field,None)
+            if not life["from"] and life["status"] in {"ACTIVE","RECOVERING"}:
+                life["status"]="SUPERSEDED"
+        if config["duration_days"] and fields:
+            recover=s["day"]+config["duration_days"]
+            s["lifecycles"].append({"label":label,"start_day":s["day"],"recover_at":recover,
+                "end_day":recover+config["recovery_days"],"from":fields,
+                "to":{k:before[k] for k in fields},"status":"ACTIVE"})
+            s["lifecycles"]=s["lifecycles"][-100:]
+            if fields.get("road_closed") is True:s["road_reopens"]=recover
+
+    def _advance_conditions(self, state=None, record=False):
+        s=self.state if state is None else state
+        for life in s.get("lifecycles",[]):
+            if life["status"] not in {"ACTIVE","RECOVERING"} or s["day"]+1e-7<life["recover_at"]:
+                continue
+            if life["status"]=="ACTIVE":
+                life["status"]="RECOVERING"
+                if record:self._event("RECOVERY_START",life["label"]+": recovery started")
+            span=life["end_day"]-life["recover_at"]
+            fraction=min(1,max(0,(s["day"]-life["recover_at"])/span)) if span else 1
+            changes={}
+            for k,start in life["from"].items():
+                target=life["to"][k]
+                changes[k]=start+(target-start)*fraction if isinstance(start,(int,float)) and not isinstance(start,bool) else (target if fraction>=1 or k=="road_closed" else start)
+            improving=changes.get("plant_availability",0)>=s["inputs"]["plant_availability"]
+            self._apply_inputs(changes,s,reset_attention=False,preserve_capacity=improving)
+            if fraction>=1:
+                life["status"]="COMPLETED"
+                if record:self._event("RECOVERY_END",life["label"]+": previous conditions restored")
+        if s.get("road_reopens") is not None and s["day"]>=s["road_reopens"]-1e-7:
+            self._apply_inputs({"road_closed":False},s)
+            if record:self._event("ROAD_OPEN","Supplier road reopened; normal receipt lead still applies")
+
+    def inputs(self, body, step_if_paused=False, lifecycle=None):
         with self.lock:
             if self.state["day"]>=112:raise ValueError("This season is complete. Use New run to test another disruption")
             if self.state.get("review"):
                 raise ValueError("Close the active decision review before changing scenario conditions")
             changes=self._validate_inputs(body)
+            timing=self._validate_lifecycle(lifecycle)
             self._manual_override()
             before=dict(self.state["inputs"])
             self._apply_inputs(changes)
+            self._schedule_lifecycle(before,changes,timing,"Custom scenario")
             self._input_change("INPUT","Scenario assumptions applied",before)
             self._refresh_offers()
-            self._persist("INPUT","Scenario assumptions updated",changes)
+            self._persist("INPUT","Scenario assumptions updated",{"changes":changes,"lifecycle":timing})
             if step_if_paused and not self.state["running"]:
                 self._step()
             return self.snapshot()
 
-    def inject(self, name, step_if_paused=False):
+    def inject(self, name, step_if_paused=False, lifecycle=None):
         with self.lock:
             if self.state["day"]>=112:raise ValueError("This season is complete. Use New run to test another disruption")
             if self.state.get("review"):
                 raise ValueError("Close the active decision review before injecting another disruption")
             if name not in PRESETS:
                 raise ValueError("Unknown disruption preset")
+            timing=self._validate_lifecycle(lifecycle)
+            if name=="quality" and timing["duration_days"]:
+                raise ValueError("Quarantined pulp requires testing and QA release; it cannot recover on a timer")
+            if name=="quality" and self.state["world"]["held_raw"]>0:
+                raise ValueError("A quarantined batch is already awaiting a decision")
             self._manual_override()
+            before=dict(self.state["inputs"])
             self._inject(name)
+            self._schedule_lifecycle(before,PRESETS[name]["changes"],timing,PRESETS[name]["label"])
+            if name=="closure" and timing["duration_days"]:
+                self.state["road_reopens"]=self.state["day"]+timing["duration_days"]
             self._refresh_offers()
-            self._persist("DISRUPTION",PRESETS[name]["label"])
+            self._persist("DISRUPTION",PRESETS[name]["label"],{"preset":name,"lifecycle":timing})
             if step_if_paused and not self.state["running"]:
                 self._step()
             return self.snapshot()
@@ -542,6 +666,11 @@ class LiveEngine:
             for w in (s["world"],s["baseline"]):
                 qty=w["raw"]["passionfruit"]*.3
                 w["raw"]["passionfruit"]-=qty;w["held_raw"]+=qty
+            for track in s.get("outcome_tracks",[]):
+                if track["status"]=="TRACKING":
+                    world=track["shadow"]["world"]
+                    qty=world["raw"]["passionfruit"]*.3
+                    world["raw"]["passionfruit"]-=qty;world["held_raw"]+=qty
         self._event("DISRUPTION",PRESETS[name]["label"])
         self._input_change("DISRUPTION",PRESETS[name]["label"],before)
 
@@ -577,7 +706,7 @@ class LiveEngine:
             if s.get("review"):
                 raise ValueError("A decision review is already open; complete or close it first")
             action=s["offers"].get(body.get("id"))
-            if not action or action["status"]!="PENDING" or action["version"]!=body.get("version") or self._expired(s,action):
+            if not action or action["status"]!="PENDING" or action.get("trigger_changed") or action["version"]!=body.get("version") or self._expired(s,action):
                 raise ValueError("This offer changed; select its current version")
             token=uuid.uuid4().hex
             s["review"]={"id":action["id"],"version":action["version"],"token":token,"was_running":s["running"]}
@@ -597,12 +726,12 @@ class LiveEngine:
             self._persist("REVIEW_CLOSED","Review closed; previous clock state restored")
             return self.snapshot()
 
-    def _apply_inputs(self, changes):
-        s=self.state
+    def _apply_inputs(self, changes, state=None, reset_attention=True, preserve_capacity=False):
+        s=self.state if state is None else state
         old=s["inputs"]
         restart_closure=changes.get("road_closed",old["road_closed"]) and (
             not old["road_closed"] or changes.get("closure_days",old["closure_days"])!=old["closure_days"])
-        if any(k in changes and changes[k]!=old[k] for k in ("trend","target_sku","region","conversion")):
+        if reset_attention and any(k in changes and changes[k]!=old[k] for k in ("trend","target_sku","region","conversion")):
             s["trend_changed_day"]=s["day"]
         delay=max(0,changes.get("traffic_delay_days",old["traffic_delay_days"])-old["traffic_delay_days"])
         imports=max(0,changes.get("import_delay_days",old["import_delay_days"])-old["import_delay_days"])
@@ -614,14 +743,21 @@ class LiveEngine:
                 for receipt in world["raw_receipts"]:
                     if receipt["material"]=="dragonfruit" and receipt["mode"]=="SEA" and receipt["status"]=="IN_TRANSIT":
                         receipt["eta"]+=imports
-        if "plant_availability" in changes and changes["plant_availability"]!=old["plant_availability"]:
+        if "plant_availability" in changes:
             for world in (s["world"],s["baseline"]):
-                world["capacity_factor"]=changes["plant_availability"]
+                world["capacity_factor"]=max(world["capacity_factor"],changes["plant_availability"]) if preserve_capacity else changes["plant_availability"]
         s["inputs"].update(changes)
         if restart_closure:
             s["road_reopens"]=s["day"]+s["inputs"]["closure_days"]
         elif "road_closed" in changes and not changes["road_closed"]:
             s["road_reopens"]=None
+        if s is self.state:
+            # Exogenous changes also reach approval-time references. A managed
+            # RESTORE_FEED decision deliberately bypasses this propagation.
+            for track in s.get("outcome_tracks",[]):
+                if track["status"]=="TRACKING":
+                    shadow=track["shadow"];shadow["day"]=s["day"]
+                    self._apply_inputs(changes,shadow,reset_attention,preserve_capacity)
 
     def _step(self):
         s=self.state
@@ -630,21 +766,20 @@ class LiveEngine:
         if s["day"]>=112:
             s["running"]=False
             return
-        dt=min(s["days_per_tick"],112-s["day"],1-(s["day"]-math.floor(s["day"])))
         for event in s["scheduled_events"]:
             if not event["done"] and event["day"]<=s["day"]:
                 self._inject(event["preset"]);event["done"]=True
-        if s["road_reopens"] is not None and s["day"]>=s["road_reopens"]:
-            s["inputs"]["road_closed"]=False;s["road_reopens"]=None
-            self._event("ROAD_OPEN","Supplier road reopened; stranded road receipts still need their three-day transit")
+        self._advance_conditions(record=True)
         self._execute_due_decisions()
+        dt=simulation_interval(s)
+        interval_inputs=dict(s["inputs"]);interval_forecast=dict(s["forecast_rates"])
         generated=generate_inputs(s,s["day"]+dt/2)
         actual={r["series"]:r["daily_rate"] for r in generated}
         before_contribution=s["tape"][-1]["contribution"] if s["tape"] else 0
         events=advance_world(s["world"],s["day"],dt,actual,s["inputs"],s["forecast_rates"])
         advance_world(s["baseline"],s["day"],dt,actual,s["inputs"])
         old_day=s["day"]
-        s["day"]=round(s["day"]+dt,5);s["tick"]+=1
+        s["day"]=round(s["day"]+dt,8);s["tick"]+=1
         s["last_dt"]=dt
         fresh=not s["inputs"]["feed_outage"]
         incoming=[]
@@ -681,6 +816,8 @@ class LiveEngine:
             self._refresh_model()
         self._refresh_forecasts()
         self._execute_due_decisions()
+        self._advance_outcomes(actual,dt,old_day,interval_forecast)
+        self._advance_conditions(record=True)
         for kind,message in events[:8]:
             self._event(kind,message)
         if len(events)>8:
@@ -694,6 +831,8 @@ class LiveEngine:
             "tick_revenue":sum(s["world"]["last_fulfilled"].values())*PRICE,
             "tick_contribution":contribution(s["world"])-before_contribution,"dt":dt,
             "unfulfilled_rate":s["world"]["last_unfulfilled"]/dt,
+            "stock_cover":sum(stock_total(s["world"],p,s["day"]) for p in s["world"]["stock"])/max(1,sum(s["forecast_rates"].values())),
+            "capacity":PLANT_CAPACITY*s["world"]["capacity_factor"],
             "sku":{sku:{"forecast":sum(v for k,v in s["forecast_rates"].items() if k.startswith(sku+"|")),
                 "actual":sum(v for k,v in s["world"]["last_orders"].items() if k.startswith(sku+"|"))/dt if fresh else None}
                 for sku in SKUS}})
@@ -703,7 +842,7 @@ class LiveEngine:
         self._persist("TICK",f"{sum(s['world']['last_orders'].values()):,} requested; {s['world']['last_unfulfilled']:,} unfulfilled",
             {"requested":sum(s["world"]["last_orders"].values()),"fulfilled":sum(s["world"]["last_fulfilled"].values()),
              "production":s["world"]["last_production"],"feed_observed":fresh,"dt":dt,
-             "inputs":dict(s["inputs"]),"raw_kg":dict(s["world"]["raw"]),
+             "inputs":interval_inputs,"raw_kg":dict(s["world"]["raw"]),
              "generator_version":s["generator_version"],"order_batches":incoming,
              "stock_snapshot":[{"sku":p.split("|")[0],"depot":p.split("|")[1],"bottles":stock_total(s["world"],p,s["day"])} for p in s["world"]["stock"]]})
 
@@ -719,9 +858,9 @@ class LiveEngine:
             item=shipment or receipt or command
             if item and item["status"] in {"RECEIVED","COMPLETED","PASSED","FAILED"}:
                 decision["status"]="FAILED" if item["status"]=="FAILED" else "RECEIVED" if shipment or receipt else "COMPLETED"
-            elif decision["kind"]=="REPLAN" and s["day"]>=decision["day"]+7:
+            elif decision["kind"]=="REPLAN" and s["day"]>=decision.get("executed_day",decision["day"])+7:
                 decision["status"]="COMPLETED"
-            elif decision["kind"]=="COPACKER" and s["day"]>=decision["day"]+28:
+            elif decision["kind"]=="COPACKER" and s["day"]>=decision.get("executed_day",decision["day"])+28:
                 decision["status"]="COMPLETED";s["copacker_reserved"]=0
 
     def _cash_available(self):
@@ -731,12 +870,13 @@ class LiveEngine:
     def _cash_for(s):
         m=s["world"]["metrics"]
         spent=sum(m[k] for k in ("transfer_cost","air_cost","quality_cost","copacker_cost","holding_cost","repair_cost"))
-        copacker=max(0,s["copacker_reserved"]-(m["copacker_cost"]-s.get("copacker_baseline_cost",0)))
+        copacker=max(0,s["copacker_reserved"]-(m["copacker_cost"]-s.get("copacker_baseline_cost",0))) if s["day"]<s["world"]["copacker_end"] else 0
         delayed=sum(j["cash_reserved"] for j in s.get("scheduled_decisions",[]) if j["status"]=="WAITING")
         return max(0,s["budget"]-s["rollout_reserved"]-s["cash_buffer"]-spent-copacker-delayed)
 
-    def _positions(self):
-        s=self.state;world=s["world"];rows=[]
+    def _positions(self, state=None):
+        s=self.state if state is None else state
+        world=s["world"];rows=[]
         stale=s["day"]-s["reported_day"]>1 or s["inputs"]["feed_outage"]
         lead=4+s["inputs"]["traffic_delay_days"]
         for sku in SKUS:
@@ -780,9 +920,42 @@ class LiveEngine:
                 offer[field]=old[field]
         offer["version"]=digest([s["run_id"],ident,number,params,lead,offer["deadline"]])
         s["offers"][ident]=offer
+        offer["evidence"]=self._recommendation_evidence(offer)
         if not old or old["status"]!="PENDING":
             self._event("RECOMMENDATION",title,{"id":ident,"version":offer["version"],"deadline":offer["deadline"]})
         return ident
+
+    def _recommendation_evidence(self, offer, state=None):
+        s=self.state if state is None else state
+        p=offer["params"];kind=offer["kind"]
+        evidence={"as_of_day":s["day"],"as_of_tick":s["tick"],"observation_day":s["reported_day"],
+            "observation_age_days":round(s["day"]-s["reported_day"],3),"forecast_mode":s.get("forecast_mode","blend"),
+            "forecast_revision":s["revision"],"forecast_bottles_day":round(sum(s["forecast_rates"].values())),
+            "available_cash":round(self._cash_for(s)),"rule":offer["why"],"calculations":[]}
+        calc=evidence["calculations"]
+        if kind in {"TRANSFER","GT_TRANSFER"}:
+            positions={(x["sku"],x["depot"]):x for x in self._positions(s)}
+            donor=positions[p["sku"],p["from"]];sink=positions[p["sku"],p["to"]]
+            floor=donor["daily_precise"]*(offer["lead"]+10)
+            need=max(0,sink["daily_precise"]*(offer["lead"]+14)-sink["quantity"]-sink["inbound"])
+            limits={"receiver_need":need,"eligible_donor_surplus":max(0,donor["eligible"]-floor),"per_shipment_cap":100000,"cash_limit":self._cash_for(s)/1.5}
+            calc.extend([f"Receiver cover: {sink['quantity']:,} / {sink['daily_precise']:,.1f} = {sink['cover']:.2f} days; review threshold 14 days",
+                f"Donor retained floor: {donor['daily_precise']:,.1f} x ({offer['lead']} transit + 10 safety days) = {floor:,.0f} bottles",
+                f"Receiver target: demand x ({offer['lead']} transit + 14 cover days) minus stock and booked inbound = {need:,.0f} bottles",
+                f"Chosen {p['quantity']:,} bottles; cash {p['quantity']:,} x 1.50 = {p['cash']:,.0f}; remaining life at arrival >= {p['min_life']} days"])
+            evidence["quantity_limits"]={k:round(v) for k,v in limits.items()}
+            evidence["binding_limit"]=min(limits,key=limits.get) if kind=="TRANSFER" else "aging stock / verified GT demand / donor floor"
+            evidence["donor_alternatives"]=[{"depot":x["depot"],"cover":x["cover"],"eligible_surplus":round(max(0,x["eligible"]-x["daily_precise"]*(offer["lead"]+10)))} for x in sorted(positions.values(),key=lambda x:(-max(0,x["eligible"]-x["daily_precise"]*(offer["lead"]+10)),x["depot"])) if x["sku"]==p["sku"] and x["depot"]!=p["to"]]
+            evidence["selection"]="Receivers ordered by cover; donors ranked by usable surplus; planned transfers share donor stock and cash. Execution rechecks every constraint."
+        elif kind in {"AIR","AIR_DRAGON","BUFFER"}:
+            material=p["material"]
+            daily=sum(v*SKUS[k.split('|')[0]]["recipe"].get(material,0) for k,v in s["forecast_rates"].items())
+            calc.extend([f"{material}: {s['world']['raw'][material]:,.0f} usable kg / {daily:,.1f} forecast kg per day",
+                f"Quantity {p['quantity']:,} kg x unit quote {p['unit_cost']} = {p['cash']:,.0f}; lead {offer['lead']} days"])
+        else:
+            calc.extend([f"Forecast {sum(s['forecast_rates'].values()):,.0f} bottles/day; installed available capacity {PLANT_CAPACITY*s['world']['capacity_factor']:,.0f}/day",
+                f"Action cash {p['cash']:,.0f}; available uncommitted cash {self._cash_for(s):,.0f}; lead {offer['lead']} days"])
+        return evidence
 
     def _refresh_offers(self):
         s=self.state;world=s["world"];now=s["day"];inputs=s["inputs"]
@@ -797,6 +970,7 @@ class LiveEngine:
             ident=self._offer(*args,**kwargs)
             if ident:
                 active.add(ident)
+            return ident
         positions=self._positions()
         critical=[x for x in positions if x["status"]=="CRITICAL"]
         cash=self._cash_available()
@@ -817,8 +991,10 @@ class LiveEngine:
             lead=4+inputs["traffic_delay_days"]
             for sku in SKUS:
                 group=[p for p in positions if p["sku"]==sku]
-                donors=sorted(group,key=lambda p:-p["cover"])
+                donors=sorted(group,key=lambda p:(-max(0,p["eligible"]-p["daily_precise"]*(lead+10)),p["depot"]))
                 available={p["depot"]:max(0,p["eligible"]-p["daily_precise"]*(lead+10)) for p in donors}
+                used={p["depot"]:0 for p in donors}
+                aging={p["depot"]:max(0,p["gt_eligible"]-p["eligible"]) for p in donors}
                 for sink in sorted([p for p in group if p["cover"]<14],key=lambda p:p["cover"]):
                     need=max(0,sink["daily_precise"]*(lead+14)-sink["quantity"]-sink["inbound"])
                     for donor in donors:
@@ -827,30 +1003,40 @@ class LiveEngine:
                         qty=int(min(need,available[donor["depot"]],100000,cash/1.5)//1000*1000)
                         if qty<1000:
                             continue
-                        available[donor["depot"]]-=qty;need-=qty
-                        offer("TRANSFER",f"{sku}|{donor['depot']}|{sink['depot']}",
+                        ident=offer("TRANSFER",f"{sku}|{donor['depot']}|{sink['depot']}",
                             f"Move {qty:,} {sku}: {donor['city']} → {sink['city']}",
                             "Same-flavor stock meets MT/QC freshness at arrival; donor retains ten projected days after transit.",
                             {"sku":sku,"from":donor["depot"],"to":sink["depot"],"quantity":qty,"cash":qty*1.5,
                              "unit_cost":1.5,"min_life":60},lead=lead,deadline=max(.25,sink["cover"]-lead),
                             role="Distribution Manager",checks=["Batch eligibility and stock are checked again at approval","Late action can mitigate later losses but cannot undo earlier shortages"])
-                        break
+                        if ident:
+                            planned=s["offers"][ident]["params"]["quantity"]
+                            available[donor["depot"]]-=planned;used[donor["depot"]]+=planned
+                            need-=planned;cash-=planned*1.5
+                        if need<1000:break
                     if need>=1000:
                         for donor in donors:
                             if donor["depot"]==sink["depot"]:
                                 continue
-                            old=max(0,donor["gt_eligible"]-donor["eligible"])
-                            safe=max(0,donor["quantity"]-donor["daily_precise"]*(lead+10))
+                            old=aging[donor["depot"]]
+                            safe=max(0,donor["quantity"]-donor["daily_precise"]*(lead+10)-used[donor["depot"]])
                             gt_daily=s["forecast_rates"][key(sku,sink["depot"],"GT")]
                             qty=int(min(old,safe,need*.55,gt_daily*7,cash/1.5)//1000*1000)
                             if qty>=1000:
-                                offer("GT_TRANSFER",f"{sku}|{donor['depot']}|{sink['depot']}",
+                                ident=offer("GT_TRANSFER",f"{sku}|{donor['depot']}|{sink['depot']}",
                                     f"Rescue {qty:,} aging {sku} bottles through GT",
                                     "These batches cannot meet MT/QC acceptance. Use only verified distributor demand and at least seven days of remaining life at arrival.",
                                     {"sku":sku,"from":donor["depot"],"to":sink["depot"],"quantity":qty,"cash":qty*1.5,"unit_cost":1.5,"min_life":7},
                                     lead=lead,deadline=max(.25,min(2,sink["cover"]-lead)),role="Distribution Manager",
                                     checks=["Approver must verify distributor order and GT buyer acceptance","No outlet-level GT data is invented"])
+                                if ident:
+                                    planned=s["offers"][ident]["params"]["quantity"]
+                                    used[donor["depot"]]+=planned;cash-=planned*1.5;need-=planned
+                                    aging[donor["depot"]]=max(0,aging[donor["depot"]]-planned)
                                 break
+        # Supply/capacity offers are alternatives to the transfer portfolio, not
+        # purchases already committed by merely displaying transfer suggestions.
+        cash=self._cash_available()
         required=sum(v*SKUS[k.split("|")[0]]["recipe"].get("passionfruit",0) for k,v in s["forecast_rates"].items())
         cover=world["raw"]["passionfruit"]/max(required,1)
         if cover<24 and not inputs["road_closed"]:
@@ -863,7 +1049,7 @@ class LiveEngine:
                     role="Procurement Manager",checks=["Synthetic pulp price ₹180/kg; replace with a supplier quote","Purchase cash is tracked separately from contribution to avoid double-counting COGS"])
         if inputs["road_closed"]:
             remaining=max(0,(s["road_reopens"] or now+21)-now)+3
-            pending=sum(r["kg"] for r in world["raw_receipts"] if r["mode"]=="AIR" and r["status"]=="IN_TRANSIT")
+            pending=sum(r["kg"] for r in world["raw_receipts"] if r["material"]=="passionfruit" and r["mode"]=="AIR" and r["status"]=="IN_TRANSIT")
             qty=int(min(max(0,remaining*required-world["raw"]["passionfruit"]-pending),100000,cash/80)//1000*1000)
             if qty>=1000:
                 offer("AIR","PASSION","Compare a targeted emergency air shipment",
@@ -984,11 +1170,11 @@ class LiveEngine:
             s["reported_day"]=now
         return ref,cost,qty
 
-    def decide(self, body):
+    def decide(self, body, *, capture_outcomes=True):
         with self.lock:
             s=self.state
             offer=s["offers"].get(body.get("id"))
-            if not offer or offer["status"]!="PENDING" or offer["version"]!=body.get("version") or self._expired(s,offer):
+            if not offer or offer["status"]!="PENDING" or offer.get("trigger_changed") or offer["version"]!=body.get("version") or self._expired(s,offer):
                 raise ValueError("Recommendation changed or its decision window expired; review the current offer")
             review=s.get("review")
             if review and (review["token"]!=body.get("review_token") or review["id"]!=offer["id"]):
@@ -1009,6 +1195,15 @@ class LiveEngine:
                 raise ValueError("This action supports only the full quantity, or half for eligible transfers and receipts")
             ref=None;cash=qty=0
             delayed=choice=="delay"
+            selected=choice or ("half" if fraction==.5 else "full")
+            projection=None;shadow=None
+            if status=="APPROVED" and capture_outcomes:
+                comparison=self.compare({"id":offer["id"],"version":offer["version"]})
+                projection=next(x for x in comparison["branches"] if x["id"]==selected)
+                if projection["issue"]:
+                    raise ValueError(projection["issue"])
+                shadow=copy.deepcopy({k:v for k,v in s.items() if k not in {"outcome_tracks","offers","events","tape","latest_inputs","history","model_curves","daily_scores","decisions"}})
+                shadow["decisions"]=[]
             if status=="APPROVED":
                 if body.get("checks_confirmed") is not True:
                     raise ValueError("Review and confirm the action's operational checks")
@@ -1036,6 +1231,17 @@ class LiveEngine:
                 "execute_day":s["day"]+2 if delayed else None,
                 "eta":s["day"]+(2 if delayed else 0)+offer["lead"] if status=="APPROVED" and offer["lead"] else None}
             s["decisions"].append(entry)
+            if projection is not None:
+                for track in s["outcome_tracks"]:
+                    if track["status"]=="TRACKING":track["subsequent_actions"]+=1
+                track={"id":ref,"title":offer["title"],"choice":selected,"start_day":s["day"],
+                    "end_day":comparison["end_day"],"status":"TRACKING","subsequent_actions":0,
+                    "evidence":copy.deepcopy(comparison["evidence"]),"projection":copy.deepcopy(projection),
+                    "opening_metrics":copy.deepcopy(shadow["world"]["metrics"]),"opening_contribution":contribution(shadow["world"]),
+                    "shadow":shadow,"realized":None}
+                s["outcome_tracks"].append(track)
+                entry["projection"]={k:v for k,v in projection.items() if k!="trajectory"}
+                entry["evidence"]=track["evidence"]
             self._event("DECISION",f"{actor.strip()} {status.lower()}: {offer['title']}",entry)
             if ref and lifecycle=="DISPATCHED":
                 self._event("RESERVED","Approved quantity reserved and dispatched; it cannot be allocated twice",{"execution_id":ref})
@@ -1074,12 +1280,19 @@ class LiveEngine:
 
     def compare(self, body):
         with self.lock:
-            s=copy.deepcopy(self.state)
+            key=(self.state["run_id"],self.state["revision"],body.get("id"),body.get("version"))
+            if key in self.comparison_cache:
+                return copy.deepcopy(self.comparison_cache[key])
+            s=copy.deepcopy({k:v for k,v in self.state.items() if k!="outcome_tracks"})
             offer=copy.deepcopy(s["offers"].get(body.get("id")))
-            if not offer or offer["version"]!=body.get("version") or offer["status"]!="PENDING":
+            if not offer or offer.get("trigger_changed") or offer["version"]!=body.get("version") or offer["status"]!="PENDING":
                 raise ValueError("Recommendation changed; select the current offer")
             offer["deadline"]=self._effective_deadline(s,offer)
         branches=[]
+        horizon=max(14,offer["lead"]+16)
+        if offer["kind"]=="COPACKER":
+            horizon=offer["lead"]+offer["params"]["duration"]+4  # delayed start + final two-day plant shipments
+        end_day=min(112,s["day"]+horizon)
         choices=[("wait","Wait / take no new action",None,0),("full","Approve full action",1,0)]
         if offer["kind"] in {"TRANSFER","GT_TRANSFER","AIR","AIR_DRAGON","BUFFER"}:
             choices.append(("half","Approve half quantity",.5,0))
@@ -1088,69 +1301,106 @@ class LiveEngine:
             candidate=copy.deepcopy(s)
             w=candidate["world"]
             before=copy.deepcopy(w["metrics"]);before_cm=contribution(w)
-            executed=False;issue=None
-            for i in range(28):
-                offset=i*.5
-                candidate["day"]=s["day"]+offset
+            issue=None;trajectory=[]
+            if delay and s["day"]+delay>=offer["deadline"]:
+                issue="The original decision window expires before this delayed approval"
+            if fraction is not None and not issue:
+                try:
+                    if delay:
+                        cost=offer["params"]["cash"]
+                        if cost>self._cash_for(candidate)+.01:raise ValueError("Insufficient uncommitted cash for the deferred action")
+                        candidate["scheduled_decisions"].append({"id":"projection-delay","offer":copy.deepcopy(offer),"fraction":fraction,
+                            "execute_day":s["day"]+delay,"cash_reserved":cost,"status":"WAITING"})
+                    else:self._execute_into(candidate,offer,fraction)
+                except ValueError as exc:issue=str(exc)
+            while candidate["day"]<end_day-1e-7:
+                offset=candidate["day"]-s["day"]
+                self._advance_conditions(candidate)
                 self._execute_due_decisions(candidate,False)
-                if fraction is not None and not executed and offset>=delay:
-                    try:
-                        if candidate["day"]>=offer["deadline"]:
-                            raise ValueError("The original decision window expires before this delayed approval")
-                        self._execute_into(candidate,offer,fraction)
-                    except ValueError as exc:
-                        issue=str(exc)
-                    executed=True
-                if candidate["road_reopens"] is not None and candidate["day"]>=candidate["road_reopens"]:
-                    candidate["inputs"]["road_closed"]=False
-                projected={}
-                h=min(13,int(offset))
-                for k,curve in s["model_curves"].items():
-                    blend=.65*math.exp(-offset/4)
-                    projected[k]=max(0,(1-blend)*curve[h]+blend*s["nowcast"][k])
-                advance_world(w,candidate["day"],.5,projected,candidate["inputs"],projected)
-                if not candidate["inputs"]["feed_outage"]:
-                    candidate["reported_stock"]=self._stock_observations(w,candidate["day"]+.5)
-                    candidate["reported_day"]=candidate["day"]+.5
-                    candidate["last_feed_day"]=candidate["day"]+.5
+                projected=forecast_at(s,offset)
                 candidate["forecast_rates"]=projected
+                dt=simulation_interval(candidate,end_day)
+                # Every branch uses the same boundary for the two-day option,
+                # even when this particular branch has no deferred action.
+                if candidate["day"]<s["day"]+2-1e-7:
+                    dt=min(dt,s["day"]+2-candidate["day"])
+                advance_world(w,candidate["day"],dt,projected,candidate["inputs"],projected)
+                candidate["day"]=round(candidate["day"]+dt,8)
+                if not candidate["inputs"]["feed_outage"]:
+                    candidate["reported_stock"]=self._stock_observations(w,candidate["day"])
+                    candidate["reported_day"]=candidate["day"]
+                    candidate["last_feed_day"]=candidate["day"]
+                candidate["forecast_rates"]=forecast_at(s,candidate["day"]-s["day"])
+                self._execute_due_decisions(candidate,False)
+                failed=next((j for j in candidate["scheduled_decisions"] if j["id"]=="projection-delay" and j["status"]=="FAILED"),None)
+                if failed:issue="Deferred execution failed its stock, freshness, or budget check"
+                trajectory.append({"day":round(candidate["day"],3),"contribution":round(contribution(w)-before_cm),
+                    "fulfilled":w["metrics"]["fulfilled"]-before["fulfilled"]})
             requested=w["metrics"]["requested"]-before["requested"]
             fulfilled=w["metrics"]["fulfilled"]-before["fulfilled"]
             costs=sum(w["metrics"][k]-before[k] for k in ("transfer_cost","air_cost","copacker_cost","quality_cost","writeoff_cost","holding_cost","repair_cost"))
             branches.append({"id":ident,"label":label,"contribution":round(contribution(w)-before_cm),"requested":requested,
                 "unfulfilled":requested-fulfilled,"fulfilled":fulfilled,
+                "produced":w["metrics"]["produced"]-before["produced"],"revenue":round((w["metrics"]["fulfilled"]-before["fulfilled"])*PRICE),
                 "modeled_costs":costs,"cash_commitment":round(offer["params"]["cash"]*fraction) if fraction and not issue else 0,
                 "writeoffs":w["metrics"]["expired"]-before["expired"],
-                "service_pct":round(100*fulfilled/max(requested,1),2),"issue":issue})
+                "service_pct":round(100*fulfilled/max(requested,1),2),"issue":issue,"trajectory":trajectory})
         for row in branches:
             row["contribution_vs_wait"]=row["contribution"]-branches[0]["contribution"]
             row["additional_fulfilled"]=row["fulfilled"]-branches[0]["fulfilled"]
             row["service_value_vs_wait"]=round(row["additional_fulfilled"]*UNIT_CONTRIBUTION)
             row["extra_cost_vs_wait"]=round(row["modeled_costs"]-branches[0]["modeled_costs"])
             row["available"]=row["issue"] is None
-        return {"run_id":s["run_id"],"as_of_day":s["day"],"action_id":offer["id"],"version":offer["version"],
-            "horizon_days":14,"branches":branches,"assumptions":[
+        result={"run_id":s["run_id"],"as_of_day":s["day"],"action_id":offer["id"],"version":offer["version"],
+            "horizon_days":round(end_day-s["day"],3),"end_day":end_day,"step_days":s["days_per_tick"],
+            "horizon_truncated":end_day<s["day"]+horizon,"branches":branches,"evidence":self._recommendation_evidence(offer,s),"assumptions":[
                 "All branches start from the same current stock and booked shipments.",
                 "Demand follows today's trained forecast plus a decaying nowcast; future hidden simulator demand is not used.",
                 "Only current known disruptions and scheduled reopening are included; no future surprise events are revealed.",
                 "Contribution uses ₹19.20 per fulfilled bottle less modeled incremental costs; this is conditional scenario evidence, not guaranteed profit.",
-                "A passing lab result still needs a separate QA approval; a test alone does not release material."]}
+                "A passing lab result still needs a separate QA approval; a test alone does not release material.",
+                "Projection uses the live interval and midnight boundaries. Beyond day 14, the last trained horizon is held with a decaying nowcast; this is an extrapolation.",
+                "Only already scheduled recoveries are included. The season ends at day 112 and may shorten this comparison."]}
+        with self.lock:
+            self.comparison_cache={key:copy.deepcopy(result)}
+        return result
+
+    def _advance_outcomes(self, actual, dt, start_day, interval_forecast):
+        s=self.state
+        for track in s.get("outcome_tracks",[]):
+            if track["status"]!="TRACKING":continue
+            shadow=track["shadow"];shadow["day"]=start_day
+            if not shadow["inputs"]["feed_outage"]:
+                shadow["forecast_rates"]=dict(interval_forecast)
+            self._execute_due_decisions(shadow,False)
+            advance_world(shadow["world"],start_day,dt,actual,shadow["inputs"],shadow["forecast_rates"])
+            shadow["day"]=s["day"]
+            if not shadow["inputs"]["feed_outage"]:
+                shadow["reported_stock"]=self._stock_observations(shadow["world"],shadow["day"])
+                shadow["reported_day"]=shadow["day"];shadow["last_feed_day"]=shadow["day"]
+                shadow["forecast_rates"]=dict(s["forecast_rates"])
+            self._execute_due_decisions(shadow,False)
+            managed=s["world"]["metrics"];reference=shadow["world"]["metrics"];opening=track["opening_metrics"]
+            track["realized"]={"as_of_day":round(shadow["day"],3),"contribution":round(contribution(s["world"])-track["opening_contribution"]),
+                "reference_contribution":round(contribution(shadow["world"])-track["opening_contribution"]),
+                "contribution_vs_reference":round(contribution(s["world"])-contribution(shadow["world"])),
+                "fulfilled":managed["fulfilled"]-opening["fulfilled"],
+                "additional_fulfilled":managed["fulfilled"]-reference["fulfilled"]}
+            if shadow["day"]>=track["end_day"]-1e-7:
+                track["status"]="COMPLETED";del track["shadow"]
 
     def snapshot(self):
         with self.lock:
             s=self.state;w=s["world"];b=s["baseline"];m=w["metrics"]
             positions=self._positions()
             market=[];curves={}
+            horizon_rates=[forecast_at(s,h) for h in range(14)]
             for sku in SKUS:
                 selected=[p for p in positions if p["sku"]==sku]
                 predicted=sum(v for k,v in s["forecast_rates"].items() if k.startswith(sku+"|"))
                 base=sum(baseline_daily(sku,d,c) for d in DEPOTS for c in CHANNELS)
                 actual=sum(v for k,v in w["last_orders"].items() if k.startswith(sku+"|"))/max(s.get("last_dt",s["days_per_tick"]),.001) if s["tick"] else None
-                curve=[]
-                for h in range(14):
-                    blend=.65*math.exp(-h/4)
-                    n=sum((1-blend)*v[h]+blend*s["nowcast"][k] for k,v in s["model_curves"].items() if k.startswith(sku+"|"))
-                    curve.append(round(n))
+                curve=[round(sum(v for k,v in rates.items() if k.startswith(sku+"|"))) for rates in horizon_rates]
                 curves[sku]=curve
                 scores=[x for x in s["daily_scores"] if x["sku"]==sku]
                 wape=100*sum(abs(x["actual"]-x["prediction"]) for x in scores)/max(sum(x["actual"] for x in scores),1) if scores else None
@@ -1181,6 +1431,8 @@ class LiveEngine:
             return {"run_id":s["run_id"],"seed":s["seed"],"scenario":s["scenario"],"revision":s["revision"],
                 "running":s["running"],"day":s["day"],"tick":s["tick"],"business_time":timestamp.strftime("%d %b %Y · %H:%M"),
                 "days_per_tick":s["days_per_tick"],"inputs":dict(s["inputs"]),"road_reopens":s["road_reopens"],"effective_availability":w["capacity_factor"],
+                "forecast_mode":s.get("forecast_mode","blend"),"lifecycles":copy.deepcopy(s["lifecycles"]),"markers":copy.deepcopy(s["markers"]),
+                "outcomes":[{k:copy.deepcopy(v) for k,v in t.items() if k not in {"shadow","opening_metrics"}} for t in s["outcome_tracks"][-50:]],
                 "last_feed_day":s["last_feed_day"],"feed_age_days":round(s["day"]-s["last_feed_day"],3),
                 "review":{k:v for k,v in s["review"].items() if k!="token"} if s.get("review") else None,
                 "latest_inputs":copy.deepcopy(s.get("latest_inputs")),"last_input_change":copy.deepcopy(s.get("last_input_change")),

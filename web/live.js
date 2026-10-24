@@ -8,6 +8,13 @@ const badge=(text,type='')=>`<span class="tag ${type}">${escapeHtml(text)}</span
 let state=null,page='board',inputDirty=false,selectedAction=null,selectedBranch=null,branchComparison=null,lastMessage=0,hoverIndex=null,commandBusy=false;
 let accessToken=sessionStorage.getItem('control-tower-token')||'';
 let lastMarket={};
+let frozenBatch=null,lastInputTableKey='';
+let benchmarkEvidence=null,benchmarkLoading=false;
+const dirtyInputs=new Set();
+let reviewOpening=false,decisionSubmitting=false;
+const freezeButton=document.createElement('button');freezeButton.id='incoming-freeze';freezeButton.className='button';freezeButton.textContent='Freeze table';
+el('input-batch-label').after(freezeButton);
+freezeButton.addEventListener('click',()=>{frozenBatch=frozenBatch?null:structuredClone(state?.latest_inputs||null);lastInputTableKey='';freezeButton.textContent=frozenBatch?'Resume live table':'Freeze table';renderIncoming()});
 
 async function api(path,body,retry=true){
   const headers={};if(accessToken)headers.Authorization=`Bearer ${accessToken}`;
@@ -55,7 +62,9 @@ function render(next){
   const freshRun=!state||state.run_id!==next.run_id;
   state=next;
   if(freshRun){
-    lastMarket={};hoverIndex=null;
+    dirtyInputs.clear();
+    if(selectedAction){selectedAction=null;selectedBranch=null;branchComparison=null;sessionStorage.removeItem('pulp-active-review');el('review-dialog').close()}
+    lastMarket={};hoverIndex=null;frozenBatch=null;lastInputTableKey='';freezeButton.textContent='Freeze table';
     const flavors=state.market.map(x=>x.sku);
     setSelect('chart-flavor',['ALL',...flavors]);setSelect('network-flavor',flavors);
     setSelect('forecast-flavor',flavors);setSelect('input-sku',flavors);setSelect('incoming-sku',['ALL',...flavors]);
@@ -76,6 +85,7 @@ function render(next){
     metric('Uncommitted cash',money(state.metrics.budget_remaining),'After rollout reserve & approved commitments','neutral');
   renderMarket();renderUrgent();renderSources();renderTape();
   renderInputConfirmation();
+  renderLifecycles();
   if(!inputDirty)syncInputs();
   renderPage();updateReview();
   el('footer-state').textContent=`Run ${state.run_id} · Revision ${state.revision} · Bottle balance ${state.metrics.bottle_conservation_error===0?'verified':'ERROR'}`;
@@ -103,7 +113,7 @@ function actionCard(action,compact=false){
   const urgent=action.remaining_days<=1;
   const progress=Math.max(0,Math.min(100,100*action.remaining_days/Math.max(action.deadline-action.created,.25)));
   const cash=action.params.cash;
-  return `<article class="action-card"><div class="action-top"><h3>${escapeHtml(action.title)}</h3><span class="deadline ${urgent?'urgent':''}">${action.wall_seconds.toFixed(0)}s ${state.running?'left':'on clock'}</span></div>${compact?'':`<p>${escapeHtml(action.why)}</p>`}<progress class="deadline-progress" value="${progress.toFixed(1)}" max="100" aria-label="Decision time remaining"></progress><div class="action-bottom"><span>${cash?money(cash)+' commitment':'Allocation / evidence decision'}${compact?'':`<br>${escapeHtml(action.role)} · lead ${action.lead}d`}</span><button class="button ${urgent?'primary':''}" data-review="${escapeHtml(action.id)}">Compare & decide</button></div></article>`;
+  return `<article class="action-card"><div class="action-top"><h3>${escapeHtml(action.title)}</h3><span class="deadline ${urgent?'urgent':''}">${action.wall_seconds.toFixed(0)}s ${state.running?'left':'on clock'}</span></div>${compact?'':`<p>${escapeHtml(action.why)}</p>`}<progress class="deadline-progress" value="${progress.toFixed(1)}" max="100" aria-label="Decision time remaining"></progress><div class="action-bottom"><span>${cash?money(cash)+' commitment':'Allocation / evidence decision'}${compact?'':`<br>${escapeHtml(action.role)} · lead ${action.lead}d`}</span><button class="button ${urgent?'primary':''}" data-review="${escapeHtml(action.id)}" ${action.available===false?'disabled title="Trigger changed; waiting for a current feasible offer"':''}>${action.available===false?'Awaiting current evidence':'Compare & decide'}</button></div></article>`;
 }
 function renderUrgent(){
   el('urgent-actions').innerHTML=state.actions.length?state.actions.slice(0,3).map(x=>actionCard(x,true)).join(''):
@@ -131,7 +141,7 @@ function renderInputConfirmation(){
   box.hidden=false;box.innerHTML=`<b>${escapeHtml(change.message)}</b> · ${escapeHtml(applied||`held pulp ${number(change.held_pulp_kg)} kg`)}<br><span>${observed?`Batch #${state.latest_inputs.tick} is available for inspection.`:'Parameters are applied. Start or Step the clock to generate the next affected batch.'}</span> <button class="text-button" data-show-inputs>See incoming data →</button>`;
 }
 function renderIncoming(){
-  const batch=state.latest_inputs;
+  const batch=frozenBatch||state.latest_inputs;
   el('input-batch-stats').innerHTML=metric('Latest input batch',batch?'#'+batch.tick:'Waiting','135 potential order series per tick')+
     metric('Business interval',batch?`${(batch.dt*24).toFixed(1)} hours`:'—','Wall clock delivers one batch/second')+
     metric('Requested this interval',batch?number(batch.requested):'—','Orders before stock constraints')+
@@ -140,10 +150,14 @@ function renderIncoming(){
   const change=state.last_input_change;
   el('input-change-detail').innerHTML=change?`<p class="subtle"><b>${escapeHtml(change.message)}</b> at D${change.day.toFixed(2)}. ${change.changes.map(x=>`${escapeHtml(x.field)}: ${escapeHtml(x.before)} → ${escapeHtml(x.after)}`).join(' · ')||`Pulp held: ${number(change.held_pulp_kg)} kg`}</p>`:'<p class="subtle">No manual disruption yet. Apply one in Disruption studio and its before/after values will appear here.</p>';
   el('input-parameters').innerHTML=Object.entries(batch?.parameters||state.inputs).map(([k,v])=>`<div><small>${escapeHtml(k.replaceAll('_',' '))}</small><strong>${escapeHtml(v)}</strong></div>`).join('');
-  el('input-batch-label').textContent=batch?`D${batch.day_start.toFixed(2)} → D${batch.day_end.toFixed(2)} · ${batch.generator_version}`:'Start or Step to create an incoming batch';
+  el('input-batch-label').textContent=batch?`${frozenBatch?'FROZEN':'LIVE'} · D${batch.day_start.toFixed(2)} → D${batch.day_end.toFixed(2)} · ${batch.generator_version}`:'Start or Step to create an incoming batch';
   const sku=el('incoming-sku').value,channel=el('incoming-channel').value,query=el('incoming-search').value.trim().toLowerCase();
   const rows=(batch?.rows||[]).filter(x=>(sku==='ALL'||x.sku===sku)&&(channel==='ALL'||x.channel===channel)&&`${x.city} ${x.depot}`.toLowerCase().includes(query));
-  el('incoming-rows').innerHTML=rows.map(x=>`<tr><td><details><summary>${escapeHtml(x.sku)} · ${escapeHtml(x.city)}</summary><div class="factor-detail">${Object.entries(x.factors).map(([k,v])=>`${escapeHtml(k)} × ${v.toFixed(5)}`).join('<br>')}<br><b>${x.baseline_daily.toFixed(3)} × ${Object.values(x.factors).reduce((a,b)=>a*b,1).toFixed(6)} × ${batch.dt} days = ${x.requested} requested (rounded)</b><br>${escapeHtml(x.id)}</div></details></td><td>${escapeHtml(x.channel)}</td><td>${number(x.baseline_daily)}</td><td>${number(x.daily_rate)}</td><td>${number(x.requested)}</td><td>${number(x.fulfilled)}</td><td>${x.factors.attention.toFixed(2)}</td><td>${x.factors.weather.toFixed(2)}</td><td>${(x.factors.network_regime*x.factors.regional_regime*x.factors.product_regime).toFixed(3)}</td><td>${badge(x.observed?'OBSERVED':'NOT OBSERVED',x.observed?'green':'amber')}</td></tr>`).join('')||'<tr><td colspan="10">No matching incoming records. Start or Step the simulation to generate a batch.</td></tr>';
+  const tableKey=[state.run_id,batch?.tick,sku,channel,query].join('|');
+  if(tableKey!==lastInputTableKey){
+    lastInputTableKey=tableKey;
+    el('incoming-rows').innerHTML=rows.map(x=>`<tr><td><details><summary>${escapeHtml(x.sku)} · ${escapeHtml(x.city)}</summary><div class="factor-detail">${Object.entries(x.factors).map(([k,v])=>`${escapeHtml(k)} × ${v.toFixed(5)}`).join('<br>')}<br><b>${x.baseline_daily.toFixed(3)} × ${Object.values(x.factors).reduce((a,b)=>a*b,1).toFixed(6)} × ${batch.dt} days = ${x.requested} requested (rounded)</b><br>${escapeHtml(x.id)}</div></details></td><td>${escapeHtml(x.channel)}</td><td>${number(x.baseline_daily)}</td><td>${number(x.daily_rate)}</td><td>${number(x.requested)}</td><td>${number(x.fulfilled)}</td><td>${x.factors.attention.toFixed(2)}</td><td>${x.factors.weather.toFixed(2)}</td><td>${(x.factors.network_regime*x.factors.regional_regime*x.factors.product_regime).toFixed(3)}</td><td>${badge(x.observed?'OBSERVED':'NOT OBSERVED',x.observed?'green':'amber')}</td></tr>`).join('')||'<tr><td colspan="10">No matching incoming records. Start or Step the simulation to generate a batch.</td></tr>';
+  }
   el('incoming-supply').innerHTML=`<p class="subtle">Road ${state.inputs.road_closed?'closed':'open'} · managed plant capacity ${Math.round(state.effective_availability*100)}% · traffic +${state.inputs.traffic_delay_days}d · imported pulp +${state.inputs.import_delay_days}d · held pulp ${number(state.metrics.held_pulp_kg)} kg.</p><div class="table-scroll"><table><thead><tr><th>Ingredient</th><th>Usable kg</th><th>Forecast kg/day</th><th>Cover</th><th>Unblocked inbound kg</th></tr></thead><tbody>${state.materials.map(x=>`<tr><td>${escapeHtml(x.material)}</td><td>${number(x.kg)}</td><td>${number(x.daily)}</td><td>${x.cover.toFixed(2)}d</td><td>${number(x.inbound)}</td></tr>`).join('')}</tbody></table></div>`;
 }
 function renderDecisions(){
@@ -190,8 +204,36 @@ function renderLedger(){
   el('decision-ledger').innerHTML=state.decisions.slice().reverse().map(x=>`<tr><td>D${x.day.toFixed(2)}</td><td>${escapeHtml(x.title)}<br><span class="subtle">${escapeHtml(x.reason)}</span></td><td>${escapeHtml(x.actor)}</td><td>${badge(x.status,['EXPIRED','REJECTED','FAILED'].includes(x.status)?'red':['RECEIVED','COMPLETED'].includes(x.status)?'green':'purple')}</td><td>${money(x.cash||0)}</td><td>${x.eta==null?'—':`D${x.eta.toFixed(2)}`}</td></tr>`).join('')||'<tr><td colspan="6">No decisions yet. Open the decision desk to choose an intervention.</td></tr>';
   el('shipment-ledger').innerHTML=state.shipments.slice(-15).reverse().map(x=>`<div class="ledger-entry">${number(x.quantity)} ${escapeHtml(x.sku)}<small>${escapeHtml(x.from)} → ${escapeHtml(x.to)} · expected D${x.eta.toFixed(2)} · ${escapeHtml(x.type)}</small></div>`).join('')||'<div class="empty-state">No goods in transit</div>';
   el('receipt-ledger').innerHTML=state.receipts.slice(-15).reverse().map(x=>`<div class="ledger-entry">${number(x.kg)} kg ${escapeHtml(x.material)} ${state.inputs.road_closed&&x.material==='passionfruit'&&x.mode==='ROAD'?badge('BLOCKED','red'):''}<small>${escapeHtml(x.mode)} · expected D${x.eta.toFixed(2)} · ${escapeHtml(x.type||'PRE-BOOKED CONTRACT')}</small></div>`).join('')||'<div class="empty-state">No ingredient receipts booked</div>';
+  el('decision-outcomes').innerHTML=(state.outcomes||[]).slice().reverse().map(t=>{
+    const actual=t.realized,elapsed=actual?actual.as_of_day-t.start_day:0;
+    const points=t.projection.trajectory||[];
+    const projected=points.filter(p=>p.day<=(actual?.as_of_day??t.start_day)+.001).at(-1);
+    return `<details class="outcome-record"><summary>${escapeHtml(t.title)} · ${escapeHtml(t.status)} · ${elapsed.toFixed(1)} days observed</summary><div class="budget-grid"><div>Projected contribution at ${projected?`D${projected.day.toFixed(2)}`:'first checkpoint'}<strong>${projected?money(projected.contribution):'Awaiting first tick'}</strong></div><div>Realized total contribution to date<strong>${actual?money(actual.contribution):'Awaiting first tick'}</strong></div><div>Projected final gain vs wait<strong>${money(t.projection.contribution_vs_wait)}</strong></div><div>Realized gain vs reference to date<strong>${actual?money(actual.contribution_vs_reference):'Awaiting first tick'}</strong></div></div><p>Window D${t.start_day.toFixed(2)}–D${t.end_day.toFixed(2)}. ${t.subsequent_actions?`${t.subsequent_actions} later approval(s): realized results include their effects; do not attribute the full difference to this action.`:'No later approvals in this observation window.'}</p>${evidenceHtml(t.evidence)}</details>`;
+  }).join('')||'<p class="subtle">Approve an action to begin recording its forecast and realized outcome. Older approvals without a saved projection are not reconstructed.</p>';
+}
+
+function evidenceHtml(evidence){
+  if(!evidence)return '<p>No saved calculation evidence for this older offer.</p>';
+  return `<p class="subtle">Evidence at D${Number(evidence.as_of_day).toFixed(2)}, tick ${evidence.as_of_tick}; stock observation age ${evidence.observation_age_days} days; forecast ${escapeHtml(evidence.forecast_mode)}, revision ${evidence.forecast_revision}.</p><ul>${(evidence.calculations||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>${evidence.binding_limit?`<p>Smallest quantity bound: <b>${escapeHtml(evidence.binding_limit.replaceAll('_',' '))}</b>. Rounding and the shared transfer plan can reduce it further.</p>`:''}${evidence.selection?`<p>${escapeHtml(evidence.selection)}</p>`:''}${evidence.donor_alternatives?`<details><summary>Other donor positions</summary><div class="table-scroll"><table><thead><tr><th>Depot</th><th>Cover days</th><th>Eligible surplus</th></tr></thead><tbody>${evidence.donor_alternatives.map(x=>`<tr><td>${escapeHtml(x.depot)}</td><td>${x.cover}</td><td>${number(x.eligible_surplus)}</td></tr>`).join('')}</tbody></table></div></details>`:''}`;
+}
+
+function renderLifecycles(){
+  el('active-lifecycles').innerHTML=(state.lifecycles||[]).filter(x=>['ACTIVE','RECOVERING'].includes(x.status)).map(x=>`<p>${badge(x.status,'amber')} ${escapeHtml(x.label)} · recovery D${x.recover_at.toFixed(2)} → D${x.end_day.toFixed(2)} · ${escapeHtml(Object.keys(x.from).join(', '))}</p>`).join('')||'<p class="subtle">No timed recovery scheduled. Permanent settings remain until changed.</p>';
+}
+
+function renderBenchmarks(){
+  const box=el('forecast-benchmarks');
+  if(!benchmarkEvidence){
+    if(!benchmarkLoading){benchmarkLoading=true;api('/api/live/benchmarks').then(result=>{benchmarkEvidence=result;renderBenchmarks()}).catch(error=>{box.textContent=error.message}).finally(()=>{benchmarkLoading=false})}
+    return;
+  }
+  const report=benchmarkEvidence;
+  if(!report.summary?.length){box.textContent='No benchmark report available. Run scripts/benchmark_forecasts.py to generate paired evidence.';return}
+  const blend=report.summary.find(x=>x.mode==='blend'),nowcast=report.summary.find(x=>x.mode==='nowcast');
+  box.innerHTML=`<p>${report.days} business days per run · seeds ${escapeHtml((report.seeds||[]).join(', '))} · ${escapeHtml(Object.keys(report.cases||{}).join(', '))}. ${report.current_source?'Report matches current source.':'Source has changed since this report; rerun before drawing conclusions.'}</p><div class="table-scroll"><table><thead><tr><th>Forecast</th><th>Runs</th><th>Daily-series WAPE ↓</th><th>Service ↑</th><th>Unfulfilled ↓</th><th>Expired ↓</th><th>Costs</th><th>Contribution ↑</th></tr></thead><tbody>${report.summary.map(x=>`<tr><td>${escapeHtml(x.mode)}</td><td>${x.runs}</td><td>${x.wape}%</td><td>${x.service_pct}%</td><td>${number(x.unfulfilled)}</td><td>${number(x.writeoffs)}</td><td>${money(x.cost)}</td><td>${money(x.contribution)}</td></tr>`).join('')}</tbody></table></div>${blend&&nowcast?`<p>Blend versus nowcast: ${money(blend.contribution-nowcast.contribution)} aggregate contribution difference; ${(blend.wape-nowcast.wape).toFixed(3)} percentage points WAPE difference. This is the measured synthetic result, regardless of which method wins.</p>`:''}<p>${escapeHtml(report.policy)}</p><ul>${(report.limitations||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>`;
 }
 function renderModel(){
+  renderBenchmarks();
   const model=state.model;
   const scored=state.market.filter(x=>x.online_wape!=null);
   el('model-details').innerHTML=[['Model',model.name],['Artifact',model.version||'Not trained'],['Synthetic held-out WAPE',model.test_wape==null?'Not available':model.test_wape+'%'],['Active daily models',`${model.positions} / ${model.total_positions}`],['Generated training rows',number(model.training_rows)],['Online evaluation',scored.length?'Completed-day scores available':'Waiting for a complete observed day'],['Feed state',state.inputs.feed_outage?'Stopped; estimates are stale':'Observed synthetic order batches']].map(([label,value])=>`<div class="model-row"><b>${escapeHtml(label)}</b><span>${escapeHtml(value)}</span></div>`).join('')+`<p class="footnote">${escapeHtml(model.runtime)}</p>`;
@@ -202,7 +244,7 @@ function renderModel(){
   el('horizon-summary').textContent=row?`${row.sku}: ${number(state.forecast_curves[row.sku][0])} bottles/day now; ${number(state.forecast_curves[row.sku][13])} at D+13. Live trained-only daily WAPE: ${row.online_wape==null?'pending':row.online_wape+'%'}. No calibrated live uncertainty band is claimed.`:'';
 }
 
-function canvasPlot(canvas,series,xValues,{currency=false,hover=null}={}){
+function canvasPlot(canvas,series,xValues,{currency=false,hover=null,markers=[]}={}){
   const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height)return;
   const ratio=Math.min(window.devicePixelRatio||1,2),w=rect.width,h=rect.height;
   canvas.width=Math.round(w*ratio);canvas.height=Math.round(h*ratio);
@@ -211,7 +253,8 @@ function canvasPlot(canvas,series,xValues,{currency=false,hover=null}={}){
   const values=series.flatMap(s=>s.values).filter(v=>v!=null&&Number.isFinite(v));
   if(!values.length)return;
   let lo=Math.min(...values),hi=Math.max(...values);const span=Math.max(hi-lo,Math.abs(hi)*.04,1);lo=Math.max(currency?-Infinity:0,lo-span*.15);hi+=span*.15;
-  const x=i=>padding.left+i*pw/Math.max(xValues.length-1,1),y=v=>padding.top+ph-(v-lo)*ph/Math.max(hi-lo,1);
+  const xDay=day=>padding.left+(day-xValues[0])*pw/Math.max(xValues.at(-1)-xValues[0],.001);
+  const x=i=>xDay(xValues[i]),y=v=>padding.top+ph-(v-lo)*ph/Math.max(hi-lo,1);
   ctx.font='9px Segoe UI';ctx.textAlign='right';ctx.lineWidth=1;
   for(let i=0;i<4;i++){
     const v=lo+(hi-lo)*i/3,yy=y(v);ctx.strokeStyle='#223047';ctx.beginPath();ctx.moveTo(padding.left,yy);ctx.lineTo(w-padding.right,yy);ctx.stroke();
@@ -222,6 +265,11 @@ function canvasPlot(canvas,series,xValues,{currency=false,hover=null}={}){
     ctx.strokeStyle=item.color;ctx.lineWidth=1.9;ctx.setLineDash(item.dashed?[4,4]:[]);ctx.beginPath();let open=false;
     item.values.forEach((v,i)=>{if(v==null){open=false;return}if(!open){ctx.moveTo(x(i),y(v));open=true}else ctx.lineTo(x(i),y(v))});ctx.stroke();ctx.setLineDash([]);
   }
+  for(const event of markers){
+    if(event.day<xValues[0]||event.day>xValues.at(-1))continue;
+    ctx.strokeStyle=event.kind==='DECISION'?'#48d5a188':'#ffbf6988';ctx.setLineDash([2,4]);
+    ctx.beginPath();ctx.moveTo(xDay(event.day),padding.top);ctx.lineTo(xDay(event.day),h-padding.bottom);ctx.stroke();ctx.setLineDash([]);
+  }
   if(hover!=null&&hover<xValues.length){
     ctx.strokeStyle='#8290aa66';ctx.beginPath();ctx.moveTo(x(hover),padding.top);ctx.lineTo(x(hover),h-padding.bottom);ctx.stroke();
     for(const item of series){const value=item.values[hover];if(value==null)continue;ctx.fillStyle=item.color;ctx.beginPath();ctx.arc(x(hover),y(value),3,0,Math.PI*2);ctx.fill()}
@@ -229,19 +277,31 @@ function canvasPlot(canvas,series,xValues,{currency=false,hover=null}={}){
 }
 function drawCharts(){
   if(!state)return;
+  if(el('review-dialog').open&&branchComparison?.branches?.[0]?.trajectory?.length){
+    const days=[...new Set(branchComparison.branches.flatMap(b=>b.trajectory.map(p=>p.day)))].sort((a,b)=>a-b);
+    const colors=['#7d90ad','#48d5a1','#a293ff','#ffbf69'];
+    canvasPlot(el('branch-chart'),branchComparison.branches.map((b,i)=>({color:colors[i],dashed:Boolean(b.issue),values:days.map(day=>{
+      const points=b.trajectory;let index=points.findIndex(p=>p.day>=day);if(index<0)return points.at(-1).contribution;
+      const right=points[index],left=points[index-1]||{day:branchComparison.as_of_day,contribution:0};
+      return left.contribution+(right.contribution-left.contribution)*(day-left.day)/Math.max(.001,right.day-left.day);
+    })})),days,{currency:true});
+  }
   if(page==='board'){
     const mode=el('chart-mode').value,sku=el('chart-flavor').value,tape=state.tape;
+    el('chart-flavor').disabled=mode!=='demand';
     el('chart-empty').hidden=tape.length>0;
-    const titles={demand:'Live demand vs prediction',contribution:'Cumulative contribution: managed vs no intervention',tick_revenue:'Gross sales in each business interval',tick_contribution:'Operating contribution in each interval',unfulfilled_rate:'Unfulfilled demand: daily rate'};
+    const titles={demand:'Live demand vs prediction',contribution:'Cumulative contribution: managed vs no intervention',tick_revenue:'Gross sales in each business interval',tick_contribution:'Operating contribution in each interval',unfulfilled_rate:'Unfulfilled demand: daily rate',fulfilled:'Fulfilled demand: daily rate',stock_cover:'Network stock cover in forecast days',capacity:'Available installed plant capacity per day'};
     el('chart-title').textContent=titles[mode];
     const chosen=tape.map(x=>sku==='ALL'?x:x.sku[sku]);
     const series=mode==='contribution'?[{values:tape.map(x=>x.contribution),color:'#48d5a1'},{values:tape.map(x=>x.baseline),color:'#7d90ad',dashed:true}]:mode==='demand'?[{values:chosen.map(x=>x.forecast),color:'#a293ff'},{values:chosen.map(x=>x.actual),color:'#48d5a1'}]:[{values:tape.map(x=>x[mode]??null),color:mode==='unfulfilled_rate'?'#ff7a8e':'#48d5a1'}];
     el('chart-legend').innerHTML=mode==='contribution'?'<span class="actual">Managed contribution</span><span class="base">No intervention</span>':mode==='demand'?'<span class="model">Trained model + adaptive nowcast</span><span class="actual">Observed requested daily rate</span>':`<span class="actual">${escapeHtml(titles[mode])}</span>`;
     const currency=['contribution','tick_revenue','tick_contribution'].includes(mode);
-    el('chart-caption').textContent=mode==='contribution'?'Cumulative totals usually rise as fulfilled sales accumulate. Use interval views to see deteriorating performance.':mode.startsWith('tick_')?'Each point covers the selected business interval. Values can fall; contribution can be negative after costs.':'Observed data and prediction update from each incoming batch.';
-    canvasPlot(el('live-chart'),series,tape.map(x=>x.day),{currency,hover:hoverIndex});
+    el('chart-caption').textContent=mode==='contribution'?'Network totals: same demand and disruptions, different interventions. This measures intervention impact; it does not isolate the disruption itself.':mode.startsWith('tick_')?'Network total per business interval. Values can fall; contribution can be negative after costs.':mode==='stock_cover'?'Network usable stock / forecast bottles per day. A network average can hide local shortages; inspect depot pressure.':mode==='capacity'?'Installed plant availability only, before ingredient limits and excluding co-packer output.':mode==='demand'?'Observed requested daily rate and prediction. Orange markers show disruptions/recoveries; green markers show decisions.':'Network fulfillment or shortages as a daily rate. Supply disruptions may affect this after existing stock is depleted.';
+    const markers=(state.markers||[]).filter((x,i,all)=>tape.length&&x.day>=tape[0].day&&x.day<=tape.at(-1).day&&all.findIndex(y=>y.day===x.day&&y.kind===x.kind&&y.message===x.message)===i);
+    canvasPlot(el('live-chart'),series,tape.map(x=>x.day),{currency,hover:hoverIndex,markers});
+    el('chart-events').innerHTML=markers.slice(-8).map(x=>`<span title="${escapeHtml(x.message)}">${x.kind==='DECISION'?'●':'◆'} D${x.day.toFixed(2)} ${escapeHtml(x.message)}</span>`).join('');
     const index=hoverIndex??tape.length-1;
-    if(index>=0&&tape[index])el('chart-latest').textContent=mode==='contribution'?`D${tape[index].day.toFixed(2)} · Managed ${money(tape[index].contribution)} · No intervention ${money(tape[index].baseline)}`:mode==='demand'?`D${tape[index].day.toFixed(2)} · Forecast ${number(chosen[index].forecast)} · Observed ${rate(chosen[index].actual)} bottles/day`:`D${tape[index].day.toFixed(2)} · ${currency?money(tape[index][mode]||0):number(tape[index][mode]||0)} · ${(24*(tape[index].dt||state.days_per_tick)).toFixed(1)} business hours`;
+    if(index>=0&&tape[index])el('chart-latest').textContent=mode==='contribution'?`D${tape[index].day.toFixed(2)} · Managed ${money(tape[index].contribution)} · No intervention ${money(tape[index].baseline)}`:mode==='demand'?`D${tape[index].day.toFixed(2)} · Forecast ${number(chosen[index].forecast)} · Observed ${rate(chosen[index].actual)} bottles/day`:`D${tape[index].day.toFixed(2)} · ${currency?money(tape[index][mode]||0):mode==='stock_cover'?Number(tape[index][mode]||0).toFixed(2)+' days':number(tape[index][mode]||0)} · ${(24*(tape[index].dt||state.days_per_tick)).toFixed(1)} business hours`;
   }else if(page==='model'){
     const curve=state.forecast_curves[el('forecast-flavor').value]||[];
     canvasPlot(el('horizon-chart'),[{values:curve,color:'#a293ff'}],curve.map((_,i)=>Math.floor(state.day)+i));
@@ -249,7 +309,9 @@ function drawCharts(){
 }
 el('live-chart').addEventListener('mousemove',event=>{
   if(!state?.tape.length)return;const rect=el('live-chart').getBoundingClientRect();
-  hoverIndex=Math.max(0,Math.min(state.tape.length-1,Math.round((event.clientX-rect.left-55)/(rect.width-70)*(state.tape.length-1))));drawCharts();
+  const fraction=Math.max(0,Math.min(1,(event.clientX-rect.left-55)/(rect.width-70)));
+  const day=state.tape[0].day+fraction*(state.tape.at(-1).day-state.tape[0].day);
+  hoverIndex=state.tape.reduce((best,x,i)=>Math.abs(x.day-day)<Math.abs(state.tape[best].day-day)?i:best,0);drawCharts();
 });
 el('live-chart').addEventListener('mouseleave',()=>{hoverIndex=null;drawCharts()});
 window.addEventListener('resize',drawCharts);
@@ -268,21 +330,28 @@ el('reset-form').addEventListener('submit',async event=>{event.preventDefault();
 document.addEventListener('click',event=>{
   if(event.target.closest('[data-show-inputs]')){openPage('datafeed');return}
   const branch=event.target.closest('[data-branch]');if(branch){chooseBranch(branch.dataset.branch);return}
-  const preset=event.target.closest('[data-preset]');if(preset){inputDirty=false;command('/api/live/inject',{preset:preset.dataset.preset,step_if_paused:true}).catch(()=>{});return}
+  const preset=event.target.closest('[data-preset]');if(preset){command('/api/live/inject',{preset:preset.dataset.preset,step_if_paused:true,lifecycle:preset.dataset.preset==='quality'?undefined:readLifecycle()}).then(()=>{inputDirty=false;dirtyInputs.clear();syncInputs()}).catch(()=>{});return}
   const review=event.target.closest('[data-review]');if(review){openReview(review.dataset.review);return}
   const flavor=event.target.closest('[data-flavor]');if(flavor){el('chart-flavor').value=flavor.dataset.flavor;el('chart-mode').value='demand';drawCharts()}
 });
-el('inputs-form').addEventListener('input',()=>{inputDirty=true;updateInputLabels();el('inputs-status').textContent='Unsaved scenario changes. Press Apply to introduce them.'});
+function readLifecycle(){return {duration_days:Number(el('shock-duration').value),recovery_days:Number(el('shock-recovery').value)}}
+el('restore-inputs').addEventListener('click',async()=>{
+  try{await command('/api/live/inputs',{changes:{trend:1,conversion:.75,target_sku:'Dragon Passion',region:'North',road_closed:false,closure_days:21,traffic_delay_days:0,plant_availability:1,import_delay_days:0,heatwave:1,competitor_pressure:0,feed_outage:false,quality_result:'PASS'},step_if_paused:true});inputDirty=false;dirtyInputs.clear();syncInputs();el('inputs-status').textContent='Normal conditions restored. Existing shipments keep booked arrival dates; held pulp still needs QA.'}catch{}
+});
+el('inputs-form').addEventListener('input',event=>{if(event.target.name)dirtyInputs.add(event.target.name);inputDirty=true;updateInputLabels();el('inputs-status').textContent='Unsaved scenario changes. Press Apply to introduce them.'});
 el('inputs-form').addEventListener('submit',async event=>{
   event.preventDefault();const changes={};
-  for(const field of el('inputs-form').elements){if(!field.name)continue;changes[field.name]=field.type==='checkbox'?field.checked:['range','number'].includes(field.type)?Number(field.value):field.value}
-  try{await command('/api/live/inputs',{changes,step_if_paused:true});inputDirty=false;syncInputs();el('inputs-status').textContent='Applied. The incoming-data tab shows the parameters and affected records.'}catch{}
+  for(const field of el('inputs-form').elements){if(!field.name||!dirtyInputs.has(field.name))continue;changes[field.name]=field.type==='checkbox'?field.checked:['range','number'].includes(field.type)?Number(field.value):field.value}
+  if(!Object.keys(changes).length){el('inputs-status').textContent='Change a scenario input first. Lifecycle settings apply to the next changed input or preset.';return}
+  try{await command('/api/live/inputs',{changes,step_if_paused:true,lifecycle:readLifecycle()});inputDirty=false;dirtyInputs.clear();syncInputs();el('inputs-status').textContent='Applied changed fields. Other disruption schedules remain active.'}catch{}
 });
 
 el('decision-fraction').closest('label').hidden=true;
 const choiceSummary=document.createElement('div');choiceSummary.id='review-choice-summary';choiceSummary.className='notice';el('branch-results').after(choiceSummary);
 async function openReview(id,recoveredToken=null){
+  if(reviewOpening||selectedAction)return;
   const action=state.actions.find(x=>x.id===id);if(!action)return;
+  reviewOpening=true;
   selectedAction=structuredClone(action);
   selectedBranch=null;branchComparison=null;
   try{
@@ -292,8 +361,9 @@ async function openReview(id,recoveredToken=null){
       selectedAction.review_token=opened.review_token;render(opened.state);
     }
     sessionStorage.setItem('pulp-active-review',JSON.stringify({run_id:state.run_id,id:action.id,token:selectedAction.review_token}));
-  }catch(error){selectedAction=null;showError(error.message);return}
+  }catch(error){selectedAction=null;showError(error.message);return}finally{reviewOpening=false}
   el('review-title').textContent=action.title;el('review-why').textContent=action.why;
+  el('review-evidence').innerHTML=evidenceHtml(action.evidence);
   el('review-checks').innerHTML=`<ul>${action.checks.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>`;
   el('review-role').textContent=`Accountable role: ${action.role}`;
   el('decision-actor').value=localStorage.getItem('pulp-live-operator')||'';el('decision-reason').value='';el('decision-checks').checked=false;
@@ -307,8 +377,12 @@ async function openReview(id,recoveredToken=null){
     const result=await api('/api/live/compare',{id:action.id,version:action.version});
     if(selectedAction?.version!==action.version)return;
     branchComparison=result;
+    el('comparison-title').textContent=`Conditional ${result.horizon_days??14}-day comparison${result.horizon_truncated?' · season-limited':''}`;
+    el('review-evidence').innerHTML=evidenceHtml(result.evidence||action.evidence);
+    el('comparison-assumptions').textContent=(result.assumptions||[]).join(' ');
     const best=Math.max(...result.branches.filter(x=>!x.issue).map(x=>x.contribution));
-    el('branch-results').innerHTML=result.branches.map(x=>`<button type="button" data-branch="${escapeHtml(x.id)}" class="branch-card ${x.contribution===best&&!x.issue?'best':''}" aria-pressed="false" ${x.issue?'disabled':''}><b>${escapeHtml(x.label)}</b><strong class="${x.contribution_vs_wait>=0?'positive':'negative'}" title="${number(x.contribution_vs_wait)} rupees">${money(x.contribution_vs_wait)}</strong><span>contribution gain vs waiting</span><small>Action cash ${money(x.cash_commitment||0)}</small><small>14-day contribution ${money(x.contribution)}</small><small>Service ${x.service_pct.toFixed(2)}% · ${number(x.unfulfilled)} unfilled</small><small>${number(x.writeoffs)} expired bottles</small><small>${x.issue?escapeHtml(x.issue):'Click to select this path'}</small></button>`).join('');
+    el('branch-results').innerHTML=result.branches.map((x,i)=>`<button type="button" data-branch="${escapeHtml(x.id)}" class="branch-card ${x.contribution===best&&!x.issue?'best':''}" aria-pressed="false" ${x.issue?'disabled':''}><b class="branch-tone-${i}">${escapeHtml(x.label)}</b><strong class="${x.contribution_vs_wait>=0?'positive':'negative'}" title="${number(x.contribution_vs_wait)} rupees">${money(x.contribution_vs_wait)}</strong><span>contribution gain vs waiting</span><small>Action cash ${money(x.cash_commitment||0)}</small><small>${result.horizon_days??14}-day contribution ${money(x.contribution)}</small><small>Service ${x.service_pct.toFixed(2)}% · ${number(x.unfulfilled)} unfilled</small><small>${number(x.writeoffs)} expired bottles</small><small>${x.issue?escapeHtml(x.issue):'Click to select this path'}</small></button>`).join('');
+    requestAnimationFrame(drawCharts);
   }catch(error){el('branch-results').textContent=error.message}
 }
 function chooseBranch(id){
@@ -326,7 +400,7 @@ function updateReview(){
   if(!selectedAction||!el('review-dialog').open)return;
   const current=state.actions.find(x=>x.id===selectedAction.id&&x.version===selectedAction.version);
   const valid=Boolean(current);
-  el('approve-action').disabled=!valid||!selectedBranch;el('reject-action').disabled=!valid;
+  el('approve-action').disabled=decisionSubmitting||!valid||!selectedBranch;el('reject-action').disabled=decisionSubmitting||!valid;
   el('review-deadline').textContent=valid?`Clock paused for this review · ${current.wall_seconds.toFixed(0)} seconds remain when resumed · proposed commitment ${money(current.params.cash)}. ${current.operational_remaining<0?'Some immediate losses may already be unavoidable; this action can protect later demand.':''}`:'This offer changed or its decision window expired. Close this review and select a current recommendation.';
 }
 async function closeReview(){
@@ -337,18 +411,20 @@ async function closeReview(){
 el('close-review').addEventListener('click',closeReview);
 el('review-dialog').addEventListener('cancel',event=>{event.preventDefault();closeReview()});
 async function recordDecision(status){
-  if(!selectedAction)return;
+  if(!selectedAction||decisionSubmitting)return;
   if(status==='APPROVED'&&!selectedBranch){el('review-error').textContent='Select a decision path above first.';el('review-error').hidden=false;return}
   const actor=el('decision-actor').value.trim(),reason=el('decision-reason').value.trim();
   if(!actor||!reason){el('review-error').textContent='Enter your name and a reason for this decision.';el('review-error').hidden=false;return}
   if(status==='APPROVED'&&selectedBranch!=='wait'&&!el('decision-checks').checked){el('review-error').textContent='Confirm the operational checks before approving.';el('review-error').hidden=false;return}
   el('approve-action').disabled=true;el('reject-action').disabled=true;
+  decisionSubmitting=true;
   try{
     const next=await api('/api/live/decide',{id:selectedAction.id,version:selectedAction.version,status,actor,reason,
       choice:status==='REJECTED'?'reject':selectedBranch,review_token:selectedAction.review_token,
       fraction:Number(el('decision-fraction').value),checks_confirmed:el('decision-checks').checked});
     localStorage.setItem('pulp-live-operator',actor);el('review-dialog').close();selectedAction=null;selectedBranch=null;sessionStorage.removeItem('pulp-active-review');render(next);
-  }catch(error){el('review-error').textContent=error.message;el('review-error').hidden=false;updateReview()}
+  }catch(error){el('review-error').textContent=error.message;el('review-error').hidden=false}
+  finally{decisionSubmitting=false;updateReview()}
 }
 el('decision-form').addEventListener('submit',event=>{event.preventDefault();recordDecision('APPROVED')});
 el('reject-action').addEventListener('click',()=>recordDecision('REJECTED'));

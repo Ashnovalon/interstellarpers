@@ -2,11 +2,13 @@
 
 The live home page is an event-driven, persistent simulation of Pulp Riot's network. Every visible figure comes from the Python engine. All operating observations, depot identities, recipes, lab outcomes and prices beyond supplied case facts are synthetic. No real procurement, dispatch or supplier contact takes place.
 
+For the revised input audit, selectable decision paths, automatically paused reviews, financial examples and numerical corrections, read `docs/WORKING_AND_NUMBERS.md`.
+
 ## User workflow
 
 Start the clock, watch daily-rate demand and forecasts, inject a disruption, compare actions, then approve or reject before the business deadline. Pause or step the clock for careful review. Rejected, missed and badly chosen actions can leave shortages unresolved or consume budget. A run ends after 112 modeled business days. Creating another run archives the previous state and event log without clearing company imports.
 
-The six screens are Live board, Decision desk, Stock & network, Disruption studio, Outcomes & ledger, and Model & evidence. The original operational input workbench remains at `/operations`.
+The seven screens are Live board, Decision desk, Stock & network, Incoming data, Disruption studio, Outcomes & ledger, and Model & evidence. The original operational input workbench remains at `/operations`. Opening a review pauses the server clock; selecting and submitting a path restores its previous state. Offers remain visible for at least ten active ticks, with physical urgency shown separately. Manual disruptions switch guided runs to sandbox and cancel remaining guided shocks. Applying a disruption while paused generates one affected input batch.
 
 Each tick emits 135 series: five flavors × nine depots × three channels. GT observations are distributor requests, never invented outlet sell-through. A tick's order quantity is for the chosen business interval; chart rates normalize it to bottles/day. Changing speed aligns ticks to midnight so partial business days cannot be promoted to complete training days.
 

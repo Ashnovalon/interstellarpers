@@ -1,0 +1,1891 @@
+channel,date,depot,fulfilled,id,in_stock,requested,sample,sku
+GT,2026-10-11,D1,30275,demo-order:2026-10-11:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-12,D1,30275,demo-order:2026-10-12:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-13,D1,30275,demo-order:2026-10-13:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-14,D1,30275,demo-order:2026-10-14:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-15,D1,30275,demo-order:2026-10-15:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-16,D1,30275,demo-order:2026-10-16:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-17,D1,30275,demo-order:2026-10-17:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-18,D1,30275,demo-order:2026-10-18:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-19,D1,30275,demo-order:2026-10-19:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-20,D1,30275,demo-order:2026-10-20:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-21,D1,30275,demo-order:2026-10-21:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-22,D1,30275,demo-order:2026-10-22:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-23,D1,30275,demo-order:2026-10-23:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+GT,2026-10-24,D1,30275,demo-order:2026-10-24:Mango Peach Basil:D1:GT,True,30275,True,Mango Peach Basil
+MT,2026-10-11,D1,13761,demo-order:2026-10-11:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-12,D1,13761,demo-order:2026-10-12:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-13,D1,13761,demo-order:2026-10-13:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-14,D1,13761,demo-order:2026-10-14:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-15,D1,13761,demo-order:2026-10-15:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-16,D1,13761,demo-order:2026-10-16:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-17,D1,13761,demo-order:2026-10-17:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-18,D1,13761,demo-order:2026-10-18:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-19,D1,13761,demo-order:2026-10-19:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-20,D1,13761,demo-order:2026-10-20:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-21,D1,13761,demo-order:2026-10-21:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-22,D1,13761,demo-order:2026-10-22:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-23,D1,13761,demo-order:2026-10-23:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+MT,2026-10-24,D1,13761,demo-order:2026-10-24:Mango Peach Basil:D1:MT,True,13761,True,Mango Peach Basil
+QC,2026-10-11,D1,11009,demo-order:2026-10-11:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-12,D1,11009,demo-order:2026-10-12:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-13,D1,11009,demo-order:2026-10-13:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-14,D1,11009,demo-order:2026-10-14:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-15,D1,11009,demo-order:2026-10-15:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-16,D1,11009,demo-order:2026-10-16:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-17,D1,11009,demo-order:2026-10-17:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-18,D1,11009,demo-order:2026-10-18:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-19,D1,11009,demo-order:2026-10-19:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-20,D1,11009,demo-order:2026-10-20:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-21,D1,11009,demo-order:2026-10-21:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-22,D1,11009,demo-order:2026-10-22:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-23,D1,11009,demo-order:2026-10-23:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+QC,2026-10-24,D1,11009,demo-order:2026-10-24:Mango Peach Basil:D1:QC,True,11009,True,Mango Peach Basil
+GT,2026-10-11,D2,12741,demo-order:2026-10-11:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-12,D2,12741,demo-order:2026-10-12:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-13,D2,12741,demo-order:2026-10-13:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-14,D2,12741,demo-order:2026-10-14:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-15,D2,12741,demo-order:2026-10-15:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-16,D2,12741,demo-order:2026-10-16:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-17,D2,12741,demo-order:2026-10-17:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-18,D2,12741,demo-order:2026-10-18:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-19,D2,12741,demo-order:2026-10-19:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-20,D2,12741,demo-order:2026-10-20:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-21,D2,12741,demo-order:2026-10-21:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-22,D2,12741,demo-order:2026-10-22:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-23,D2,12741,demo-order:2026-10-23:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+GT,2026-10-24,D2,12741,demo-order:2026-10-24:Mango Peach Basil:D2:GT,True,12741,True,Mango Peach Basil
+MT,2026-10-11,D2,5791,demo-order:2026-10-11:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-12,D2,5791,demo-order:2026-10-12:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-13,D2,5791,demo-order:2026-10-13:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-14,D2,5791,demo-order:2026-10-14:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-15,D2,5791,demo-order:2026-10-15:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-16,D2,5791,demo-order:2026-10-16:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-17,D2,5791,demo-order:2026-10-17:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-18,D2,5791,demo-order:2026-10-18:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-19,D2,5791,demo-order:2026-10-19:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-20,D2,5791,demo-order:2026-10-20:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-21,D2,5791,demo-order:2026-10-21:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-22,D2,5791,demo-order:2026-10-22:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-23,D2,5791,demo-order:2026-10-23:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+MT,2026-10-24,D2,5791,demo-order:2026-10-24:Mango Peach Basil:D2:MT,True,5791,True,Mango Peach Basil
+QC,2026-10-11,D2,4633,demo-order:2026-10-11:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-12,D2,4633,demo-order:2026-10-12:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-13,D2,4633,demo-order:2026-10-13:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-14,D2,4633,demo-order:2026-10-14:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-15,D2,4633,demo-order:2026-10-15:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-16,D2,4633,demo-order:2026-10-16:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-17,D2,4633,demo-order:2026-10-17:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-18,D2,4633,demo-order:2026-10-18:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-19,D2,4633,demo-order:2026-10-19:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-20,D2,4633,demo-order:2026-10-20:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-21,D2,4633,demo-order:2026-10-21:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-22,D2,4633,demo-order:2026-10-22:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-23,D2,4633,demo-order:2026-10-23:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+QC,2026-10-24,D2,4633,demo-order:2026-10-24:Mango Peach Basil:D2:QC,True,4633,True,Mango Peach Basil
+GT,2026-10-11,D3,37262,demo-order:2026-10-11:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-12,D3,37262,demo-order:2026-10-12:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-13,D3,37262,demo-order:2026-10-13:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-14,D3,37262,demo-order:2026-10-14:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-15,D3,37262,demo-order:2026-10-15:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-16,D3,37262,demo-order:2026-10-16:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-17,D3,37262,demo-order:2026-10-17:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-18,D3,37262,demo-order:2026-10-18:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-19,D3,37262,demo-order:2026-10-19:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-20,D3,37262,demo-order:2026-10-20:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-21,D3,37262,demo-order:2026-10-21:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-22,D3,37262,demo-order:2026-10-22:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-23,D3,37262,demo-order:2026-10-23:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-24,D3,37262,demo-order:2026-10-24:Mango Peach Basil:D3:GT,True,37262,True,Mango Peach Basil
+MT,2026-10-11,D3,16937,demo-order:2026-10-11:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-12,D3,16937,demo-order:2026-10-12:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-13,D3,16937,demo-order:2026-10-13:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-14,D3,16937,demo-order:2026-10-14:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-15,D3,16937,demo-order:2026-10-15:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-16,D3,16937,demo-order:2026-10-16:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-17,D3,16937,demo-order:2026-10-17:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-18,D3,16937,demo-order:2026-10-18:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-19,D3,16937,demo-order:2026-10-19:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-20,D3,16937,demo-order:2026-10-20:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-21,D3,16937,demo-order:2026-10-21:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-22,D3,16937,demo-order:2026-10-22:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-23,D3,16937,demo-order:2026-10-23:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-24,D3,16937,demo-order:2026-10-24:Mango Peach Basil:D3:MT,True,16937,True,Mango Peach Basil
+QC,2026-10-11,D3,13550,demo-order:2026-10-11:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-12,D3,13550,demo-order:2026-10-12:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-13,D3,13550,demo-order:2026-10-13:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-14,D3,13550,demo-order:2026-10-14:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-15,D3,13550,demo-order:2026-10-15:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-16,D3,13550,demo-order:2026-10-16:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-17,D3,13550,demo-order:2026-10-17:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-18,D3,13550,demo-order:2026-10-18:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-19,D3,13550,demo-order:2026-10-19:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-20,D3,13550,demo-order:2026-10-20:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-21,D3,13550,demo-order:2026-10-21:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-22,D3,13550,demo-order:2026-10-22:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-23,D3,13550,demo-order:2026-10-23:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-24,D3,13550,demo-order:2026-10-24:Mango Peach Basil:D3:QC,True,13550,True,Mango Peach Basil
+GT,2026-10-11,D4,16988,demo-order:2026-10-11:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-12,D4,16988,demo-order:2026-10-12:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-13,D4,16988,demo-order:2026-10-13:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-14,D4,16988,demo-order:2026-10-14:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-15,D4,16988,demo-order:2026-10-15:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-16,D4,16988,demo-order:2026-10-16:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-17,D4,16988,demo-order:2026-10-17:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-18,D4,16988,demo-order:2026-10-18:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-19,D4,16988,demo-order:2026-10-19:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-20,D4,16988,demo-order:2026-10-20:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-21,D4,16988,demo-order:2026-10-21:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-22,D4,16988,demo-order:2026-10-22:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-23,D4,16988,demo-order:2026-10-23:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-24,D4,16988,demo-order:2026-10-24:Mango Peach Basil:D4:GT,True,16988,True,Mango Peach Basil
+MT,2026-10-11,D4,7722,demo-order:2026-10-11:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-12,D4,7722,demo-order:2026-10-12:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-13,D4,7722,demo-order:2026-10-13:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-14,D4,7722,demo-order:2026-10-14:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-15,D4,7722,demo-order:2026-10-15:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-16,D4,7722,demo-order:2026-10-16:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-17,D4,7722,demo-order:2026-10-17:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-18,D4,7722,demo-order:2026-10-18:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-19,D4,7722,demo-order:2026-10-19:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-20,D4,7722,demo-order:2026-10-20:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-21,D4,7722,demo-order:2026-10-21:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-22,D4,7722,demo-order:2026-10-22:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-23,D4,7722,demo-order:2026-10-23:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-24,D4,7722,demo-order:2026-10-24:Mango Peach Basil:D4:MT,True,7722,True,Mango Peach Basil
+QC,2026-10-11,D4,6177,demo-order:2026-10-11:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-12,D4,6177,demo-order:2026-10-12:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-13,D4,6177,demo-order:2026-10-13:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-14,D4,6177,demo-order:2026-10-14:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-15,D4,6177,demo-order:2026-10-15:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-16,D4,6177,demo-order:2026-10-16:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-17,D4,6177,demo-order:2026-10-17:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-18,D4,6177,demo-order:2026-10-18:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-19,D4,6177,demo-order:2026-10-19:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-20,D4,6177,demo-order:2026-10-20:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-21,D4,6177,demo-order:2026-10-21:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-22,D4,6177,demo-order:2026-10-22:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-23,D4,6177,demo-order:2026-10-23:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-24,D4,6177,demo-order:2026-10-24:Mango Peach Basil:D4:QC,True,6177,True,Mango Peach Basil
+GT,2026-10-11,D5,11325,demo-order:2026-10-11:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-12,D5,11325,demo-order:2026-10-12:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-13,D5,11325,demo-order:2026-10-13:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-14,D5,11325,demo-order:2026-10-14:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-15,D5,11325,demo-order:2026-10-15:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-16,D5,11325,demo-order:2026-10-16:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-17,D5,11325,demo-order:2026-10-17:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-18,D5,11325,demo-order:2026-10-18:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-19,D5,11325,demo-order:2026-10-19:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-20,D5,11325,demo-order:2026-10-20:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-21,D5,11325,demo-order:2026-10-21:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-22,D5,11325,demo-order:2026-10-22:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-23,D5,11325,demo-order:2026-10-23:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+GT,2026-10-24,D5,11325,demo-order:2026-10-24:Mango Peach Basil:D5:GT,True,11325,True,Mango Peach Basil
+MT,2026-10-11,D5,5148,demo-order:2026-10-11:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-12,D5,5148,demo-order:2026-10-12:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-13,D5,5148,demo-order:2026-10-13:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-14,D5,5148,demo-order:2026-10-14:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-15,D5,5148,demo-order:2026-10-15:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-16,D5,5148,demo-order:2026-10-16:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-17,D5,5148,demo-order:2026-10-17:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-18,D5,5148,demo-order:2026-10-18:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-19,D5,5148,demo-order:2026-10-19:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-20,D5,5148,demo-order:2026-10-20:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-21,D5,5148,demo-order:2026-10-21:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-22,D5,5148,demo-order:2026-10-22:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-23,D5,5148,demo-order:2026-10-23:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+MT,2026-10-24,D5,5148,demo-order:2026-10-24:Mango Peach Basil:D5:MT,True,5148,True,Mango Peach Basil
+QC,2026-10-11,D5,4118,demo-order:2026-10-11:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-12,D5,4118,demo-order:2026-10-12:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-13,D5,4118,demo-order:2026-10-13:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-14,D5,4118,demo-order:2026-10-14:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-15,D5,4118,demo-order:2026-10-15:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-16,D5,4118,demo-order:2026-10-16:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-17,D5,4118,demo-order:2026-10-17:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-18,D5,4118,demo-order:2026-10-18:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-19,D5,4118,demo-order:2026-10-19:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-20,D5,4118,demo-order:2026-10-20:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-21,D5,4118,demo-order:2026-10-21:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-22,D5,4118,demo-order:2026-10-22:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-23,D5,4118,demo-order:2026-10-23:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+QC,2026-10-24,D5,4118,demo-order:2026-10-24:Mango Peach Basil:D5:QC,True,4118,True,Mango Peach Basil
+GT,2026-10-11,D6,37262,demo-order:2026-10-11:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-12,D6,37262,demo-order:2026-10-12:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-13,D6,37262,demo-order:2026-10-13:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-14,D6,37262,demo-order:2026-10-14:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-15,D6,37262,demo-order:2026-10-15:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-16,D6,37262,demo-order:2026-10-16:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-17,D6,37262,demo-order:2026-10-17:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-18,D6,37262,demo-order:2026-10-18:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-19,D6,37262,demo-order:2026-10-19:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-20,D6,37262,demo-order:2026-10-20:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-21,D6,37262,demo-order:2026-10-21:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-22,D6,37262,demo-order:2026-10-22:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-23,D6,37262,demo-order:2026-10-23:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+GT,2026-10-24,D6,37262,demo-order:2026-10-24:Mango Peach Basil:D6:GT,True,37262,True,Mango Peach Basil
+MT,2026-10-11,D6,16937,demo-order:2026-10-11:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-12,D6,16937,demo-order:2026-10-12:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-13,D6,16937,demo-order:2026-10-13:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-14,D6,16937,demo-order:2026-10-14:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-15,D6,16937,demo-order:2026-10-15:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-16,D6,16937,demo-order:2026-10-16:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-17,D6,16937,demo-order:2026-10-17:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-18,D6,16937,demo-order:2026-10-18:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-19,D6,16937,demo-order:2026-10-19:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-20,D6,16937,demo-order:2026-10-20:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-21,D6,16937,demo-order:2026-10-21:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-22,D6,16937,demo-order:2026-10-22:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-23,D6,16937,demo-order:2026-10-23:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+MT,2026-10-24,D6,16937,demo-order:2026-10-24:Mango Peach Basil:D6:MT,True,16937,True,Mango Peach Basil
+QC,2026-10-11,D6,13550,demo-order:2026-10-11:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-12,D6,13550,demo-order:2026-10-12:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-13,D6,13550,demo-order:2026-10-13:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-14,D6,13550,demo-order:2026-10-14:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-15,D6,13550,demo-order:2026-10-15:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-16,D6,13550,demo-order:2026-10-16:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-17,D6,13550,demo-order:2026-10-17:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-18,D6,13550,demo-order:2026-10-18:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-19,D6,13550,demo-order:2026-10-19:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-20,D6,13550,demo-order:2026-10-20:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-21,D6,13550,demo-order:2026-10-21:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-22,D6,13550,demo-order:2026-10-22:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-23,D6,13550,demo-order:2026-10-23:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+QC,2026-10-24,D6,13550,demo-order:2026-10-24:Mango Peach Basil:D6:QC,True,13550,True,Mango Peach Basil
+GT,2026-10-11,D7,16988,demo-order:2026-10-11:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-12,D7,16988,demo-order:2026-10-12:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-13,D7,16988,demo-order:2026-10-13:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-14,D7,16988,demo-order:2026-10-14:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-15,D7,16988,demo-order:2026-10-15:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-16,D7,16988,demo-order:2026-10-16:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-17,D7,16988,demo-order:2026-10-17:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-18,D7,16988,demo-order:2026-10-18:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-19,D7,16988,demo-order:2026-10-19:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-20,D7,16988,demo-order:2026-10-20:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-21,D7,16988,demo-order:2026-10-21:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-22,D7,16988,demo-order:2026-10-22:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-23,D7,16988,demo-order:2026-10-23:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+GT,2026-10-24,D7,16988,demo-order:2026-10-24:Mango Peach Basil:D7:GT,True,16988,True,Mango Peach Basil
+MT,2026-10-11,D7,7722,demo-order:2026-10-11:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-12,D7,7722,demo-order:2026-10-12:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-13,D7,7722,demo-order:2026-10-13:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-14,D7,7722,demo-order:2026-10-14:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-15,D7,7722,demo-order:2026-10-15:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-16,D7,7722,demo-order:2026-10-16:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-17,D7,7722,demo-order:2026-10-17:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-18,D7,7722,demo-order:2026-10-18:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-19,D7,7722,demo-order:2026-10-19:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-20,D7,7722,demo-order:2026-10-20:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-21,D7,7722,demo-order:2026-10-21:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-22,D7,7722,demo-order:2026-10-22:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-23,D7,7722,demo-order:2026-10-23:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+MT,2026-10-24,D7,7722,demo-order:2026-10-24:Mango Peach Basil:D7:MT,True,7722,True,Mango Peach Basil
+QC,2026-10-11,D7,6177,demo-order:2026-10-11:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-12,D7,6177,demo-order:2026-10-12:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-13,D7,6177,demo-order:2026-10-13:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-14,D7,6177,demo-order:2026-10-14:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-15,D7,6177,demo-order:2026-10-15:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-16,D7,6177,demo-order:2026-10-16:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-17,D7,6177,demo-order:2026-10-17:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-18,D7,6177,demo-order:2026-10-18:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-19,D7,6177,demo-order:2026-10-19:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-20,D7,6177,demo-order:2026-10-20:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-21,D7,6177,demo-order:2026-10-21:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-22,D7,6177,demo-order:2026-10-22:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-23,D7,6177,demo-order:2026-10-23:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+QC,2026-10-24,D7,6177,demo-order:2026-10-24:Mango Peach Basil:D7:QC,True,6177,True,Mango Peach Basil
+GT,2026-10-11,D8,9315,demo-order:2026-10-11:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-12,D8,9315,demo-order:2026-10-12:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-13,D8,9315,demo-order:2026-10-13:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-14,D8,9315,demo-order:2026-10-14:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-15,D8,9315,demo-order:2026-10-15:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-16,D8,9315,demo-order:2026-10-16:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-17,D8,9315,demo-order:2026-10-17:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-18,D8,9315,demo-order:2026-10-18:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-19,D8,9315,demo-order:2026-10-19:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-20,D8,9315,demo-order:2026-10-20:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-21,D8,9315,demo-order:2026-10-21:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-22,D8,9315,demo-order:2026-10-22:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-23,D8,9315,demo-order:2026-10-23:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+GT,2026-10-24,D8,9315,demo-order:2026-10-24:Mango Peach Basil:D8:GT,True,9315,True,Mango Peach Basil
+MT,2026-10-11,D8,4234,demo-order:2026-10-11:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-12,D8,4234,demo-order:2026-10-12:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-13,D8,4234,demo-order:2026-10-13:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-14,D8,4234,demo-order:2026-10-14:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-15,D8,4234,demo-order:2026-10-15:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-16,D8,4234,demo-order:2026-10-16:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-17,D8,4234,demo-order:2026-10-17:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-18,D8,4234,demo-order:2026-10-18:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-19,D8,4234,demo-order:2026-10-19:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-20,D8,4234,demo-order:2026-10-20:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-21,D8,4234,demo-order:2026-10-21:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-22,D8,4234,demo-order:2026-10-22:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-23,D8,4234,demo-order:2026-10-23:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+MT,2026-10-24,D8,4234,demo-order:2026-10-24:Mango Peach Basil:D8:MT,True,4234,True,Mango Peach Basil
+QC,2026-10-11,D8,3387,demo-order:2026-10-11:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-12,D8,3387,demo-order:2026-10-12:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-13,D8,3387,demo-order:2026-10-13:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-14,D8,3387,demo-order:2026-10-14:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-15,D8,3387,demo-order:2026-10-15:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-16,D8,3387,demo-order:2026-10-16:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-17,D8,3387,demo-order:2026-10-17:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-18,D8,3387,demo-order:2026-10-18:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-19,D8,3387,demo-order:2026-10-19:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-20,D8,3387,demo-order:2026-10-20:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-21,D8,3387,demo-order:2026-10-21:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-22,D8,3387,demo-order:2026-10-22:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-23,D8,3387,demo-order:2026-10-23:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+QC,2026-10-24,D8,3387,demo-order:2026-10-24:Mango Peach Basil:D8:QC,True,3387,True,Mango Peach Basil
+GT,2026-10-11,D9,6987,demo-order:2026-10-11:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-12,D9,6987,demo-order:2026-10-12:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-13,D9,6987,demo-order:2026-10-13:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-14,D9,6987,demo-order:2026-10-14:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-15,D9,6987,demo-order:2026-10-15:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-16,D9,6987,demo-order:2026-10-16:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-17,D9,6987,demo-order:2026-10-17:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-18,D9,6987,demo-order:2026-10-18:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-19,D9,6987,demo-order:2026-10-19:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-20,D9,6987,demo-order:2026-10-20:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-21,D9,6987,demo-order:2026-10-21:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-22,D9,6987,demo-order:2026-10-22:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-23,D9,6987,demo-order:2026-10-23:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+GT,2026-10-24,D9,6987,demo-order:2026-10-24:Mango Peach Basil:D9:GT,True,6987,True,Mango Peach Basil
+MT,2026-10-11,D9,3176,demo-order:2026-10-11:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-12,D9,3176,demo-order:2026-10-12:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-13,D9,3176,demo-order:2026-10-13:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-14,D9,3176,demo-order:2026-10-14:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-15,D9,3176,demo-order:2026-10-15:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-16,D9,3176,demo-order:2026-10-16:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-17,D9,3176,demo-order:2026-10-17:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-18,D9,3176,demo-order:2026-10-18:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-19,D9,3176,demo-order:2026-10-19:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-20,D9,3176,demo-order:2026-10-20:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-21,D9,3176,demo-order:2026-10-21:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-22,D9,3176,demo-order:2026-10-22:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-23,D9,3176,demo-order:2026-10-23:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+MT,2026-10-24,D9,3176,demo-order:2026-10-24:Mango Peach Basil:D9:MT,True,3176,True,Mango Peach Basil
+QC,2026-10-11,D9,2541,demo-order:2026-10-11:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-12,D9,2541,demo-order:2026-10-12:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-13,D9,2541,demo-order:2026-10-13:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-14,D9,2541,demo-order:2026-10-14:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-15,D9,2541,demo-order:2026-10-15:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-16,D9,2541,demo-order:2026-10-16:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-17,D9,2541,demo-order:2026-10-17:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-18,D9,2541,demo-order:2026-10-18:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-19,D9,2541,demo-order:2026-10-19:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-20,D9,2541,demo-order:2026-10-20:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-21,D9,2541,demo-order:2026-10-21:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-22,D9,2541,demo-order:2026-10-22:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-23,D9,2541,demo-order:2026-10-23:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+QC,2026-10-24,D9,2541,demo-order:2026-10-24:Mango Peach Basil:D9:QC,True,2541,True,Mango Peach Basil
+GT,2026-10-11,D1,15934,demo-order:2026-10-11:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-12,D1,15934,demo-order:2026-10-12:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-13,D1,15934,demo-order:2026-10-13:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-14,D1,15934,demo-order:2026-10-14:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-15,D1,15934,demo-order:2026-10-15:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-16,D1,15934,demo-order:2026-10-16:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-17,D1,15934,demo-order:2026-10-17:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-18,D1,15934,demo-order:2026-10-18:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-19,D1,15934,demo-order:2026-10-19:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-20,D1,15934,demo-order:2026-10-20:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-21,D1,15934,demo-order:2026-10-21:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-22,D1,15934,demo-order:2026-10-22:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-23,D1,15934,demo-order:2026-10-23:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+GT,2026-10-24,D1,15934,demo-order:2026-10-24:Guava Chilli:D1:GT,True,15934,True,Guava Chilli
+MT,2026-10-11,D1,7243,demo-order:2026-10-11:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-12,D1,7243,demo-order:2026-10-12:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-13,D1,7243,demo-order:2026-10-13:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-14,D1,7243,demo-order:2026-10-14:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-15,D1,7243,demo-order:2026-10-15:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-16,D1,7243,demo-order:2026-10-16:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-17,D1,7243,demo-order:2026-10-17:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-18,D1,7243,demo-order:2026-10-18:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-19,D1,7243,demo-order:2026-10-19:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-20,D1,7243,demo-order:2026-10-20:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-21,D1,7243,demo-order:2026-10-21:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-22,D1,7243,demo-order:2026-10-22:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-23,D1,7243,demo-order:2026-10-23:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+MT,2026-10-24,D1,7243,demo-order:2026-10-24:Guava Chilli:D1:MT,True,7243,True,Guava Chilli
+QC,2026-10-11,D1,5794,demo-order:2026-10-11:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-12,D1,5794,demo-order:2026-10-12:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-13,D1,5794,demo-order:2026-10-13:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-14,D1,5794,demo-order:2026-10-14:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-15,D1,5794,demo-order:2026-10-15:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-16,D1,5794,demo-order:2026-10-16:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-17,D1,5794,demo-order:2026-10-17:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-18,D1,5794,demo-order:2026-10-18:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-19,D1,5794,demo-order:2026-10-19:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-20,D1,5794,demo-order:2026-10-20:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-21,D1,5794,demo-order:2026-10-21:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-22,D1,5794,demo-order:2026-10-22:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-23,D1,5794,demo-order:2026-10-23:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+QC,2026-10-24,D1,5794,demo-order:2026-10-24:Guava Chilli:D1:QC,True,5794,True,Guava Chilli
+GT,2026-10-11,D2,6706,demo-order:2026-10-11:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-12,D2,6706,demo-order:2026-10-12:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-13,D2,6706,demo-order:2026-10-13:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-14,D2,6706,demo-order:2026-10-14:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-15,D2,6706,demo-order:2026-10-15:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-16,D2,6706,demo-order:2026-10-16:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-17,D2,6706,demo-order:2026-10-17:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-18,D2,6706,demo-order:2026-10-18:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-19,D2,6706,demo-order:2026-10-19:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-20,D2,6706,demo-order:2026-10-20:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-21,D2,6706,demo-order:2026-10-21:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-22,D2,6706,demo-order:2026-10-22:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-23,D2,6706,demo-order:2026-10-23:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+GT,2026-10-24,D2,6706,demo-order:2026-10-24:Guava Chilli:D2:GT,True,6706,True,Guava Chilli
+MT,2026-10-11,D2,3048,demo-order:2026-10-11:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-12,D2,3048,demo-order:2026-10-12:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-13,D2,3048,demo-order:2026-10-13:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-14,D2,3048,demo-order:2026-10-14:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-15,D2,3048,demo-order:2026-10-15:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-16,D2,3048,demo-order:2026-10-16:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-17,D2,3048,demo-order:2026-10-17:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-18,D2,3048,demo-order:2026-10-18:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-19,D2,3048,demo-order:2026-10-19:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-20,D2,3048,demo-order:2026-10-20:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-21,D2,3048,demo-order:2026-10-21:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-22,D2,3048,demo-order:2026-10-22:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-23,D2,3048,demo-order:2026-10-23:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+MT,2026-10-24,D2,3048,demo-order:2026-10-24:Guava Chilli:D2:MT,True,3048,True,Guava Chilli
+QC,2026-10-11,D2,2438,demo-order:2026-10-11:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-12,D2,2438,demo-order:2026-10-12:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-13,D2,2438,demo-order:2026-10-13:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-14,D2,2438,demo-order:2026-10-14:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-15,D2,2438,demo-order:2026-10-15:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-16,D2,2438,demo-order:2026-10-16:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-17,D2,2438,demo-order:2026-10-17:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-18,D2,2438,demo-order:2026-10-18:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-19,D2,2438,demo-order:2026-10-19:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-20,D2,2438,demo-order:2026-10-20:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-21,D2,2438,demo-order:2026-10-21:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-22,D2,2438,demo-order:2026-10-22:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-23,D2,2438,demo-order:2026-10-23:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+QC,2026-10-24,D2,2438,demo-order:2026-10-24:Guava Chilli:D2:QC,True,2438,True,Guava Chilli
+GT,2026-10-11,D3,19611,demo-order:2026-10-11:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-12,D3,19611,demo-order:2026-10-12:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-13,D3,19611,demo-order:2026-10-13:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-14,D3,19611,demo-order:2026-10-14:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-15,D3,19611,demo-order:2026-10-15:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-16,D3,19611,demo-order:2026-10-16:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-17,D3,19611,demo-order:2026-10-17:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-18,D3,19611,demo-order:2026-10-18:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-19,D3,19611,demo-order:2026-10-19:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-20,D3,19611,demo-order:2026-10-20:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-21,D3,19611,demo-order:2026-10-21:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-22,D3,19611,demo-order:2026-10-22:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-23,D3,19611,demo-order:2026-10-23:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+GT,2026-10-24,D3,19611,demo-order:2026-10-24:Guava Chilli:D3:GT,True,19611,True,Guava Chilli
+MT,2026-10-11,D3,8914,demo-order:2026-10-11:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-12,D3,8914,demo-order:2026-10-12:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-13,D3,8914,demo-order:2026-10-13:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-14,D3,8914,demo-order:2026-10-14:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-15,D3,8914,demo-order:2026-10-15:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-16,D3,8914,demo-order:2026-10-16:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-17,D3,8914,demo-order:2026-10-17:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-18,D3,8914,demo-order:2026-10-18:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-19,D3,8914,demo-order:2026-10-19:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-20,D3,8914,demo-order:2026-10-20:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-21,D3,8914,demo-order:2026-10-21:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-22,D3,8914,demo-order:2026-10-22:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-23,D3,8914,demo-order:2026-10-23:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+MT,2026-10-24,D3,8914,demo-order:2026-10-24:Guava Chilli:D3:MT,True,8914,True,Guava Chilli
+QC,2026-10-11,D3,7131,demo-order:2026-10-11:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-12,D3,7131,demo-order:2026-10-12:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-13,D3,7131,demo-order:2026-10-13:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-14,D3,7131,demo-order:2026-10-14:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-15,D3,7131,demo-order:2026-10-15:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-16,D3,7131,demo-order:2026-10-16:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-17,D3,7131,demo-order:2026-10-17:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-18,D3,7131,demo-order:2026-10-18:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-19,D3,7131,demo-order:2026-10-19:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-20,D3,7131,demo-order:2026-10-20:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-21,D3,7131,demo-order:2026-10-21:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-22,D3,7131,demo-order:2026-10-22:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-23,D3,7131,demo-order:2026-10-23:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+QC,2026-10-24,D3,7131,demo-order:2026-10-24:Guava Chilli:D3:QC,True,7131,True,Guava Chilli
+GT,2026-10-11,D4,8941,demo-order:2026-10-11:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-12,D4,8941,demo-order:2026-10-12:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-13,D4,8941,demo-order:2026-10-13:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-14,D4,8941,demo-order:2026-10-14:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-15,D4,8941,demo-order:2026-10-15:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-16,D4,8941,demo-order:2026-10-16:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-17,D4,8941,demo-order:2026-10-17:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-18,D4,8941,demo-order:2026-10-18:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-19,D4,8941,demo-order:2026-10-19:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-20,D4,8941,demo-order:2026-10-20:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-21,D4,8941,demo-order:2026-10-21:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-22,D4,8941,demo-order:2026-10-22:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-23,D4,8941,demo-order:2026-10-23:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+GT,2026-10-24,D4,8941,demo-order:2026-10-24:Guava Chilli:D4:GT,True,8941,True,Guava Chilli
+MT,2026-10-11,D4,4064,demo-order:2026-10-11:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-12,D4,4064,demo-order:2026-10-12:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-13,D4,4064,demo-order:2026-10-13:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-14,D4,4064,demo-order:2026-10-14:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-15,D4,4064,demo-order:2026-10-15:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-16,D4,4064,demo-order:2026-10-16:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-17,D4,4064,demo-order:2026-10-17:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-18,D4,4064,demo-order:2026-10-18:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-19,D4,4064,demo-order:2026-10-19:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-20,D4,4064,demo-order:2026-10-20:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-21,D4,4064,demo-order:2026-10-21:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-22,D4,4064,demo-order:2026-10-22:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-23,D4,4064,demo-order:2026-10-23:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+MT,2026-10-24,D4,4064,demo-order:2026-10-24:Guava Chilli:D4:MT,True,4064,True,Guava Chilli
+QC,2026-10-11,D4,3251,demo-order:2026-10-11:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-12,D4,3251,demo-order:2026-10-12:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-13,D4,3251,demo-order:2026-10-13:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-14,D4,3251,demo-order:2026-10-14:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-15,D4,3251,demo-order:2026-10-15:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-16,D4,3251,demo-order:2026-10-16:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-17,D4,3251,demo-order:2026-10-17:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-18,D4,3251,demo-order:2026-10-18:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-19,D4,3251,demo-order:2026-10-19:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-20,D4,3251,demo-order:2026-10-20:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-21,D4,3251,demo-order:2026-10-21:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-22,D4,3251,demo-order:2026-10-22:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-23,D4,3251,demo-order:2026-10-23:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+QC,2026-10-24,D4,3251,demo-order:2026-10-24:Guava Chilli:D4:QC,True,3251,True,Guava Chilli
+GT,2026-10-11,D5,5961,demo-order:2026-10-11:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-12,D5,5961,demo-order:2026-10-12:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-13,D5,5961,demo-order:2026-10-13:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-14,D5,5961,demo-order:2026-10-14:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-15,D5,5961,demo-order:2026-10-15:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-16,D5,5961,demo-order:2026-10-16:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-17,D5,5961,demo-order:2026-10-17:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-18,D5,5961,demo-order:2026-10-18:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-19,D5,5961,demo-order:2026-10-19:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-20,D5,5961,demo-order:2026-10-20:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-21,D5,5961,demo-order:2026-10-21:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-22,D5,5961,demo-order:2026-10-22:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-23,D5,5961,demo-order:2026-10-23:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+GT,2026-10-24,D5,5961,demo-order:2026-10-24:Guava Chilli:D5:GT,True,5961,True,Guava Chilli
+MT,2026-10-11,D5,2709,demo-order:2026-10-11:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-12,D5,2709,demo-order:2026-10-12:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-13,D5,2709,demo-order:2026-10-13:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-14,D5,2709,demo-order:2026-10-14:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-15,D5,2709,demo-order:2026-10-15:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-16,D5,2709,demo-order:2026-10-16:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-17,D5,2709,demo-order:2026-10-17:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-18,D5,2709,demo-order:2026-10-18:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-19,D5,2709,demo-order:2026-10-19:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-20,D5,2709,demo-order:2026-10-20:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-21,D5,2709,demo-order:2026-10-21:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-22,D5,2709,demo-order:2026-10-22:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-23,D5,2709,demo-order:2026-10-23:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+MT,2026-10-24,D5,2709,demo-order:2026-10-24:Guava Chilli:D5:MT,True,2709,True,Guava Chilli
+QC,2026-10-11,D5,2168,demo-order:2026-10-11:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-12,D5,2168,demo-order:2026-10-12:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-13,D5,2168,demo-order:2026-10-13:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-14,D5,2168,demo-order:2026-10-14:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-15,D5,2168,demo-order:2026-10-15:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-16,D5,2168,demo-order:2026-10-16:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-17,D5,2168,demo-order:2026-10-17:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-18,D5,2168,demo-order:2026-10-18:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-19,D5,2168,demo-order:2026-10-19:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-20,D5,2168,demo-order:2026-10-20:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-21,D5,2168,demo-order:2026-10-21:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-22,D5,2168,demo-order:2026-10-22:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-23,D5,2168,demo-order:2026-10-23:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+QC,2026-10-24,D5,2168,demo-order:2026-10-24:Guava Chilli:D5:QC,True,2168,True,Guava Chilli
+GT,2026-10-11,D6,19611,demo-order:2026-10-11:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-12,D6,19611,demo-order:2026-10-12:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-13,D6,19611,demo-order:2026-10-13:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-14,D6,19611,demo-order:2026-10-14:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-15,D6,19611,demo-order:2026-10-15:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-16,D6,19611,demo-order:2026-10-16:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-17,D6,19611,demo-order:2026-10-17:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-18,D6,19611,demo-order:2026-10-18:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-19,D6,19611,demo-order:2026-10-19:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-20,D6,19611,demo-order:2026-10-20:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-21,D6,19611,demo-order:2026-10-21:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-22,D6,19611,demo-order:2026-10-22:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-23,D6,19611,demo-order:2026-10-23:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+GT,2026-10-24,D6,19611,demo-order:2026-10-24:Guava Chilli:D6:GT,True,19611,True,Guava Chilli
+MT,2026-10-11,D6,8914,demo-order:2026-10-11:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-12,D6,8914,demo-order:2026-10-12:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-13,D6,8914,demo-order:2026-10-13:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-14,D6,8914,demo-order:2026-10-14:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-15,D6,8914,demo-order:2026-10-15:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-16,D6,8914,demo-order:2026-10-16:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-17,D6,8914,demo-order:2026-10-17:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-18,D6,8914,demo-order:2026-10-18:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-19,D6,8914,demo-order:2026-10-19:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-20,D6,8914,demo-order:2026-10-20:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-21,D6,8914,demo-order:2026-10-21:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-22,D6,8914,demo-order:2026-10-22:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-23,D6,8914,demo-order:2026-10-23:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+MT,2026-10-24,D6,8914,demo-order:2026-10-24:Guava Chilli:D6:MT,True,8914,True,Guava Chilli
+QC,2026-10-11,D6,7131,demo-order:2026-10-11:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-12,D6,7131,demo-order:2026-10-12:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-13,D6,7131,demo-order:2026-10-13:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-14,D6,7131,demo-order:2026-10-14:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-15,D6,7131,demo-order:2026-10-15:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-16,D6,7131,demo-order:2026-10-16:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-17,D6,7131,demo-order:2026-10-17:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-18,D6,7131,demo-order:2026-10-18:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-19,D6,7131,demo-order:2026-10-19:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-20,D6,7131,demo-order:2026-10-20:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-21,D6,7131,demo-order:2026-10-21:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-22,D6,7131,demo-order:2026-10-22:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-23,D6,7131,demo-order:2026-10-23:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+QC,2026-10-24,D6,7131,demo-order:2026-10-24:Guava Chilli:D6:QC,True,7131,True,Guava Chilli
+GT,2026-10-11,D7,8941,demo-order:2026-10-11:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-12,D7,8941,demo-order:2026-10-12:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-13,D7,8941,demo-order:2026-10-13:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-14,D7,8941,demo-order:2026-10-14:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-15,D7,8941,demo-order:2026-10-15:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-16,D7,8941,demo-order:2026-10-16:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-17,D7,8941,demo-order:2026-10-17:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-18,D7,8941,demo-order:2026-10-18:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-19,D7,8941,demo-order:2026-10-19:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-20,D7,8941,demo-order:2026-10-20:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-21,D7,8941,demo-order:2026-10-21:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-22,D7,8941,demo-order:2026-10-22:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-23,D7,8941,demo-order:2026-10-23:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+GT,2026-10-24,D7,8941,demo-order:2026-10-24:Guava Chilli:D7:GT,True,8941,True,Guava Chilli
+MT,2026-10-11,D7,4064,demo-order:2026-10-11:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-12,D7,4064,demo-order:2026-10-12:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-13,D7,4064,demo-order:2026-10-13:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-14,D7,4064,demo-order:2026-10-14:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-15,D7,4064,demo-order:2026-10-15:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-16,D7,4064,demo-order:2026-10-16:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-17,D7,4064,demo-order:2026-10-17:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-18,D7,4064,demo-order:2026-10-18:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-19,D7,4064,demo-order:2026-10-19:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-20,D7,4064,demo-order:2026-10-20:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-21,D7,4064,demo-order:2026-10-21:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-22,D7,4064,demo-order:2026-10-22:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-23,D7,4064,demo-order:2026-10-23:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+MT,2026-10-24,D7,4064,demo-order:2026-10-24:Guava Chilli:D7:MT,True,4064,True,Guava Chilli
+QC,2026-10-11,D7,3251,demo-order:2026-10-11:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-12,D7,3251,demo-order:2026-10-12:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-13,D7,3251,demo-order:2026-10-13:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-14,D7,3251,demo-order:2026-10-14:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-15,D7,3251,demo-order:2026-10-15:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-16,D7,3251,demo-order:2026-10-16:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-17,D7,3251,demo-order:2026-10-17:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-18,D7,3251,demo-order:2026-10-18:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-19,D7,3251,demo-order:2026-10-19:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-20,D7,3251,demo-order:2026-10-20:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-21,D7,3251,demo-order:2026-10-21:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-22,D7,3251,demo-order:2026-10-22:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-23,D7,3251,demo-order:2026-10-23:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+QC,2026-10-24,D7,3251,demo-order:2026-10-24:Guava Chilli:D7:QC,True,3251,True,Guava Chilli
+GT,2026-10-11,D8,4903,demo-order:2026-10-11:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-12,D8,4903,demo-order:2026-10-12:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-13,D8,4903,demo-order:2026-10-13:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-14,D8,4903,demo-order:2026-10-14:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-15,D8,4903,demo-order:2026-10-15:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-16,D8,4903,demo-order:2026-10-16:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-17,D8,4903,demo-order:2026-10-17:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-18,D8,4903,demo-order:2026-10-18:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-19,D8,4903,demo-order:2026-10-19:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-20,D8,4903,demo-order:2026-10-20:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-21,D8,4903,demo-order:2026-10-21:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-22,D8,4903,demo-order:2026-10-22:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-23,D8,4903,demo-order:2026-10-23:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+GT,2026-10-24,D8,4903,demo-order:2026-10-24:Guava Chilli:D8:GT,True,4903,True,Guava Chilli
+MT,2026-10-11,D8,2229,demo-order:2026-10-11:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-12,D8,2229,demo-order:2026-10-12:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-13,D8,2229,demo-order:2026-10-13:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-14,D8,2229,demo-order:2026-10-14:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-15,D8,2229,demo-order:2026-10-15:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-16,D8,2229,demo-order:2026-10-16:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-17,D8,2229,demo-order:2026-10-17:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-18,D8,2229,demo-order:2026-10-18:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-19,D8,2229,demo-order:2026-10-19:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-20,D8,2229,demo-order:2026-10-20:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-21,D8,2229,demo-order:2026-10-21:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-22,D8,2229,demo-order:2026-10-22:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-23,D8,2229,demo-order:2026-10-23:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+MT,2026-10-24,D8,2229,demo-order:2026-10-24:Guava Chilli:D8:MT,True,2229,True,Guava Chilli
+QC,2026-10-11,D8,1783,demo-order:2026-10-11:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-12,D8,1783,demo-order:2026-10-12:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-13,D8,1783,demo-order:2026-10-13:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-14,D8,1783,demo-order:2026-10-14:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-15,D8,1783,demo-order:2026-10-15:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-16,D8,1783,demo-order:2026-10-16:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-17,D8,1783,demo-order:2026-10-17:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-18,D8,1783,demo-order:2026-10-18:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-19,D8,1783,demo-order:2026-10-19:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-20,D8,1783,demo-order:2026-10-20:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-21,D8,1783,demo-order:2026-10-21:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-22,D8,1783,demo-order:2026-10-22:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-23,D8,1783,demo-order:2026-10-23:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+QC,2026-10-24,D8,1783,demo-order:2026-10-24:Guava Chilli:D8:QC,True,1783,True,Guava Chilli
+GT,2026-10-11,D9,3677,demo-order:2026-10-11:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-12,D9,3677,demo-order:2026-10-12:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-13,D9,3677,demo-order:2026-10-13:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-14,D9,3677,demo-order:2026-10-14:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-15,D9,3677,demo-order:2026-10-15:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-16,D9,3677,demo-order:2026-10-16:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-17,D9,3677,demo-order:2026-10-17:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-18,D9,3677,demo-order:2026-10-18:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-19,D9,3677,demo-order:2026-10-19:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-20,D9,3677,demo-order:2026-10-20:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-21,D9,3677,demo-order:2026-10-21:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-22,D9,3677,demo-order:2026-10-22:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-23,D9,3677,demo-order:2026-10-23:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+GT,2026-10-24,D9,3677,demo-order:2026-10-24:Guava Chilli:D9:GT,True,3677,True,Guava Chilli
+MT,2026-10-11,D9,1671,demo-order:2026-10-11:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-12,D9,1671,demo-order:2026-10-12:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-13,D9,1671,demo-order:2026-10-13:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-14,D9,1671,demo-order:2026-10-14:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-15,D9,1671,demo-order:2026-10-15:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-16,D9,1671,demo-order:2026-10-16:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-17,D9,1671,demo-order:2026-10-17:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-18,D9,1671,demo-order:2026-10-18:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-19,D9,1671,demo-order:2026-10-19:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-20,D9,1671,demo-order:2026-10-20:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-21,D9,1671,demo-order:2026-10-21:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-22,D9,1671,demo-order:2026-10-22:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-23,D9,1671,demo-order:2026-10-23:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+MT,2026-10-24,D9,1671,demo-order:2026-10-24:Guava Chilli:D9:MT,True,1671,True,Guava Chilli
+QC,2026-10-11,D9,1337,demo-order:2026-10-11:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-12,D9,1337,demo-order:2026-10-12:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-13,D9,1337,demo-order:2026-10-13:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-14,D9,1337,demo-order:2026-10-14:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-15,D9,1337,demo-order:2026-10-15:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-16,D9,1337,demo-order:2026-10-16:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-17,D9,1337,demo-order:2026-10-17:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-18,D9,1337,demo-order:2026-10-18:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-19,D9,1337,demo-order:2026-10-19:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-20,D9,1337,demo-order:2026-10-20:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-21,D9,1337,demo-order:2026-10-21:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-22,D9,1337,demo-order:2026-10-22:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-23,D9,1337,demo-order:2026-10-23:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+QC,2026-10-24,D9,1337,demo-order:2026-10-24:Guava Chilli:D9:QC,True,1337,True,Guava Chilli
+GT,2026-10-11,D1,9806,demo-order:2026-10-11:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-12,D1,9806,demo-order:2026-10-12:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-13,D1,9806,demo-order:2026-10-13:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-14,D1,9806,demo-order:2026-10-14:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-15,D1,9806,demo-order:2026-10-15:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-16,D1,9806,demo-order:2026-10-16:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-17,D1,9806,demo-order:2026-10-17:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-18,D1,9806,demo-order:2026-10-18:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-19,D1,9806,demo-order:2026-10-19:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-20,D1,9806,demo-order:2026-10-20:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-21,D1,9806,demo-order:2026-10-21:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-22,D1,9806,demo-order:2026-10-22:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-23,D1,9806,demo-order:2026-10-23:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+GT,2026-10-24,D1,9806,demo-order:2026-10-24:Passionfruit Punch:D1:GT,True,9806,True,Passionfruit Punch
+MT,2026-10-11,D1,4457,demo-order:2026-10-11:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-12,D1,4457,demo-order:2026-10-12:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-13,D1,4457,demo-order:2026-10-13:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-14,D1,4457,demo-order:2026-10-14:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-15,D1,4457,demo-order:2026-10-15:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-16,D1,4457,demo-order:2026-10-16:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-17,D1,4457,demo-order:2026-10-17:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-18,D1,4457,demo-order:2026-10-18:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-19,D1,4457,demo-order:2026-10-19:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-20,D1,4457,demo-order:2026-10-20:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-21,D1,4457,demo-order:2026-10-21:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-22,D1,4457,demo-order:2026-10-22:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-23,D1,4457,demo-order:2026-10-23:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+MT,2026-10-24,D1,4457,demo-order:2026-10-24:Passionfruit Punch:D1:MT,True,4457,True,Passionfruit Punch
+QC,2026-10-11,D1,3566,demo-order:2026-10-11:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-12,D1,3566,demo-order:2026-10-12:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-13,D1,3566,demo-order:2026-10-13:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-14,D1,3566,demo-order:2026-10-14:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-15,D1,3566,demo-order:2026-10-15:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-16,D1,3566,demo-order:2026-10-16:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-17,D1,3566,demo-order:2026-10-17:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-18,D1,3566,demo-order:2026-10-18:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-19,D1,3566,demo-order:2026-10-19:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-20,D1,3566,demo-order:2026-10-20:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-21,D1,3566,demo-order:2026-10-21:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-22,D1,3566,demo-order:2026-10-22:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-23,D1,3566,demo-order:2026-10-23:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+QC,2026-10-24,D1,3566,demo-order:2026-10-24:Passionfruit Punch:D1:QC,True,3566,True,Passionfruit Punch
+GT,2026-10-11,D2,6789,demo-order:2026-10-11:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-12,D2,6789,demo-order:2026-10-12:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-13,D2,6789,demo-order:2026-10-13:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-14,D2,6789,demo-order:2026-10-14:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-15,D2,6789,demo-order:2026-10-15:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-16,D2,6789,demo-order:2026-10-16:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-17,D2,6789,demo-order:2026-10-17:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-18,D2,6789,demo-order:2026-10-18:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-19,D2,6789,demo-order:2026-10-19:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-20,D2,6789,demo-order:2026-10-20:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-21,D2,6789,demo-order:2026-10-21:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-22,D2,6789,demo-order:2026-10-22:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-23,D2,6789,demo-order:2026-10-23:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+GT,2026-10-24,D2,6789,demo-order:2026-10-24:Passionfruit Punch:D2:GT,True,6789,True,Passionfruit Punch
+MT,2026-10-11,D2,3086,demo-order:2026-10-11:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-12,D2,3086,demo-order:2026-10-12:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-13,D2,3086,demo-order:2026-10-13:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-14,D2,3086,demo-order:2026-10-14:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-15,D2,3086,demo-order:2026-10-15:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-16,D2,3086,demo-order:2026-10-16:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-17,D2,3086,demo-order:2026-10-17:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-18,D2,3086,demo-order:2026-10-18:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-19,D2,3086,demo-order:2026-10-19:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-20,D2,3086,demo-order:2026-10-20:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-21,D2,3086,demo-order:2026-10-21:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-22,D2,3086,demo-order:2026-10-22:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-23,D2,3086,demo-order:2026-10-23:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+MT,2026-10-24,D2,3086,demo-order:2026-10-24:Passionfruit Punch:D2:MT,True,3086,True,Passionfruit Punch
+QC,2026-10-11,D2,2469,demo-order:2026-10-11:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-12,D2,2469,demo-order:2026-10-12:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-13,D2,2469,demo-order:2026-10-13:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-14,D2,2469,demo-order:2026-10-14:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-15,D2,2469,demo-order:2026-10-15:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-16,D2,2469,demo-order:2026-10-16:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-17,D2,2469,demo-order:2026-10-17:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-18,D2,2469,demo-order:2026-10-18:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-19,D2,2469,demo-order:2026-10-19:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-20,D2,2469,demo-order:2026-10-20:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-21,D2,2469,demo-order:2026-10-21:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-22,D2,2469,demo-order:2026-10-22:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-23,D2,2469,demo-order:2026-10-23:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+QC,2026-10-24,D2,2469,demo-order:2026-10-24:Passionfruit Punch:D2:QC,True,2469,True,Passionfruit Punch
+GT,2026-10-11,D3,12069,demo-order:2026-10-11:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-12,D3,12069,demo-order:2026-10-12:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-13,D3,12069,demo-order:2026-10-13:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-14,D3,12069,demo-order:2026-10-14:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-15,D3,12069,demo-order:2026-10-15:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-16,D3,12069,demo-order:2026-10-16:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-17,D3,12069,demo-order:2026-10-17:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-18,D3,12069,demo-order:2026-10-18:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-19,D3,12069,demo-order:2026-10-19:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-20,D3,12069,demo-order:2026-10-20:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-21,D3,12069,demo-order:2026-10-21:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-22,D3,12069,demo-order:2026-10-22:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-23,D3,12069,demo-order:2026-10-23:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-24,D3,12069,demo-order:2026-10-24:Passionfruit Punch:D3:GT,True,12069,True,Passionfruit Punch
+MT,2026-10-11,D3,5486,demo-order:2026-10-11:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-12,D3,5486,demo-order:2026-10-12:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-13,D3,5486,demo-order:2026-10-13:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-14,D3,5486,demo-order:2026-10-14:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-15,D3,5486,demo-order:2026-10-15:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-16,D3,5486,demo-order:2026-10-16:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-17,D3,5486,demo-order:2026-10-17:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-18,D3,5486,demo-order:2026-10-18:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-19,D3,5486,demo-order:2026-10-19:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-20,D3,5486,demo-order:2026-10-20:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-21,D3,5486,demo-order:2026-10-21:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-22,D3,5486,demo-order:2026-10-22:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-23,D3,5486,demo-order:2026-10-23:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-24,D3,5486,demo-order:2026-10-24:Passionfruit Punch:D3:MT,True,5486,True,Passionfruit Punch
+QC,2026-10-11,D3,4389,demo-order:2026-10-11:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-12,D3,4389,demo-order:2026-10-12:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-13,D3,4389,demo-order:2026-10-13:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-14,D3,4389,demo-order:2026-10-14:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-15,D3,4389,demo-order:2026-10-15:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-16,D3,4389,demo-order:2026-10-16:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-17,D3,4389,demo-order:2026-10-17:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-18,D3,4389,demo-order:2026-10-18:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-19,D3,4389,demo-order:2026-10-19:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-20,D3,4389,demo-order:2026-10-20:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-21,D3,4389,demo-order:2026-10-21:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-22,D3,4389,demo-order:2026-10-22:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-23,D3,4389,demo-order:2026-10-23:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-24,D3,4389,demo-order:2026-10-24:Passionfruit Punch:D3:QC,True,4389,True,Passionfruit Punch
+GT,2026-10-11,D4,9051,demo-order:2026-10-11:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-12,D4,9051,demo-order:2026-10-12:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-13,D4,9051,demo-order:2026-10-13:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-14,D4,9051,demo-order:2026-10-14:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-15,D4,9051,demo-order:2026-10-15:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-16,D4,9051,demo-order:2026-10-16:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-17,D4,9051,demo-order:2026-10-17:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-18,D4,9051,demo-order:2026-10-18:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-19,D4,9051,demo-order:2026-10-19:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-20,D4,9051,demo-order:2026-10-20:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-21,D4,9051,demo-order:2026-10-21:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-22,D4,9051,demo-order:2026-10-22:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-23,D4,9051,demo-order:2026-10-23:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-24,D4,9051,demo-order:2026-10-24:Passionfruit Punch:D4:GT,True,9051,True,Passionfruit Punch
+MT,2026-10-11,D4,4114,demo-order:2026-10-11:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-12,D4,4114,demo-order:2026-10-12:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-13,D4,4114,demo-order:2026-10-13:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-14,D4,4114,demo-order:2026-10-14:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-15,D4,4114,demo-order:2026-10-15:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-16,D4,4114,demo-order:2026-10-16:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-17,D4,4114,demo-order:2026-10-17:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-18,D4,4114,demo-order:2026-10-18:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-19,D4,4114,demo-order:2026-10-19:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-20,D4,4114,demo-order:2026-10-20:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-21,D4,4114,demo-order:2026-10-21:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-22,D4,4114,demo-order:2026-10-22:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-23,D4,4114,demo-order:2026-10-23:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-24,D4,4114,demo-order:2026-10-24:Passionfruit Punch:D4:MT,True,4114,True,Passionfruit Punch
+QC,2026-10-11,D4,3291,demo-order:2026-10-11:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-12,D4,3291,demo-order:2026-10-12:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-13,D4,3291,demo-order:2026-10-13:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-14,D4,3291,demo-order:2026-10-14:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-15,D4,3291,demo-order:2026-10-15:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-16,D4,3291,demo-order:2026-10-16:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-17,D4,3291,demo-order:2026-10-17:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-18,D4,3291,demo-order:2026-10-18:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-19,D4,3291,demo-order:2026-10-19:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-20,D4,3291,demo-order:2026-10-20:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-21,D4,3291,demo-order:2026-10-21:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-22,D4,3291,demo-order:2026-10-22:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-23,D4,3291,demo-order:2026-10-23:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-24,D4,3291,demo-order:2026-10-24:Passionfruit Punch:D4:QC,True,3291,True,Passionfruit Punch
+GT,2026-10-11,D5,6034,demo-order:2026-10-11:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-12,D5,6034,demo-order:2026-10-12:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-13,D5,6034,demo-order:2026-10-13:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-14,D5,6034,demo-order:2026-10-14:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-15,D5,6034,demo-order:2026-10-15:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-16,D5,6034,demo-order:2026-10-16:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-17,D5,6034,demo-order:2026-10-17:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-18,D5,6034,demo-order:2026-10-18:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-19,D5,6034,demo-order:2026-10-19:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-20,D5,6034,demo-order:2026-10-20:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-21,D5,6034,demo-order:2026-10-21:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-22,D5,6034,demo-order:2026-10-22:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-23,D5,6034,demo-order:2026-10-23:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-24,D5,6034,demo-order:2026-10-24:Passionfruit Punch:D5:GT,True,6034,True,Passionfruit Punch
+MT,2026-10-11,D5,2743,demo-order:2026-10-11:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-12,D5,2743,demo-order:2026-10-12:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-13,D5,2743,demo-order:2026-10-13:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-14,D5,2743,demo-order:2026-10-14:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-15,D5,2743,demo-order:2026-10-15:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-16,D5,2743,demo-order:2026-10-16:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-17,D5,2743,demo-order:2026-10-17:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-18,D5,2743,demo-order:2026-10-18:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-19,D5,2743,demo-order:2026-10-19:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-20,D5,2743,demo-order:2026-10-20:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-21,D5,2743,demo-order:2026-10-21:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-22,D5,2743,demo-order:2026-10-22:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-23,D5,2743,demo-order:2026-10-23:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-24,D5,2743,demo-order:2026-10-24:Passionfruit Punch:D5:MT,True,2743,True,Passionfruit Punch
+QC,2026-10-11,D5,2194,demo-order:2026-10-11:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-12,D5,2194,demo-order:2026-10-12:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-13,D5,2194,demo-order:2026-10-13:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-14,D5,2194,demo-order:2026-10-14:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-15,D5,2194,demo-order:2026-10-15:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-16,D5,2194,demo-order:2026-10-16:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-17,D5,2194,demo-order:2026-10-17:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-18,D5,2194,demo-order:2026-10-18:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-19,D5,2194,demo-order:2026-10-19:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-20,D5,2194,demo-order:2026-10-20:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-21,D5,2194,demo-order:2026-10-21:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-22,D5,2194,demo-order:2026-10-22:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-23,D5,2194,demo-order:2026-10-23:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-24,D5,2194,demo-order:2026-10-24:Passionfruit Punch:D5:QC,True,2194,True,Passionfruit Punch
+GT,2026-10-11,D6,12069,demo-order:2026-10-11:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-12,D6,12069,demo-order:2026-10-12:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-13,D6,12069,demo-order:2026-10-13:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-14,D6,12069,demo-order:2026-10-14:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-15,D6,12069,demo-order:2026-10-15:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-16,D6,12069,demo-order:2026-10-16:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-17,D6,12069,demo-order:2026-10-17:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-18,D6,12069,demo-order:2026-10-18:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-19,D6,12069,demo-order:2026-10-19:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-20,D6,12069,demo-order:2026-10-20:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-21,D6,12069,demo-order:2026-10-21:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-22,D6,12069,demo-order:2026-10-22:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-23,D6,12069,demo-order:2026-10-23:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+GT,2026-10-24,D6,12069,demo-order:2026-10-24:Passionfruit Punch:D6:GT,True,12069,True,Passionfruit Punch
+MT,2026-10-11,D6,5486,demo-order:2026-10-11:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-12,D6,5486,demo-order:2026-10-12:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-13,D6,5486,demo-order:2026-10-13:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-14,D6,5486,demo-order:2026-10-14:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-15,D6,5486,demo-order:2026-10-15:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-16,D6,5486,demo-order:2026-10-16:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-17,D6,5486,demo-order:2026-10-17:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-18,D6,5486,demo-order:2026-10-18:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-19,D6,5486,demo-order:2026-10-19:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-20,D6,5486,demo-order:2026-10-20:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-21,D6,5486,demo-order:2026-10-21:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-22,D6,5486,demo-order:2026-10-22:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-23,D6,5486,demo-order:2026-10-23:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+MT,2026-10-24,D6,5486,demo-order:2026-10-24:Passionfruit Punch:D6:MT,True,5486,True,Passionfruit Punch
+QC,2026-10-11,D6,4389,demo-order:2026-10-11:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-12,D6,4389,demo-order:2026-10-12:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-13,D6,4389,demo-order:2026-10-13:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-14,D6,4389,demo-order:2026-10-14:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-15,D6,4389,demo-order:2026-10-15:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-16,D6,4389,demo-order:2026-10-16:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-17,D6,4389,demo-order:2026-10-17:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-18,D6,4389,demo-order:2026-10-18:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-19,D6,4389,demo-order:2026-10-19:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-20,D6,4389,demo-order:2026-10-20:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-21,D6,4389,demo-order:2026-10-21:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-22,D6,4389,demo-order:2026-10-22:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-23,D6,4389,demo-order:2026-10-23:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+QC,2026-10-24,D6,4389,demo-order:2026-10-24:Passionfruit Punch:D6:QC,True,4389,True,Passionfruit Punch
+GT,2026-10-11,D7,9051,demo-order:2026-10-11:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-12,D7,9051,demo-order:2026-10-12:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-13,D7,9051,demo-order:2026-10-13:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-14,D7,9051,demo-order:2026-10-14:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-15,D7,9051,demo-order:2026-10-15:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-16,D7,9051,demo-order:2026-10-16:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-17,D7,9051,demo-order:2026-10-17:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-18,D7,9051,demo-order:2026-10-18:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-19,D7,9051,demo-order:2026-10-19:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-20,D7,9051,demo-order:2026-10-20:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-21,D7,9051,demo-order:2026-10-21:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-22,D7,9051,demo-order:2026-10-22:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-23,D7,9051,demo-order:2026-10-23:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+GT,2026-10-24,D7,9051,demo-order:2026-10-24:Passionfruit Punch:D7:GT,True,9051,True,Passionfruit Punch
+MT,2026-10-11,D7,4114,demo-order:2026-10-11:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-12,D7,4114,demo-order:2026-10-12:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-13,D7,4114,demo-order:2026-10-13:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-14,D7,4114,demo-order:2026-10-14:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-15,D7,4114,demo-order:2026-10-15:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-16,D7,4114,demo-order:2026-10-16:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-17,D7,4114,demo-order:2026-10-17:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-18,D7,4114,demo-order:2026-10-18:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-19,D7,4114,demo-order:2026-10-19:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-20,D7,4114,demo-order:2026-10-20:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-21,D7,4114,demo-order:2026-10-21:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-22,D7,4114,demo-order:2026-10-22:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-23,D7,4114,demo-order:2026-10-23:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+MT,2026-10-24,D7,4114,demo-order:2026-10-24:Passionfruit Punch:D7:MT,True,4114,True,Passionfruit Punch
+QC,2026-10-11,D7,3291,demo-order:2026-10-11:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-12,D7,3291,demo-order:2026-10-12:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-13,D7,3291,demo-order:2026-10-13:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-14,D7,3291,demo-order:2026-10-14:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-15,D7,3291,demo-order:2026-10-15:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-16,D7,3291,demo-order:2026-10-16:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-17,D7,3291,demo-order:2026-10-17:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-18,D7,3291,demo-order:2026-10-18:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-19,D7,3291,demo-order:2026-10-19:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-20,D7,3291,demo-order:2026-10-20:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-21,D7,3291,demo-order:2026-10-21:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-22,D7,3291,demo-order:2026-10-22:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-23,D7,3291,demo-order:2026-10-23:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+QC,2026-10-24,D7,3291,demo-order:2026-10-24:Passionfruit Punch:D7:QC,True,3291,True,Passionfruit Punch
+GT,2026-10-11,D8,6034,demo-order:2026-10-11:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-12,D8,6034,demo-order:2026-10-12:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-13,D8,6034,demo-order:2026-10-13:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-14,D8,6034,demo-order:2026-10-14:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-15,D8,6034,demo-order:2026-10-15:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-16,D8,6034,demo-order:2026-10-16:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-17,D8,6034,demo-order:2026-10-17:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-18,D8,6034,demo-order:2026-10-18:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-19,D8,6034,demo-order:2026-10-19:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-20,D8,6034,demo-order:2026-10-20:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-21,D8,6034,demo-order:2026-10-21:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-22,D8,6034,demo-order:2026-10-22:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-23,D8,6034,demo-order:2026-10-23:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+GT,2026-10-24,D8,6034,demo-order:2026-10-24:Passionfruit Punch:D8:GT,True,6034,True,Passionfruit Punch
+MT,2026-10-11,D8,2743,demo-order:2026-10-11:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-12,D8,2743,demo-order:2026-10-12:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-13,D8,2743,demo-order:2026-10-13:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-14,D8,2743,demo-order:2026-10-14:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-15,D8,2743,demo-order:2026-10-15:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-16,D8,2743,demo-order:2026-10-16:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-17,D8,2743,demo-order:2026-10-17:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-18,D8,2743,demo-order:2026-10-18:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-19,D8,2743,demo-order:2026-10-19:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-20,D8,2743,demo-order:2026-10-20:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-21,D8,2743,demo-order:2026-10-21:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-22,D8,2743,demo-order:2026-10-22:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-23,D8,2743,demo-order:2026-10-23:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+MT,2026-10-24,D8,2743,demo-order:2026-10-24:Passionfruit Punch:D8:MT,True,2743,True,Passionfruit Punch
+QC,2026-10-11,D8,2194,demo-order:2026-10-11:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-12,D8,2194,demo-order:2026-10-12:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-13,D8,2194,demo-order:2026-10-13:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-14,D8,2194,demo-order:2026-10-14:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-15,D8,2194,demo-order:2026-10-15:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-16,D8,2194,demo-order:2026-10-16:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-17,D8,2194,demo-order:2026-10-17:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-18,D8,2194,demo-order:2026-10-18:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-19,D8,2194,demo-order:2026-10-19:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-20,D8,2194,demo-order:2026-10-20:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-21,D8,2194,demo-order:2026-10-21:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-22,D8,2194,demo-order:2026-10-22:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-23,D8,2194,demo-order:2026-10-23:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+QC,2026-10-24,D8,2194,demo-order:2026-10-24:Passionfruit Punch:D8:QC,True,2194,True,Passionfruit Punch
+GT,2026-10-11,D9,4526,demo-order:2026-10-11:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-12,D9,4526,demo-order:2026-10-12:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-13,D9,4526,demo-order:2026-10-13:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-14,D9,4526,demo-order:2026-10-14:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-15,D9,4526,demo-order:2026-10-15:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-16,D9,4526,demo-order:2026-10-16:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-17,D9,4526,demo-order:2026-10-17:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-18,D9,4526,demo-order:2026-10-18:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-19,D9,4526,demo-order:2026-10-19:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-20,D9,4526,demo-order:2026-10-20:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-21,D9,4526,demo-order:2026-10-21:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-22,D9,4526,demo-order:2026-10-22:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-23,D9,4526,demo-order:2026-10-23:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+GT,2026-10-24,D9,4526,demo-order:2026-10-24:Passionfruit Punch:D9:GT,True,4526,True,Passionfruit Punch
+MT,2026-10-11,D9,2057,demo-order:2026-10-11:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-12,D9,2057,demo-order:2026-10-12:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-13,D9,2057,demo-order:2026-10-13:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-14,D9,2057,demo-order:2026-10-14:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-15,D9,2057,demo-order:2026-10-15:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-16,D9,2057,demo-order:2026-10-16:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-17,D9,2057,demo-order:2026-10-17:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-18,D9,2057,demo-order:2026-10-18:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-19,D9,2057,demo-order:2026-10-19:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-20,D9,2057,demo-order:2026-10-20:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-21,D9,2057,demo-order:2026-10-21:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-22,D9,2057,demo-order:2026-10-22:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-23,D9,2057,demo-order:2026-10-23:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+MT,2026-10-24,D9,2057,demo-order:2026-10-24:Passionfruit Punch:D9:MT,True,2057,True,Passionfruit Punch
+QC,2026-10-11,D9,1646,demo-order:2026-10-11:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-12,D9,1646,demo-order:2026-10-12:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-13,D9,1646,demo-order:2026-10-13:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-14,D9,1646,demo-order:2026-10-14:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-15,D9,1646,demo-order:2026-10-15:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-16,D9,1646,demo-order:2026-10-16:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-17,D9,1646,demo-order:2026-10-17:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-18,D9,1646,demo-order:2026-10-18:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-19,D9,1646,demo-order:2026-10-19:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-20,D9,1646,demo-order:2026-10-20:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-21,D9,1646,demo-order:2026-10-21:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-22,D9,1646,demo-order:2026-10-22:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-23,D9,1646,demo-order:2026-10-23:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+QC,2026-10-24,D9,1646,demo-order:2026-10-24:Passionfruit Punch:D9:QC,True,1646,True,Passionfruit Punch
+GT,2026-10-11,D1,8580,demo-order:2026-10-11:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-12,D1,8580,demo-order:2026-10-12:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-13,D1,8580,demo-order:2026-10-13:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-14,D1,8580,demo-order:2026-10-14:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-15,D1,8580,demo-order:2026-10-15:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-16,D1,8580,demo-order:2026-10-16:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-17,D1,8580,demo-order:2026-10-17:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-18,D1,8580,demo-order:2026-10-18:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-19,D1,8580,demo-order:2026-10-19:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-20,D1,8580,demo-order:2026-10-20:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-21,D1,8580,demo-order:2026-10-21:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-22,D1,8580,demo-order:2026-10-22:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-23,D1,8580,demo-order:2026-10-23:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+GT,2026-10-24,D1,8580,demo-order:2026-10-24:Dragonfruit Bloom:D1:GT,True,8580,True,Dragonfruit Bloom
+MT,2026-10-11,D1,3900,demo-order:2026-10-11:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-12,D1,3900,demo-order:2026-10-12:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-13,D1,3900,demo-order:2026-10-13:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-14,D1,3900,demo-order:2026-10-14:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-15,D1,3900,demo-order:2026-10-15:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-16,D1,3900,demo-order:2026-10-16:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-17,D1,3900,demo-order:2026-10-17:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-18,D1,3900,demo-order:2026-10-18:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-19,D1,3900,demo-order:2026-10-19:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-20,D1,3900,demo-order:2026-10-20:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-21,D1,3900,demo-order:2026-10-21:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-22,D1,3900,demo-order:2026-10-22:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-23,D1,3900,demo-order:2026-10-23:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+MT,2026-10-24,D1,3900,demo-order:2026-10-24:Dragonfruit Bloom:D1:MT,True,3900,True,Dragonfruit Bloom
+QC,2026-10-11,D1,3120,demo-order:2026-10-11:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-12,D1,3120,demo-order:2026-10-12:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-13,D1,3120,demo-order:2026-10-13:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-14,D1,3120,demo-order:2026-10-14:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-15,D1,3120,demo-order:2026-10-15:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-16,D1,3120,demo-order:2026-10-16:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-17,D1,3120,demo-order:2026-10-17:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-18,D1,3120,demo-order:2026-10-18:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-19,D1,3120,demo-order:2026-10-19:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-20,D1,3120,demo-order:2026-10-20:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-21,D1,3120,demo-order:2026-10-21:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-22,D1,3120,demo-order:2026-10-22:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-23,D1,3120,demo-order:2026-10-23:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+QC,2026-10-24,D1,3120,demo-order:2026-10-24:Dragonfruit Bloom:D1:QC,True,3120,True,Dragonfruit Bloom
+GT,2026-10-11,D2,5940,demo-order:2026-10-11:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-12,D2,5940,demo-order:2026-10-12:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-13,D2,5940,demo-order:2026-10-13:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-14,D2,5940,demo-order:2026-10-14:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-15,D2,5940,demo-order:2026-10-15:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-16,D2,5940,demo-order:2026-10-16:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-17,D2,5940,demo-order:2026-10-17:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-18,D2,5940,demo-order:2026-10-18:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-19,D2,5940,demo-order:2026-10-19:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-20,D2,5940,demo-order:2026-10-20:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-21,D2,5940,demo-order:2026-10-21:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-22,D2,5940,demo-order:2026-10-22:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-23,D2,5940,demo-order:2026-10-23:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+GT,2026-10-24,D2,5940,demo-order:2026-10-24:Dragonfruit Bloom:D2:GT,True,5940,True,Dragonfruit Bloom
+MT,2026-10-11,D2,2700,demo-order:2026-10-11:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-12,D2,2700,demo-order:2026-10-12:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-13,D2,2700,demo-order:2026-10-13:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-14,D2,2700,demo-order:2026-10-14:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-15,D2,2700,demo-order:2026-10-15:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-16,D2,2700,demo-order:2026-10-16:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-17,D2,2700,demo-order:2026-10-17:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-18,D2,2700,demo-order:2026-10-18:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-19,D2,2700,demo-order:2026-10-19:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-20,D2,2700,demo-order:2026-10-20:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-21,D2,2700,demo-order:2026-10-21:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-22,D2,2700,demo-order:2026-10-22:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-23,D2,2700,demo-order:2026-10-23:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+MT,2026-10-24,D2,2700,demo-order:2026-10-24:Dragonfruit Bloom:D2:MT,True,2700,True,Dragonfruit Bloom
+QC,2026-10-11,D2,2160,demo-order:2026-10-11:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-12,D2,2160,demo-order:2026-10-12:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-13,D2,2160,demo-order:2026-10-13:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-14,D2,2160,demo-order:2026-10-14:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-15,D2,2160,demo-order:2026-10-15:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-16,D2,2160,demo-order:2026-10-16:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-17,D2,2160,demo-order:2026-10-17:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-18,D2,2160,demo-order:2026-10-18:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-19,D2,2160,demo-order:2026-10-19:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-20,D2,2160,demo-order:2026-10-20:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-21,D2,2160,demo-order:2026-10-21:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-22,D2,2160,demo-order:2026-10-22:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-23,D2,2160,demo-order:2026-10-23:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+QC,2026-10-24,D2,2160,demo-order:2026-10-24:Dragonfruit Bloom:D2:QC,True,2160,True,Dragonfruit Bloom
+GT,2026-10-11,D3,10560,demo-order:2026-10-11:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-12,D3,10560,demo-order:2026-10-12:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-13,D3,10560,demo-order:2026-10-13:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-14,D3,10560,demo-order:2026-10-14:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-15,D3,10560,demo-order:2026-10-15:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-16,D3,10560,demo-order:2026-10-16:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-17,D3,10560,demo-order:2026-10-17:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-18,D3,10560,demo-order:2026-10-18:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-19,D3,10560,demo-order:2026-10-19:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-20,D3,10560,demo-order:2026-10-20:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-21,D3,10560,demo-order:2026-10-21:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-22,D3,10560,demo-order:2026-10-22:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-23,D3,10560,demo-order:2026-10-23:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-24,D3,10560,demo-order:2026-10-24:Dragonfruit Bloom:D3:GT,True,10560,True,Dragonfruit Bloom
+MT,2026-10-11,D3,4800,demo-order:2026-10-11:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-12,D3,4800,demo-order:2026-10-12:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-13,D3,4800,demo-order:2026-10-13:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-14,D3,4800,demo-order:2026-10-14:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-15,D3,4800,demo-order:2026-10-15:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-16,D3,4800,demo-order:2026-10-16:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-17,D3,4800,demo-order:2026-10-17:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-18,D3,4800,demo-order:2026-10-18:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-19,D3,4800,demo-order:2026-10-19:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-20,D3,4800,demo-order:2026-10-20:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-21,D3,4800,demo-order:2026-10-21:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-22,D3,4800,demo-order:2026-10-22:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-23,D3,4800,demo-order:2026-10-23:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-24,D3,4800,demo-order:2026-10-24:Dragonfruit Bloom:D3:MT,True,4800,True,Dragonfruit Bloom
+QC,2026-10-11,D3,3840,demo-order:2026-10-11:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-12,D3,3840,demo-order:2026-10-12:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-13,D3,3840,demo-order:2026-10-13:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-14,D3,3840,demo-order:2026-10-14:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-15,D3,3840,demo-order:2026-10-15:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-16,D3,3840,demo-order:2026-10-16:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-17,D3,3840,demo-order:2026-10-17:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-18,D3,3840,demo-order:2026-10-18:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-19,D3,3840,demo-order:2026-10-19:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-20,D3,3840,demo-order:2026-10-20:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-21,D3,3840,demo-order:2026-10-21:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-22,D3,3840,demo-order:2026-10-22:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-23,D3,3840,demo-order:2026-10-23:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-24,D3,3840,demo-order:2026-10-24:Dragonfruit Bloom:D3:QC,True,3840,True,Dragonfruit Bloom
+GT,2026-10-11,D4,7920,demo-order:2026-10-11:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-12,D4,7920,demo-order:2026-10-12:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-13,D4,7920,demo-order:2026-10-13:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-14,D4,7920,demo-order:2026-10-14:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-15,D4,7920,demo-order:2026-10-15:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-16,D4,7920,demo-order:2026-10-16:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-17,D4,7920,demo-order:2026-10-17:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-18,D4,7920,demo-order:2026-10-18:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-19,D4,7920,demo-order:2026-10-19:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-20,D4,7920,demo-order:2026-10-20:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-21,D4,7920,demo-order:2026-10-21:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-22,D4,7920,demo-order:2026-10-22:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-23,D4,7920,demo-order:2026-10-23:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-24,D4,7920,demo-order:2026-10-24:Dragonfruit Bloom:D4:GT,True,7920,True,Dragonfruit Bloom
+MT,2026-10-11,D4,3600,demo-order:2026-10-11:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-12,D4,3600,demo-order:2026-10-12:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-13,D4,3600,demo-order:2026-10-13:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-14,D4,3600,demo-order:2026-10-14:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-15,D4,3600,demo-order:2026-10-15:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-16,D4,3600,demo-order:2026-10-16:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-17,D4,3600,demo-order:2026-10-17:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-18,D4,3600,demo-order:2026-10-18:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-19,D4,3600,demo-order:2026-10-19:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-20,D4,3600,demo-order:2026-10-20:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-21,D4,3600,demo-order:2026-10-21:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-22,D4,3600,demo-order:2026-10-22:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-23,D4,3600,demo-order:2026-10-23:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-24,D4,3600,demo-order:2026-10-24:Dragonfruit Bloom:D4:MT,True,3600,True,Dragonfruit Bloom
+QC,2026-10-11,D4,2880,demo-order:2026-10-11:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-12,D4,2880,demo-order:2026-10-12:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-13,D4,2880,demo-order:2026-10-13:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-14,D4,2880,demo-order:2026-10-14:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-15,D4,2880,demo-order:2026-10-15:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-16,D4,2880,demo-order:2026-10-16:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-17,D4,2880,demo-order:2026-10-17:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-18,D4,2880,demo-order:2026-10-18:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-19,D4,2880,demo-order:2026-10-19:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-20,D4,2880,demo-order:2026-10-20:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-21,D4,2880,demo-order:2026-10-21:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-22,D4,2880,demo-order:2026-10-22:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-23,D4,2880,demo-order:2026-10-23:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-24,D4,2880,demo-order:2026-10-24:Dragonfruit Bloom:D4:QC,True,2880,True,Dragonfruit Bloom
+GT,2026-10-11,D5,5280,demo-order:2026-10-11:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-12,D5,5280,demo-order:2026-10-12:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-13,D5,5280,demo-order:2026-10-13:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-14,D5,5280,demo-order:2026-10-14:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-15,D5,5280,demo-order:2026-10-15:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-16,D5,5280,demo-order:2026-10-16:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-17,D5,5280,demo-order:2026-10-17:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-18,D5,5280,demo-order:2026-10-18:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-19,D5,5280,demo-order:2026-10-19:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-20,D5,5280,demo-order:2026-10-20:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-21,D5,5280,demo-order:2026-10-21:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-22,D5,5280,demo-order:2026-10-22:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-23,D5,5280,demo-order:2026-10-23:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-24,D5,5280,demo-order:2026-10-24:Dragonfruit Bloom:D5:GT,True,5280,True,Dragonfruit Bloom
+MT,2026-10-11,D5,2400,demo-order:2026-10-11:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-12,D5,2400,demo-order:2026-10-12:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-13,D5,2400,demo-order:2026-10-13:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-14,D5,2400,demo-order:2026-10-14:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-15,D5,2400,demo-order:2026-10-15:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-16,D5,2400,demo-order:2026-10-16:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-17,D5,2400,demo-order:2026-10-17:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-18,D5,2400,demo-order:2026-10-18:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-19,D5,2400,demo-order:2026-10-19:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-20,D5,2400,demo-order:2026-10-20:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-21,D5,2400,demo-order:2026-10-21:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-22,D5,2400,demo-order:2026-10-22:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-23,D5,2400,demo-order:2026-10-23:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-24,D5,2400,demo-order:2026-10-24:Dragonfruit Bloom:D5:MT,True,2400,True,Dragonfruit Bloom
+QC,2026-10-11,D5,1920,demo-order:2026-10-11:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-12,D5,1920,demo-order:2026-10-12:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-13,D5,1920,demo-order:2026-10-13:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-14,D5,1920,demo-order:2026-10-14:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-15,D5,1920,demo-order:2026-10-15:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-16,D5,1920,demo-order:2026-10-16:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-17,D5,1920,demo-order:2026-10-17:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-18,D5,1920,demo-order:2026-10-18:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-19,D5,1920,demo-order:2026-10-19:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-20,D5,1920,demo-order:2026-10-20:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-21,D5,1920,demo-order:2026-10-21:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-22,D5,1920,demo-order:2026-10-22:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-23,D5,1920,demo-order:2026-10-23:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-24,D5,1920,demo-order:2026-10-24:Dragonfruit Bloom:D5:QC,True,1920,True,Dragonfruit Bloom
+GT,2026-10-11,D6,10560,demo-order:2026-10-11:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-12,D6,10560,demo-order:2026-10-12:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-13,D6,10560,demo-order:2026-10-13:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-14,D6,10560,demo-order:2026-10-14:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-15,D6,10560,demo-order:2026-10-15:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-16,D6,10560,demo-order:2026-10-16:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-17,D6,10560,demo-order:2026-10-17:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-18,D6,10560,demo-order:2026-10-18:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-19,D6,10560,demo-order:2026-10-19:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-20,D6,10560,demo-order:2026-10-20:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-21,D6,10560,demo-order:2026-10-21:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-22,D6,10560,demo-order:2026-10-22:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-23,D6,10560,demo-order:2026-10-23:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+GT,2026-10-24,D6,10560,demo-order:2026-10-24:Dragonfruit Bloom:D6:GT,True,10560,True,Dragonfruit Bloom
+MT,2026-10-11,D6,4800,demo-order:2026-10-11:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-12,D6,4800,demo-order:2026-10-12:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-13,D6,4800,demo-order:2026-10-13:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-14,D6,4800,demo-order:2026-10-14:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-15,D6,4800,demo-order:2026-10-15:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-16,D6,4800,demo-order:2026-10-16:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-17,D6,4800,demo-order:2026-10-17:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-18,D6,4800,demo-order:2026-10-18:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-19,D6,4800,demo-order:2026-10-19:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-20,D6,4800,demo-order:2026-10-20:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-21,D6,4800,demo-order:2026-10-21:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-22,D6,4800,demo-order:2026-10-22:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-23,D6,4800,demo-order:2026-10-23:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+MT,2026-10-24,D6,4800,demo-order:2026-10-24:Dragonfruit Bloom:D6:MT,True,4800,True,Dragonfruit Bloom
+QC,2026-10-11,D6,3840,demo-order:2026-10-11:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-12,D6,3840,demo-order:2026-10-12:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-13,D6,3840,demo-order:2026-10-13:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-14,D6,3840,demo-order:2026-10-14:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-15,D6,3840,demo-order:2026-10-15:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-16,D6,3840,demo-order:2026-10-16:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-17,D6,3840,demo-order:2026-10-17:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-18,D6,3840,demo-order:2026-10-18:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-19,D6,3840,demo-order:2026-10-19:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-20,D6,3840,demo-order:2026-10-20:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-21,D6,3840,demo-order:2026-10-21:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-22,D6,3840,demo-order:2026-10-22:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-23,D6,3840,demo-order:2026-10-23:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+QC,2026-10-24,D6,3840,demo-order:2026-10-24:Dragonfruit Bloom:D6:QC,True,3840,True,Dragonfruit Bloom
+GT,2026-10-11,D7,7920,demo-order:2026-10-11:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-12,D7,7920,demo-order:2026-10-12:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-13,D7,7920,demo-order:2026-10-13:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-14,D7,7920,demo-order:2026-10-14:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-15,D7,7920,demo-order:2026-10-15:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-16,D7,7920,demo-order:2026-10-16:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-17,D7,7920,demo-order:2026-10-17:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-18,D7,7920,demo-order:2026-10-18:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-19,D7,7920,demo-order:2026-10-19:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-20,D7,7920,demo-order:2026-10-20:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-21,D7,7920,demo-order:2026-10-21:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-22,D7,7920,demo-order:2026-10-22:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-23,D7,7920,demo-order:2026-10-23:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+GT,2026-10-24,D7,7920,demo-order:2026-10-24:Dragonfruit Bloom:D7:GT,True,7920,True,Dragonfruit Bloom
+MT,2026-10-11,D7,3600,demo-order:2026-10-11:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-12,D7,3600,demo-order:2026-10-12:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-13,D7,3600,demo-order:2026-10-13:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-14,D7,3600,demo-order:2026-10-14:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-15,D7,3600,demo-order:2026-10-15:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-16,D7,3600,demo-order:2026-10-16:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-17,D7,3600,demo-order:2026-10-17:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-18,D7,3600,demo-order:2026-10-18:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-19,D7,3600,demo-order:2026-10-19:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-20,D7,3600,demo-order:2026-10-20:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-21,D7,3600,demo-order:2026-10-21:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-22,D7,3600,demo-order:2026-10-22:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-23,D7,3600,demo-order:2026-10-23:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+MT,2026-10-24,D7,3600,demo-order:2026-10-24:Dragonfruit Bloom:D7:MT,True,3600,True,Dragonfruit Bloom
+QC,2026-10-11,D7,2880,demo-order:2026-10-11:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-12,D7,2880,demo-order:2026-10-12:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-13,D7,2880,demo-order:2026-10-13:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-14,D7,2880,demo-order:2026-10-14:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-15,D7,2880,demo-order:2026-10-15:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-16,D7,2880,demo-order:2026-10-16:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-17,D7,2880,demo-order:2026-10-17:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-18,D7,2880,demo-order:2026-10-18:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-19,D7,2880,demo-order:2026-10-19:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-20,D7,2880,demo-order:2026-10-20:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-21,D7,2880,demo-order:2026-10-21:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-22,D7,2880,demo-order:2026-10-22:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-23,D7,2880,demo-order:2026-10-23:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+QC,2026-10-24,D7,2880,demo-order:2026-10-24:Dragonfruit Bloom:D7:QC,True,2880,True,Dragonfruit Bloom
+GT,2026-10-11,D8,5280,demo-order:2026-10-11:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-12,D8,5280,demo-order:2026-10-12:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-13,D8,5280,demo-order:2026-10-13:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-14,D8,5280,demo-order:2026-10-14:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-15,D8,5280,demo-order:2026-10-15:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-16,D8,5280,demo-order:2026-10-16:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-17,D8,5280,demo-order:2026-10-17:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-18,D8,5280,demo-order:2026-10-18:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-19,D8,5280,demo-order:2026-10-19:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-20,D8,5280,demo-order:2026-10-20:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-21,D8,5280,demo-order:2026-10-21:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-22,D8,5280,demo-order:2026-10-22:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-23,D8,5280,demo-order:2026-10-23:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+GT,2026-10-24,D8,5280,demo-order:2026-10-24:Dragonfruit Bloom:D8:GT,True,5280,True,Dragonfruit Bloom
+MT,2026-10-11,D8,2400,demo-order:2026-10-11:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-12,D8,2400,demo-order:2026-10-12:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-13,D8,2400,demo-order:2026-10-13:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-14,D8,2400,demo-order:2026-10-14:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-15,D8,2400,demo-order:2026-10-15:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-16,D8,2400,demo-order:2026-10-16:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-17,D8,2400,demo-order:2026-10-17:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-18,D8,2400,demo-order:2026-10-18:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-19,D8,2400,demo-order:2026-10-19:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-20,D8,2400,demo-order:2026-10-20:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-21,D8,2400,demo-order:2026-10-21:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-22,D8,2400,demo-order:2026-10-22:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-23,D8,2400,demo-order:2026-10-23:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+MT,2026-10-24,D8,2400,demo-order:2026-10-24:Dragonfruit Bloom:D8:MT,True,2400,True,Dragonfruit Bloom
+QC,2026-10-11,D8,1920,demo-order:2026-10-11:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-12,D8,1920,demo-order:2026-10-12:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-13,D8,1920,demo-order:2026-10-13:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-14,D8,1920,demo-order:2026-10-14:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-15,D8,1920,demo-order:2026-10-15:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-16,D8,1920,demo-order:2026-10-16:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-17,D8,1920,demo-order:2026-10-17:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-18,D8,1920,demo-order:2026-10-18:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-19,D8,1920,demo-order:2026-10-19:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-20,D8,1920,demo-order:2026-10-20:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-21,D8,1920,demo-order:2026-10-21:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-22,D8,1920,demo-order:2026-10-22:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-23,D8,1920,demo-order:2026-10-23:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+QC,2026-10-24,D8,1920,demo-order:2026-10-24:Dragonfruit Bloom:D8:QC,True,1920,True,Dragonfruit Bloom
+GT,2026-10-11,D9,3960,demo-order:2026-10-11:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-12,D9,3960,demo-order:2026-10-12:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-13,D9,3960,demo-order:2026-10-13:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-14,D9,3960,demo-order:2026-10-14:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-15,D9,3960,demo-order:2026-10-15:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-16,D9,3960,demo-order:2026-10-16:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-17,D9,3960,demo-order:2026-10-17:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-18,D9,3960,demo-order:2026-10-18:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-19,D9,3960,demo-order:2026-10-19:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-20,D9,3960,demo-order:2026-10-20:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-21,D9,3960,demo-order:2026-10-21:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-22,D9,3960,demo-order:2026-10-22:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-23,D9,3960,demo-order:2026-10-23:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+GT,2026-10-24,D9,3960,demo-order:2026-10-24:Dragonfruit Bloom:D9:GT,True,3960,True,Dragonfruit Bloom
+MT,2026-10-11,D9,1800,demo-order:2026-10-11:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-12,D9,1800,demo-order:2026-10-12:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-13,D9,1800,demo-order:2026-10-13:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-14,D9,1800,demo-order:2026-10-14:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-15,D9,1800,demo-order:2026-10-15:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-16,D9,1800,demo-order:2026-10-16:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-17,D9,1800,demo-order:2026-10-17:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-18,D9,1800,demo-order:2026-10-18:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-19,D9,1800,demo-order:2026-10-19:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-20,D9,1800,demo-order:2026-10-20:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-21,D9,1800,demo-order:2026-10-21:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-22,D9,1800,demo-order:2026-10-22:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-23,D9,1800,demo-order:2026-10-23:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+MT,2026-10-24,D9,1800,demo-order:2026-10-24:Dragonfruit Bloom:D9:MT,True,1800,True,Dragonfruit Bloom
+QC,2026-10-11,D9,1440,demo-order:2026-10-11:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-12,D9,1440,demo-order:2026-10-12:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-13,D9,1440,demo-order:2026-10-13:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-14,D9,1440,demo-order:2026-10-14:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-15,D9,1440,demo-order:2026-10-15:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-16,D9,1440,demo-order:2026-10-16:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-17,D9,1440,demo-order:2026-10-17:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-18,D9,1440,demo-order:2026-10-18:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-19,D9,1440,demo-order:2026-10-19:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-20,D9,1440,demo-order:2026-10-20:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-21,D9,1440,demo-order:2026-10-21:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-22,D9,1440,demo-order:2026-10-22:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-23,D9,1440,demo-order:2026-10-23:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+QC,2026-10-24,D9,1440,demo-order:2026-10-24:Dragonfruit Bloom:D9:QC,True,1440,True,Dragonfruit Bloom
+GT,2026-10-11,D1,7354,demo-order:2026-10-11:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-12,D1,7354,demo-order:2026-10-12:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-13,D1,7354,demo-order:2026-10-13:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-14,D1,7354,demo-order:2026-10-14:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-15,D1,7354,demo-order:2026-10-15:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-16,D1,7354,demo-order:2026-10-16:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-17,D1,7354,demo-order:2026-10-17:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-18,D1,7354,demo-order:2026-10-18:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-19,D1,7354,demo-order:2026-10-19:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-20,D1,7354,demo-order:2026-10-20:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-21,D1,7354,demo-order:2026-10-21:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-22,D1,7354,demo-order:2026-10-22:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-23,D1,7354,demo-order:2026-10-23:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+GT,2026-10-24,D1,7354,demo-order:2026-10-24:Dragon Passion:D1:GT,True,7354,True,Dragon Passion
+MT,2026-10-11,D1,3343,demo-order:2026-10-11:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-12,D1,3343,demo-order:2026-10-12:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-13,D1,3343,demo-order:2026-10-13:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-14,D1,3343,demo-order:2026-10-14:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-15,D1,3343,demo-order:2026-10-15:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-16,D1,3343,demo-order:2026-10-16:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-17,D1,3343,demo-order:2026-10-17:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-18,D1,3343,demo-order:2026-10-18:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-19,D1,3343,demo-order:2026-10-19:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-20,D1,3343,demo-order:2026-10-20:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-21,D1,3343,demo-order:2026-10-21:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-22,D1,3343,demo-order:2026-10-22:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-23,D1,3343,demo-order:2026-10-23:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+MT,2026-10-24,D1,3343,demo-order:2026-10-24:Dragon Passion:D1:MT,True,3343,True,Dragon Passion
+QC,2026-10-11,D1,2674,demo-order:2026-10-11:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-12,D1,2674,demo-order:2026-10-12:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-13,D1,2674,demo-order:2026-10-13:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-14,D1,2674,demo-order:2026-10-14:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-15,D1,2674,demo-order:2026-10-15:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-16,D1,2674,demo-order:2026-10-16:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-17,D1,2674,demo-order:2026-10-17:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-18,D1,2674,demo-order:2026-10-18:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-19,D1,2674,demo-order:2026-10-19:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-20,D1,2674,demo-order:2026-10-20:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-21,D1,2674,demo-order:2026-10-21:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-22,D1,2674,demo-order:2026-10-22:Dragon Passion:D1:QC,True,2674,True,Dragon Passion
+QC,2026-10-23,D1,13371,demo-order:2026-10-23:Dragon Passion:D1:QC,True,13371,True,Dragon Passion
+QC,2026-10-24,D1,13371,demo-order:2026-10-24:Dragon Passion:D1:QC,True,13371,True,Dragon Passion
+GT,2026-10-11,D2,5091,demo-order:2026-10-11:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-12,D2,5091,demo-order:2026-10-12:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-13,D2,5091,demo-order:2026-10-13:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-14,D2,5091,demo-order:2026-10-14:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-15,D2,5091,demo-order:2026-10-15:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-16,D2,5091,demo-order:2026-10-16:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-17,D2,5091,demo-order:2026-10-17:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-18,D2,5091,demo-order:2026-10-18:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-19,D2,5091,demo-order:2026-10-19:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-20,D2,5091,demo-order:2026-10-20:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-21,D2,5091,demo-order:2026-10-21:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-22,D2,5091,demo-order:2026-10-22:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-23,D2,5091,demo-order:2026-10-23:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+GT,2026-10-24,D2,5091,demo-order:2026-10-24:Dragon Passion:D2:GT,True,5091,True,Dragon Passion
+MT,2026-10-11,D2,2314,demo-order:2026-10-11:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-12,D2,2314,demo-order:2026-10-12:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-13,D2,2314,demo-order:2026-10-13:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-14,D2,2314,demo-order:2026-10-14:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-15,D2,2314,demo-order:2026-10-15:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-16,D2,2314,demo-order:2026-10-16:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-17,D2,2314,demo-order:2026-10-17:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-18,D2,2314,demo-order:2026-10-18:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-19,D2,2314,demo-order:2026-10-19:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-20,D2,2314,demo-order:2026-10-20:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-21,D2,2314,demo-order:2026-10-21:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-22,D2,2314,demo-order:2026-10-22:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-23,D2,2314,demo-order:2026-10-23:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+MT,2026-10-24,D2,2314,demo-order:2026-10-24:Dragon Passion:D2:MT,True,2314,True,Dragon Passion
+QC,2026-10-11,D2,1851,demo-order:2026-10-11:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-12,D2,1851,demo-order:2026-10-12:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-13,D2,1851,demo-order:2026-10-13:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-14,D2,1851,demo-order:2026-10-14:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-15,D2,1851,demo-order:2026-10-15:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-16,D2,1851,demo-order:2026-10-16:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-17,D2,1851,demo-order:2026-10-17:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-18,D2,1851,demo-order:2026-10-18:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-19,D2,1851,demo-order:2026-10-19:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-20,D2,1851,demo-order:2026-10-20:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-21,D2,1851,demo-order:2026-10-21:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-22,D2,1851,demo-order:2026-10-22:Dragon Passion:D2:QC,True,1851,True,Dragon Passion
+QC,2026-10-23,D2,4951,demo-order:2026-10-23:Dragon Passion:D2:QC,True,4951,True,Dragon Passion
+QC,2026-10-24,D2,4951,demo-order:2026-10-24:Dragon Passion:D2:QC,True,4951,True,Dragon Passion
+GT,2026-10-11,D3,9051,demo-order:2026-10-11:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-12,D3,9051,demo-order:2026-10-12:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-13,D3,9051,demo-order:2026-10-13:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-14,D3,9051,demo-order:2026-10-14:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-15,D3,9051,demo-order:2026-10-15:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-16,D3,9051,demo-order:2026-10-16:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-17,D3,9051,demo-order:2026-10-17:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-18,D3,9051,demo-order:2026-10-18:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-19,D3,9051,demo-order:2026-10-19:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-20,D3,9051,demo-order:2026-10-20:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-21,D3,9051,demo-order:2026-10-21:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-22,D3,9051,demo-order:2026-10-22:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-23,D3,9051,demo-order:2026-10-23:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+GT,2026-10-24,D3,9051,demo-order:2026-10-24:Dragon Passion:D3:GT,True,9051,True,Dragon Passion
+MT,2026-10-11,D3,4114,demo-order:2026-10-11:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-12,D3,4114,demo-order:2026-10-12:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-13,D3,4114,demo-order:2026-10-13:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-14,D3,4114,demo-order:2026-10-14:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-15,D3,4114,demo-order:2026-10-15:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-16,D3,4114,demo-order:2026-10-16:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-17,D3,4114,demo-order:2026-10-17:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-18,D3,4114,demo-order:2026-10-18:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-19,D3,4114,demo-order:2026-10-19:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-20,D3,4114,demo-order:2026-10-20:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-21,D3,4114,demo-order:2026-10-21:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-22,D3,4114,demo-order:2026-10-22:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-23,D3,4114,demo-order:2026-10-23:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+MT,2026-10-24,D3,4114,demo-order:2026-10-24:Dragon Passion:D3:MT,True,4114,True,Dragon Passion
+QC,2026-10-11,D3,3291,demo-order:2026-10-11:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-12,D3,3291,demo-order:2026-10-12:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-13,D3,3291,demo-order:2026-10-13:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-14,D3,3291,demo-order:2026-10-14:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-15,D3,3291,demo-order:2026-10-15:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-16,D3,3291,demo-order:2026-10-16:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-17,D3,3291,demo-order:2026-10-17:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-18,D3,3291,demo-order:2026-10-18:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-19,D3,3291,demo-order:2026-10-19:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-20,D3,3291,demo-order:2026-10-20:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-21,D3,3291,demo-order:2026-10-21:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-22,D3,3291,demo-order:2026-10-22:Dragon Passion:D3:QC,True,3291,True,Dragon Passion
+QC,2026-10-23,D3,16457,demo-order:2026-10-23:Dragon Passion:D3:QC,True,16457,True,Dragon Passion
+QC,2026-10-24,D3,16457,demo-order:2026-10-24:Dragon Passion:D3:QC,True,16457,True,Dragon Passion
+GT,2026-10-11,D4,6789,demo-order:2026-10-11:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-12,D4,6789,demo-order:2026-10-12:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-13,D4,6789,demo-order:2026-10-13:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-14,D4,6789,demo-order:2026-10-14:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-15,D4,6789,demo-order:2026-10-15:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-16,D4,6789,demo-order:2026-10-16:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-17,D4,6789,demo-order:2026-10-17:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-18,D4,6789,demo-order:2026-10-18:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-19,D4,6789,demo-order:2026-10-19:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-20,D4,6789,demo-order:2026-10-20:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-21,D4,6789,demo-order:2026-10-21:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-22,D4,6789,demo-order:2026-10-22:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-23,D4,6789,demo-order:2026-10-23:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+GT,2026-10-24,D4,6789,demo-order:2026-10-24:Dragon Passion:D4:GT,True,6789,True,Dragon Passion
+MT,2026-10-11,D4,3086,demo-order:2026-10-11:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-12,D4,3086,demo-order:2026-10-12:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-13,D4,3086,demo-order:2026-10-13:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-14,D4,3086,demo-order:2026-10-14:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-15,D4,3086,demo-order:2026-10-15:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-16,D4,3086,demo-order:2026-10-16:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-17,D4,3086,demo-order:2026-10-17:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-18,D4,3086,demo-order:2026-10-18:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-19,D4,3086,demo-order:2026-10-19:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-20,D4,3086,demo-order:2026-10-20:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-21,D4,3086,demo-order:2026-10-21:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-22,D4,3086,demo-order:2026-10-22:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-23,D4,3086,demo-order:2026-10-23:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+MT,2026-10-24,D4,3086,demo-order:2026-10-24:Dragon Passion:D4:MT,True,3086,True,Dragon Passion
+QC,2026-10-11,D4,2469,demo-order:2026-10-11:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-12,D4,2469,demo-order:2026-10-12:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-13,D4,2469,demo-order:2026-10-13:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-14,D4,2469,demo-order:2026-10-14:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-15,D4,2469,demo-order:2026-10-15:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-16,D4,2469,demo-order:2026-10-16:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-17,D4,2469,demo-order:2026-10-17:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-18,D4,2469,demo-order:2026-10-18:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-19,D4,2469,demo-order:2026-10-19:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-20,D4,2469,demo-order:2026-10-20:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-21,D4,2469,demo-order:2026-10-21:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-22,D4,2469,demo-order:2026-10-22:Dragon Passion:D4:QC,True,2469,True,Dragon Passion
+QC,2026-10-23,D4,12343,demo-order:2026-10-23:Dragon Passion:D4:QC,True,12343,True,Dragon Passion
+QC,2026-10-24,D4,12343,demo-order:2026-10-24:Dragon Passion:D4:QC,True,12343,True,Dragon Passion
+GT,2026-10-11,D5,4526,demo-order:2026-10-11:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-12,D5,4526,demo-order:2026-10-12:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-13,D5,4526,demo-order:2026-10-13:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-14,D5,4526,demo-order:2026-10-14:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-15,D5,4526,demo-order:2026-10-15:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-16,D5,4526,demo-order:2026-10-16:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-17,D5,4526,demo-order:2026-10-17:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-18,D5,4526,demo-order:2026-10-18:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-19,D5,4526,demo-order:2026-10-19:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-20,D5,4526,demo-order:2026-10-20:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-21,D5,4526,demo-order:2026-10-21:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-22,D5,4526,demo-order:2026-10-22:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-23,D5,4526,demo-order:2026-10-23:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+GT,2026-10-24,D5,4526,demo-order:2026-10-24:Dragon Passion:D5:GT,True,4526,True,Dragon Passion
+MT,2026-10-11,D5,2057,demo-order:2026-10-11:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-12,D5,2057,demo-order:2026-10-12:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-13,D5,2057,demo-order:2026-10-13:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-14,D5,2057,demo-order:2026-10-14:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-15,D5,2057,demo-order:2026-10-15:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-16,D5,2057,demo-order:2026-10-16:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-17,D5,2057,demo-order:2026-10-17:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-18,D5,2057,demo-order:2026-10-18:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-19,D5,2057,demo-order:2026-10-19:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-20,D5,2057,demo-order:2026-10-20:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-21,D5,2057,demo-order:2026-10-21:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-22,D5,2057,demo-order:2026-10-22:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-23,D5,2057,demo-order:2026-10-23:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+MT,2026-10-24,D5,2057,demo-order:2026-10-24:Dragon Passion:D5:MT,True,2057,True,Dragon Passion
+QC,2026-10-11,D5,1646,demo-order:2026-10-11:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-12,D5,1646,demo-order:2026-10-12:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-13,D5,1646,demo-order:2026-10-13:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-14,D5,1646,demo-order:2026-10-14:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-15,D5,1646,demo-order:2026-10-15:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-16,D5,1646,demo-order:2026-10-16:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-17,D5,1646,demo-order:2026-10-17:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-18,D5,1646,demo-order:2026-10-18:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-19,D5,1646,demo-order:2026-10-19:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-20,D5,1646,demo-order:2026-10-20:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-21,D5,1646,demo-order:2026-10-21:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-22,D5,1646,demo-order:2026-10-22:Dragon Passion:D5:QC,True,1646,True,Dragon Passion
+QC,2026-10-23,D5,4401,demo-order:2026-10-23:Dragon Passion:D5:QC,True,4401,True,Dragon Passion
+QC,2026-10-24,D5,4401,demo-order:2026-10-24:Dragon Passion:D5:QC,True,4401,True,Dragon Passion
+GT,2026-10-11,D6,9051,demo-order:2026-10-11:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-12,D6,9051,demo-order:2026-10-12:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-13,D6,9051,demo-order:2026-10-13:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-14,D6,9051,demo-order:2026-10-14:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-15,D6,9051,demo-order:2026-10-15:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-16,D6,9051,demo-order:2026-10-16:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-17,D6,9051,demo-order:2026-10-17:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-18,D6,9051,demo-order:2026-10-18:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-19,D6,9051,demo-order:2026-10-19:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-20,D6,9051,demo-order:2026-10-20:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-21,D6,9051,demo-order:2026-10-21:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-22,D6,9051,demo-order:2026-10-22:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-23,D6,9051,demo-order:2026-10-23:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+GT,2026-10-24,D6,9051,demo-order:2026-10-24:Dragon Passion:D6:GT,True,9051,True,Dragon Passion
+MT,2026-10-11,D6,4114,demo-order:2026-10-11:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-12,D6,4114,demo-order:2026-10-12:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-13,D6,4114,demo-order:2026-10-13:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-14,D6,4114,demo-order:2026-10-14:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-15,D6,4114,demo-order:2026-10-15:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-16,D6,4114,demo-order:2026-10-16:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-17,D6,4114,demo-order:2026-10-17:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-18,D6,4114,demo-order:2026-10-18:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-19,D6,4114,demo-order:2026-10-19:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-20,D6,4114,demo-order:2026-10-20:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-21,D6,4114,demo-order:2026-10-21:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-22,D6,4114,demo-order:2026-10-22:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-23,D6,4114,demo-order:2026-10-23:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+MT,2026-10-24,D6,4114,demo-order:2026-10-24:Dragon Passion:D6:MT,True,4114,True,Dragon Passion
+QC,2026-10-11,D6,3291,demo-order:2026-10-11:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-12,D6,3291,demo-order:2026-10-12:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-13,D6,3291,demo-order:2026-10-13:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-14,D6,3291,demo-order:2026-10-14:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-15,D6,3291,demo-order:2026-10-15:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-16,D6,3291,demo-order:2026-10-16:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-17,D6,3291,demo-order:2026-10-17:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-18,D6,3291,demo-order:2026-10-18:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-19,D6,3291,demo-order:2026-10-19:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-20,D6,3291,demo-order:2026-10-20:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-21,D6,3291,demo-order:2026-10-21:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-22,D6,3291,demo-order:2026-10-22:Dragon Passion:D6:QC,True,3291,True,Dragon Passion
+QC,2026-10-23,D6,16457,demo-order:2026-10-23:Dragon Passion:D6:QC,True,16457,True,Dragon Passion
+QC,2026-10-24,D6,16457,demo-order:2026-10-24:Dragon Passion:D6:QC,True,16457,True,Dragon Passion
+GT,2026-10-11,D7,6789,demo-order:2026-10-11:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-12,D7,6789,demo-order:2026-10-12:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-13,D7,6789,demo-order:2026-10-13:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-14,D7,6789,demo-order:2026-10-14:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-15,D7,6789,demo-order:2026-10-15:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-16,D7,6789,demo-order:2026-10-16:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-17,D7,6789,demo-order:2026-10-17:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-18,D7,6789,demo-order:2026-10-18:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-19,D7,6789,demo-order:2026-10-19:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-20,D7,6789,demo-order:2026-10-20:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-21,D7,6789,demo-order:2026-10-21:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-22,D7,6789,demo-order:2026-10-22:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-23,D7,6789,demo-order:2026-10-23:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+GT,2026-10-24,D7,6789,demo-order:2026-10-24:Dragon Passion:D7:GT,True,6789,True,Dragon Passion
+MT,2026-10-11,D7,3086,demo-order:2026-10-11:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-12,D7,3086,demo-order:2026-10-12:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-13,D7,3086,demo-order:2026-10-13:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-14,D7,3086,demo-order:2026-10-14:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-15,D7,3086,demo-order:2026-10-15:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-16,D7,3086,demo-order:2026-10-16:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-17,D7,3086,demo-order:2026-10-17:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-18,D7,3086,demo-order:2026-10-18:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-19,D7,3086,demo-order:2026-10-19:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-20,D7,3086,demo-order:2026-10-20:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-21,D7,3086,demo-order:2026-10-21:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-22,D7,3086,demo-order:2026-10-22:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-23,D7,3086,demo-order:2026-10-23:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+MT,2026-10-24,D7,3086,demo-order:2026-10-24:Dragon Passion:D7:MT,True,3086,True,Dragon Passion
+QC,2026-10-11,D7,2469,demo-order:2026-10-11:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-12,D7,2469,demo-order:2026-10-12:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-13,D7,2469,demo-order:2026-10-13:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-14,D7,2469,demo-order:2026-10-14:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-15,D7,2469,demo-order:2026-10-15:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-16,D7,2469,demo-order:2026-10-16:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-17,D7,2469,demo-order:2026-10-17:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-18,D7,2469,demo-order:2026-10-18:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-19,D7,2469,demo-order:2026-10-19:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-20,D7,2469,demo-order:2026-10-20:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-21,D7,2469,demo-order:2026-10-21:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-22,D7,2469,demo-order:2026-10-22:Dragon Passion:D7:QC,True,2469,True,Dragon Passion
+QC,2026-10-23,D7,6602,demo-order:2026-10-23:Dragon Passion:D7:QC,True,6602,True,Dragon Passion
+QC,2026-10-24,D7,6602,demo-order:2026-10-24:Dragon Passion:D7:QC,True,6602,True,Dragon Passion
+GT,2026-10-11,D8,4526,demo-order:2026-10-11:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-12,D8,4526,demo-order:2026-10-12:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-13,D8,4526,demo-order:2026-10-13:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-14,D8,4526,demo-order:2026-10-14:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-15,D8,4526,demo-order:2026-10-15:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-16,D8,4526,demo-order:2026-10-16:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-17,D8,4526,demo-order:2026-10-17:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-18,D8,4526,demo-order:2026-10-18:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-19,D8,4526,demo-order:2026-10-19:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-20,D8,4526,demo-order:2026-10-20:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-21,D8,4526,demo-order:2026-10-21:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-22,D8,4526,demo-order:2026-10-22:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-23,D8,4526,demo-order:2026-10-23:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+GT,2026-10-24,D8,4526,demo-order:2026-10-24:Dragon Passion:D8:GT,True,4526,True,Dragon Passion
+MT,2026-10-11,D8,2057,demo-order:2026-10-11:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-12,D8,2057,demo-order:2026-10-12:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-13,D8,2057,demo-order:2026-10-13:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-14,D8,2057,demo-order:2026-10-14:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-15,D8,2057,demo-order:2026-10-15:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-16,D8,2057,demo-order:2026-10-16:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-17,D8,2057,demo-order:2026-10-17:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-18,D8,2057,demo-order:2026-10-18:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-19,D8,2057,demo-order:2026-10-19:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-20,D8,2057,demo-order:2026-10-20:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-21,D8,2057,demo-order:2026-10-21:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-22,D8,2057,demo-order:2026-10-22:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-23,D8,2057,demo-order:2026-10-23:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+MT,2026-10-24,D8,2057,demo-order:2026-10-24:Dragon Passion:D8:MT,True,2057,True,Dragon Passion
+QC,2026-10-11,D8,1646,demo-order:2026-10-11:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-12,D8,1646,demo-order:2026-10-12:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-13,D8,1646,demo-order:2026-10-13:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-14,D8,1646,demo-order:2026-10-14:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-15,D8,1646,demo-order:2026-10-15:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-16,D8,1646,demo-order:2026-10-16:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-17,D8,1646,demo-order:2026-10-17:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-18,D8,1646,demo-order:2026-10-18:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-19,D8,1646,demo-order:2026-10-19:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-20,D8,1646,demo-order:2026-10-20:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-21,D8,1646,demo-order:2026-10-21:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-22,D8,1646,demo-order:2026-10-22:Dragon Passion:D8:QC,True,1646,True,Dragon Passion
+QC,2026-10-23,D8,4401,demo-order:2026-10-23:Dragon Passion:D8:QC,True,4401,True,Dragon Passion
+QC,2026-10-24,D8,4401,demo-order:2026-10-24:Dragon Passion:D8:QC,True,4401,True,Dragon Passion
+GT,2026-10-11,D9,3394,demo-order:2026-10-11:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-12,D9,3394,demo-order:2026-10-12:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-13,D9,3394,demo-order:2026-10-13:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-14,D9,3394,demo-order:2026-10-14:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-15,D9,3394,demo-order:2026-10-15:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-16,D9,3394,demo-order:2026-10-16:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-17,D9,3394,demo-order:2026-10-17:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-18,D9,3394,demo-order:2026-10-18:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-19,D9,3394,demo-order:2026-10-19:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-20,D9,3394,demo-order:2026-10-20:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-21,D9,3394,demo-order:2026-10-21:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-22,D9,3394,demo-order:2026-10-22:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-23,D9,3394,demo-order:2026-10-23:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+GT,2026-10-24,D9,3394,demo-order:2026-10-24:Dragon Passion:D9:GT,True,3394,True,Dragon Passion
+MT,2026-10-11,D9,1543,demo-order:2026-10-11:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-12,D9,1543,demo-order:2026-10-12:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-13,D9,1543,demo-order:2026-10-13:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-14,D9,1543,demo-order:2026-10-14:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-15,D9,1543,demo-order:2026-10-15:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-16,D9,1543,demo-order:2026-10-16:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-17,D9,1543,demo-order:2026-10-17:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-18,D9,1543,demo-order:2026-10-18:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-19,D9,1543,demo-order:2026-10-19:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-20,D9,1543,demo-order:2026-10-20:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-21,D9,1543,demo-order:2026-10-21:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-22,D9,1543,demo-order:2026-10-22:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-23,D9,1543,demo-order:2026-10-23:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+MT,2026-10-24,D9,1543,demo-order:2026-10-24:Dragon Passion:D9:MT,True,1543,True,Dragon Passion
+QC,2026-10-11,D9,1234,demo-order:2026-10-11:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-12,D9,1234,demo-order:2026-10-12:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-13,D9,1234,demo-order:2026-10-13:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-14,D9,1234,demo-order:2026-10-14:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-15,D9,1234,demo-order:2026-10-15:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-16,D9,1234,demo-order:2026-10-16:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-17,D9,1234,demo-order:2026-10-17:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-18,D9,1234,demo-order:2026-10-18:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-19,D9,1234,demo-order:2026-10-19:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-20,D9,1234,demo-order:2026-10-20:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-21,D9,1234,demo-order:2026-10-21:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-22,D9,1234,demo-order:2026-10-22:Dragon Passion:D9:QC,True,1234,True,Dragon Passion
+QC,2026-10-23,D9,3301,demo-order:2026-10-23:Dragon Passion:D9:QC,True,3301,True,Dragon Passion
+QC,2026-10-24,D9,3301,demo-order:2026-10-24:Dragon Passion:D9:QC,True,3301,True,Dragon Passion

@@ -1,0 +1,2 @@
+cold_chain_confirmed,date,id,incremental_cost_rupees,lead_days,material,max_kg,sample,valid_until
+True,2026-10-24,demo-illustrative-air-quote,400000.0,2,passionfruit,5000.0,True,2026-10-25

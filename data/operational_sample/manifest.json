@@ -1,0 +1,36 @@
+{
+  "data_type": "SYNTHETIC CASE-CONSTRAINED EXAMPLE; NOT PULP RIOT ACTUALS",
+  "as_of": "2026-10-24",
+  "counts": {
+    "capacity": 2,
+    "route": 1,
+    "order": 1890,
+    "channel_master": 3,
+    "inbound": 1,
+    "lot": 45,
+    "production": 1,
+    "signal": 1,
+    "shipment": 1,
+    "sku_master": 5,
+    "material_lot": 7,
+    "depot_master": 9,
+    "freight_quote": 1
+  },
+  "case_facts": [
+    "five flavor shares",
+    "nine depots",
+    "GT 55% / MT 25% / QC 20%",
+    "9.6 crore summer bottles",
+    "fourfold QC order case stress",
+    "14-day opening passionfruit pulp cover and three-week road closure"
+  ],
+  "synthetic_choices": [
+    "specific depot identities and local weights",
+    "SKU recipe kilograms per bottle",
+    "fourfold QC orders on the final two sample days; the replay uses a 14-day spike",
+    "daily orders, fulfillment, and batch ages",
+    "road report and attention record dates",
+    "four-week model month and 112-day summer"
+  ],
+  "validation": "Every row passes engine.operations.validate before writing. Scenario outcomes are not measured savings."
+}

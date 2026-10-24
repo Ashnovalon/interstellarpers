@@ -1,0 +1,10 @@
+{
+  "name": "pulp-riot-control-tower",
+  "private": true,
+  "scripts": {
+    "test:ui": "node scripts/test_live_ui.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}

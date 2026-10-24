@@ -1,0 +1,2 @@
+bottles,date,depot,eta_depot,facility,id,production_on,sample,sku,status
+10000,2026-10-24,D1,2026-10-27,PLANT_1,demo-committed:dragon-passion:d1,2026-10-25,True,Dragon Passion,COMMITTED

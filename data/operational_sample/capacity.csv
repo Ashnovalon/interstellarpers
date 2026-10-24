@@ -1,0 +1,3 @@
+capacity_bottles,date,facility,id,sample,status
+446429,2026-10-24,PLANT_1,demo-capacity:PLANT_1:2026-10-24,True,AVAILABLE
+446429,2026-10-24,PLANT_2,demo-capacity:PLANT_2:2026-10-24,True,AVAILABLE

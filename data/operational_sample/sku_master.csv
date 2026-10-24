@@ -1,0 +1,6 @@
+date,id,mix,recipe,sample
+2026-10-24,Mango Peach Basil,0.38,"{""mango"":0.08,""peach"":0.02,""basil"":0.001}",True
+2026-10-24,Guava Chilli,0.2,"{""guava"":0.1,""chilli"":0.001}",True
+2026-10-24,Passionfruit Punch,0.16,"{""passionfruit"":0.1}",True
+2026-10-24,Dragonfruit Bloom,0.14,"{""dragonfruit"":0.1}",True
+2026-10-24,Dragon Passion,0.12,"{""passionfruit"":0.06,""dragonfruit"":0.04}",True

@@ -1,0 +1,2 @@
+bottles,date,eta,expires,from_depot,id,sample,sku,status,to_depot
+5000,2026-10-24,2026-10-26,2027-01-02,PLANT,demo-in-transit:guava:d1,True,Guava Chilli,IN_TRANSIT,D1

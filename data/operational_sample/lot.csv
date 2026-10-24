@@ -1,0 +1,46 @@
+date,depot,expires,hold,id,manufactured,quantity,sample,sku
+2026-10-24,D1,2027-01-15,False,demo-lot:Mango Peach Basil:D1,2026-10-17,889200,True,Mango Peach Basil
+2026-10-24,D2,2027-01-15,False,demo-lot:Mango Peach Basil:D2,2026-10-17,615600,True,Mango Peach Basil
+2026-10-24,D3,2027-01-15,False,demo-lot:Mango Peach Basil:D3,2026-10-17,1094400,True,Mango Peach Basil
+2026-10-24,D4,2027-01-15,False,demo-lot:Mango Peach Basil:D4,2026-10-17,820800,True,Mango Peach Basil
+2026-10-24,D5,2027-01-15,False,demo-lot:Mango Peach Basil:D5,2026-10-17,547200,True,Mango Peach Basil
+2026-10-24,D6,2027-01-15,False,demo-lot:Mango Peach Basil:D6,2026-10-17,1094400,True,Mango Peach Basil
+2026-10-24,D7,2027-01-15,False,demo-lot:Mango Peach Basil:D7,2026-10-17,820800,True,Mango Peach Basil
+2026-10-24,D8,2026-12-26,False,demo-lot:Mango Peach Basil:D8,2026-09-27,547200,True,Mango Peach Basil
+2026-10-24,D9,2026-12-26,False,demo-lot:Mango Peach Basil:D9,2026-09-27,410400,True,Mango Peach Basil
+2026-10-24,D1,2027-01-15,False,demo-lot:Guava Chilli:D1,2026-10-17,468000,True,Guava Chilli
+2026-10-24,D2,2027-01-15,False,demo-lot:Guava Chilli:D2,2026-10-17,324000,True,Guava Chilli
+2026-10-24,D3,2027-01-15,False,demo-lot:Guava Chilli:D3,2026-10-17,576000,True,Guava Chilli
+2026-10-24,D4,2027-01-15,False,demo-lot:Guava Chilli:D4,2026-10-17,432000,True,Guava Chilli
+2026-10-24,D5,2027-01-15,False,demo-lot:Guava Chilli:D5,2026-10-17,288000,True,Guava Chilli
+2026-10-24,D6,2027-01-15,False,demo-lot:Guava Chilli:D6,2026-10-17,576000,True,Guava Chilli
+2026-10-24,D7,2027-01-15,False,demo-lot:Guava Chilli:D7,2026-10-17,432000,True,Guava Chilli
+2026-10-24,D8,2026-12-26,False,demo-lot:Guava Chilli:D8,2026-09-27,288000,True,Guava Chilli
+2026-10-24,D9,2026-12-26,False,demo-lot:Guava Chilli:D9,2026-09-27,216000,True,Guava Chilli
+2026-10-24,D1,2027-01-15,False,demo-lot:Passionfruit Punch:D1,2026-10-17,374400,True,Passionfruit Punch
+2026-10-24,D2,2027-01-15,False,demo-lot:Passionfruit Punch:D2,2026-10-17,259200,True,Passionfruit Punch
+2026-10-24,D3,2027-01-15,False,demo-lot:Passionfruit Punch:D3,2026-10-17,460800,True,Passionfruit Punch
+2026-10-24,D4,2027-01-15,False,demo-lot:Passionfruit Punch:D4,2026-10-17,345600,True,Passionfruit Punch
+2026-10-24,D5,2027-01-15,False,demo-lot:Passionfruit Punch:D5,2026-10-17,230400,True,Passionfruit Punch
+2026-10-24,D6,2027-01-15,False,demo-lot:Passionfruit Punch:D6,2026-10-17,460800,True,Passionfruit Punch
+2026-10-24,D7,2027-01-15,False,demo-lot:Passionfruit Punch:D7,2026-10-17,345600,True,Passionfruit Punch
+2026-10-24,D8,2027-01-15,False,demo-lot:Passionfruit Punch:D8,2026-10-17,230400,True,Passionfruit Punch
+2026-10-24,D9,2027-01-15,False,demo-lot:Passionfruit Punch:D9,2026-10-17,172800,True,Passionfruit Punch
+2026-10-24,D1,2027-01-15,False,demo-lot:Dragonfruit Bloom:D1,2026-10-17,327600,True,Dragonfruit Bloom
+2026-10-24,D2,2027-01-15,False,demo-lot:Dragonfruit Bloom:D2,2026-10-17,226800,True,Dragonfruit Bloom
+2026-10-24,D3,2027-01-15,False,demo-lot:Dragonfruit Bloom:D3,2026-10-17,403200,True,Dragonfruit Bloom
+2026-10-24,D4,2027-01-15,False,demo-lot:Dragonfruit Bloom:D4,2026-10-17,302400,True,Dragonfruit Bloom
+2026-10-24,D5,2027-01-15,False,demo-lot:Dragonfruit Bloom:D5,2026-10-17,201600,True,Dragonfruit Bloom
+2026-10-24,D6,2027-01-15,False,demo-lot:Dragonfruit Bloom:D6,2026-10-17,403200,True,Dragonfruit Bloom
+2026-10-24,D7,2027-01-15,False,demo-lot:Dragonfruit Bloom:D7,2026-10-17,302400,True,Dragonfruit Bloom
+2026-10-24,D8,2027-01-15,False,demo-lot:Dragonfruit Bloom:D8,2026-10-17,201600,True,Dragonfruit Bloom
+2026-10-24,D9,2027-01-15,False,demo-lot:Dragonfruit Bloom:D9,2026-10-17,151200,True,Dragonfruit Bloom
+2026-10-24,D1,2027-01-15,False,demo-lot:Dragon Passion:D1,2026-10-17,280800,True,Dragon Passion
+2026-10-24,D2,2027-01-15,False,demo-lot:Dragon Passion:D2,2026-10-17,194400,True,Dragon Passion
+2026-10-24,D3,2027-01-15,False,demo-lot:Dragon Passion:D3,2026-10-17,345600,True,Dragon Passion
+2026-10-24,D4,2027-01-15,False,demo-lot:Dragon Passion:D4,2026-10-17,259200,True,Dragon Passion
+2026-10-24,D5,2027-01-15,False,demo-lot:Dragon Passion:D5,2026-10-17,172800,True,Dragon Passion
+2026-10-24,D6,2027-01-15,False,demo-lot:Dragon Passion:D6,2026-10-17,345600,True,Dragon Passion
+2026-10-24,D7,2027-01-15,False,demo-lot:Dragon Passion:D7,2026-10-17,259200,True,Dragon Passion
+2026-10-24,D8,2027-01-15,False,demo-lot:Dragon Passion:D8,2026-10-17,172800,True,Dragon Passion
+2026-10-24,D9,2027-01-15,False,demo-lot:Dragon Passion:D9,2026-10-17,129600,True,Dragon Passion

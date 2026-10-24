@@ -1,0 +1,10 @@
+city,date,id,region,sample,share
+Delhi,2026-10-24,D1,North,True,0.13
+Jaipur,2026-10-24,D2,North,True,0.09
+Mumbai,2026-10-24,D3,West,True,0.16
+Pune,2026-10-24,D4,West,True,0.12
+Ahmedabad,2026-10-24,D5,West,True,0.08
+Bengaluru,2026-10-24,D6,South,True,0.16
+Chennai,2026-10-24,D7,South,True,0.12
+Kolkata,2026-10-24,D8,East,True,0.08
+Bhubaneswar,2026-10-24,D9,East,True,0.06

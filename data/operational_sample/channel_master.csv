@@ -1,0 +1,4 @@
+date,id,min_remaining_days,sample,share
+2026-10-24,GT,0,True,0.55
+2026-10-24,MT,60,True,0.25
+2026-10-24,QC,60,True,0.2

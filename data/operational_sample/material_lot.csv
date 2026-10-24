@@ -1,0 +1,8 @@
+date,expires,id,material,quantity_kg,sample
+2026-10-24,2027-03-23,demo-material:mango,mango,781714.0,True
+2026-10-24,2027-03-23,demo-material:peach,peach,195429.0,True
+2026-10-24,2027-03-23,demo-material:basil,basil,9771.0,True
+2026-10-24,2027-03-23,demo-material:guava,guava,514286.0,True
+2026-10-24,2027-03-23,demo-material:chilli,chilli,5143.0,True
+2026-10-24,2027-03-23,demo-material:passionfruit,passionfruit,278400.0,True
+2026-10-24,2027-03-23,demo-material:dragonfruit,dragonfruit,676800.0,True

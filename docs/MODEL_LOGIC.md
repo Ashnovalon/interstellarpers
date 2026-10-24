@@ -1,4 +1,6 @@
-# Pulp Riot — Demand × Inventory Control Tower
+# Pulp Riot — Demand × Inventory Control Tower (legacy model notes)
+
+The current operational application is documented in [PRODUCTION_SYSTEM.md](PRODUCTION_SYSTEM.md) and run with `py -3 server.py --demo`. This document describes the original offline model. Its references to a deck, workbook, and builder scripts are historical plans; those artifacts are not present in this repository.
 
 ## Files
 

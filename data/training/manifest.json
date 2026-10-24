@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "rows": 40500,
+  "series": 135,
+  "data_start": "2025-12-15",
+  "data_end": "2026-10-10",
+  "sha256": "7c7dde400ed3ca0988ceb74612ab68437202d05e3794ab60890397eccd370757",
+  "model_version": "7c7dde400ed3",
+  "seed": 42,
+  "purpose": "Reproducible model training history. Live event batches are stored separately in live_events and exported from the UI.",
+  "quality_limits": "Generated daily patterns do not establish real-company accuracy; live stress tests use independent scenarios."
+}

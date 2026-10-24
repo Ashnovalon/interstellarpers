@@ -1,0 +1,14 @@
+name: Prototype checks
+on:
+  push:
+  pull_request:
+jobs:
+  python-model:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run model self-test
+        run: python engine/pulp_riot_model.py --test

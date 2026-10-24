@@ -1,0 +1,7 @@
+module,trigger,flavor,from,to,bottles,cost_rupees,transport_days,approval,reason
+Inventory / Distribution,<14d receiver; >14d donor,Dragon Passion,D2 Jaipur,D1 Delhi,21000,31500,2–4,PENDING,Bridge geography gap; validate recipient shelf-life at arrival
+Inventory / Distribution,<14d receiver; >14d donor,Dragon Passion,D5 Ahmedabad,D1 Delhi,19000,28500,2–4,PENDING,Bridge geography gap; validate recipient shelf-life at arrival
+Inventory / Distribution,<14d receiver; >14d donor,Dragon Passion,D7 Chennai,D1 Delhi,16000,24000,2–4,PENDING,Bridge geography gap; validate recipient shelf-life at arrival
+Inventory / Distribution,<14d receiver; >14d donor,Dragon Passion,D7 Chennai,D3 Mumbai,12000,18000,2–4,PENDING,Bridge geography gap; validate recipient shelf-life at arrival
+Inventory / Distribution,<14d receiver; >14d donor,Dragon Passion,D8 Kolkata,D3 Mumbai,19000,28500,2–4,PENDING,Bridge geography gap; validate recipient shelf-life at arrival
+Inventory / Distribution,<14d receiver; >14d donor,Dragon Passion,D9 Bhubaneswar,D3 Mumbai,14000,21000,2–4,PENDING,Bridge geography gap; validate recipient shelf-life at arrival

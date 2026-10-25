@@ -75,7 +75,7 @@ OTHER_SPATIAL_FACTOR=(1-1.30*FAST_SHARE-.65*SLOW_SHARE)/(1-FAST_SHARE-SLOW_SHARE
 DEFAULT_INPUTS = {"trend": 1.0, "conversion": .75, "target_sku": "Dragon Passion",
     "region": "ALL", "road_closed": False, "closure_days": 21,
     "traffic_delay_days": 0.0, "plant_availability": 1.0,
-    "import_delay_days": 0.0, "heatwave": 1.0, "competitor_pressure": 0.0,
+    "delayed_material": "dragonfruit", "import_delay_days": 0.0, "heatwave": 1.0, "competitor_pressure": 0.0,
     "feed_outage": False, "quality_result": "PASS"}
 PRESETS = {
     "viral": {"label": "Influencer goes viral", "changes": {"trend": 5.0, "conversion": .75}},
@@ -83,7 +83,7 @@ PRESETS = {
     "closure": {"label": "Sole supplier road closes", "changes": {"road_closed": True, "closure_days": 21}},
     "outage": {"label": "Plant loses 35% capacity", "changes": {"plant_availability": .65}},
     "traffic": {"label": "Transfer traffic adds 2 days", "changes": {"traffic_delay_days": 2.0}},
-    "imports": {"label": "Imported dragonfruit delayed", "changes": {"import_delay_days": 14.0}},
+    "imports": {"label": "Supplier receipt delayed", "changes": {"delayed_material": "dragonfruit", "import_delay_days": 14.0}},
     "heatwave": {"label": "Heatwave lifts demand", "changes": {"heatwave": 1.25}},
     "feed": {"label": "Order and warehouse feeds stop", "changes": {"feed_outage": True}},
     "competitor": {"label": "Competitor takes 25% of blend demand", "changes": {"competitor_pressure": .25}},
@@ -149,6 +149,24 @@ def generate_inputs(state, at_day=None):
 def raw_daily():
     return {m:sum(baseline_daily(s,d,c)*SKUS[s]["recipe"].get(m,0)
                   for s in SKUS for d in DEPOTS for c in CHANNELS) for m in MATERIALS}
+
+
+def operating_snapshot(state):
+    """Small, user-facing set of values captured on both sides of a disruption."""
+    world=state["world"]
+    physical=[lot for lots in world["stock"].values() for lot in lots if lot["qty"]>0]
+    return {"generated_demand_per_day":round(sum(rates_at(state).values())),
+        "forecast_per_day":round(sum(state["forecast_rates"].values())),
+        "usable_raw_kg":{m:round(world["raw"][m]) for m in MATERIALS},
+        "held_pulp_kg":round(world["held_raw"]),
+        "plant_capacity_per_day":round(PLANT_CAPACITY*world["capacity_factor"]),
+        "traffic_delay_days":state["inputs"]["traffic_delay_days"],
+        "supplier_delay_days":state["inputs"]["import_delay_days"],
+        "delayed_material":state["inputs"].get("delayed_material","dragonfruit"),
+        "road_closed":state["inputs"]["road_closed"],
+        "unfulfilled_rate":world["last_unfulfilled"]/max(state.get("last_dt",state["days_per_tick"]),.001),
+        "on_hand_bottles":round(sum(lot["qty"] for lot in physical)),
+        "expired_bottles":round(world["metrics"]["expired"])}
 
 
 def new_world():
@@ -248,10 +266,12 @@ def advance_world(world, day, dt, rates, inputs, forecast_rates=None):
     if math.floor(end)>math.floor(day):
         daily=raw_daily()
         for m,kg in daily.items():
+            delayed=inputs.get("delayed_material","dragonfruit")==m
+            supplier_delay=inputs["import_delay_days"] if delayed else 0
             if m=="dragonfruit":
-                portions=((.6,3,"ROAD"),(.4,42+inputs["import_delay_days"],"SEA"))
+                portions=((.6,3,"ROAD"),(.4,42+supplier_delay,"SEA"))
             else:
-                portions=((1,3,"ROAD"),)
+                portions=((1,3+supplier_delay,"ROAD"),)
             for share,lead,mode in portions:
                 world["raw_receipts"].append({"id":f"routine:{math.floor(end)}:{m}:{mode}","material":m,
                     "kg":kg*share,"eta":end+lead,"mode":mode,"status":"IN_TRANSIT"})
@@ -268,7 +288,7 @@ def advance_world(world, day, dt, rates, inputs, forecast_rates=None):
             for channel in ("MT","QC","GT"):
                 k=key(sku,depot,channel)
                 quantity=max(0,round(rates[k]*dt))
-                done,_=take(world,key(sku,depot),quantity,end,60 if channel!="GT" else 0)
+                done,_=take(world,key(sku,depot),quantity,end,60 if channel!="GT" else 7)
                 orders[k]=quantity;served[k]=done
     m=world["metrics"]
     m["requested"]+=sum(orders.values());m["fulfilled"]+=sum(served.values())
@@ -357,6 +377,8 @@ class LiveEngine:
         self.state.setdefault("markers",[])
         self.state.setdefault("outcome_tracks",[])
         self.state.setdefault("forecast_mode","blend")
+        for name,value in DEFAULT_INPUTS.items():
+            self.state["inputs"].setdefault(name,value)
         self.comparison_cache={}
         self.state["generator_version"]="v2-correlated"
         for offer in self.state["offers"].values():
@@ -554,6 +576,8 @@ class LiveEngine:
             raise ValueError("Unknown target flavor")
         if "region" in body and body["region"] not in {"ALL","North","South","East","West"}:
             raise ValueError("Unknown region")
+        if "delayed_material" in body and body["delayed_material"] not in MATERIALS:
+            raise ValueError("Unknown delayed ingredient")
         if "quality_result" in body and body["quality_result"] not in {"PASS","FAIL"}:
             raise ValueError("Lab outcome must be PASS or FAIL")
         return dict(body)
@@ -620,9 +644,10 @@ class LiveEngine:
             timing=self._validate_lifecycle(lifecycle)
             self._manual_override()
             before=dict(self.state["inputs"])
+            before_operating=operating_snapshot(self.state)
             self._apply_inputs(changes)
             self._schedule_lifecycle(before,changes,timing,"Custom scenario")
-            self._input_change("INPUT","Scenario assumptions applied",before)
+            self._input_change("INPUT","Scenario assumptions applied",before,before_operating)
             self._refresh_offers()
             self._persist("INPUT","Scenario assumptions updated",{"changes":changes,"lifecycle":timing})
             if step_if_paused and not self.state["running"]:
@@ -656,6 +681,7 @@ class LiveEngine:
     def _inject(self, name):
         s=self.state
         before=dict(s["inputs"])
+        before_operating=operating_snapshot(s)
         self._apply_inputs(PRESETS[name]["changes"])
         if name=="outage":
             for world in (s["world"],s["baseline"]):
@@ -672,14 +698,16 @@ class LiveEngine:
                     qty=world["raw"]["passionfruit"]*.3
                     world["raw"]["passionfruit"]-=qty;world["held_raw"]+=qty
         self._event("DISRUPTION",PRESETS[name]["label"])
-        self._input_change("DISRUPTION",PRESETS[name]["label"],before)
+        self._input_change("DISRUPTION",PRESETS[name]["label"],before,before_operating)
 
-    def _input_change(self, kind, message, before):
+    def _input_change(self, kind, message, before, before_operating=None):
         s=self.state
         s["last_input_change"]={"kind":kind,"message":message,"day":s["day"],"tick":s["tick"],
             "changes":[{"field":k,"before":before[k],"after":v} for k,v in s["inputs"].items() if before[k]!=v],
             "applied_inputs":dict(s["inputs"]),"held_pulp_kg":round(s["world"]["held_raw"]),
-            "effective_capacity":s["world"]["capacity_factor"]}
+            "effective_capacity":s["world"]["capacity_factor"],
+            "operating_before":before_operating or operating_snapshot(s),
+            "operating_after":operating_snapshot(s)}
 
     def _manual_override(self):
         s=self.state
@@ -734,14 +762,18 @@ class LiveEngine:
         if reset_attention and any(k in changes and changes[k]!=old[k] for k in ("trend","target_sku","region","conversion")):
             s["trend_changed_day"]=s["day"]
         delay=max(0,changes.get("traffic_delay_days",old["traffic_delay_days"])-old["traffic_delay_days"])
-        imports=max(0,changes.get("import_delay_days",old["import_delay_days"])-old["import_delay_days"])
+        selected=changes.get("delayed_material",old.get("delayed_material","dragonfruit"))
+        material_changed=selected!=old.get("delayed_material","dragonfruit")
+        imports=(changes.get("import_delay_days",old["import_delay_days"])
+            if material_changed else max(0,changes.get("import_delay_days",old["import_delay_days"])-old["import_delay_days"]))
         if delay or imports:
             for world in (s["world"],s["baseline"]):
                 for shipment in world["shipments"]:
                     if shipment["status"]=="IN_TRANSIT":
                         shipment["eta"]+=delay
                 for receipt in world["raw_receipts"]:
-                    if receipt["material"]=="dragonfruit" and receipt["mode"]=="SEA" and receipt["status"]=="IN_TRANSIT":
+                    eligible_lane=(selected=="dragonfruit" and receipt["mode"]=="SEA") or (selected!="dragonfruit" and receipt["mode"]=="ROAD")
+                    if receipt["material"]==selected and eligible_lane and receipt["status"]=="IN_TRANSIT":
                         receipt["eta"]+=imports
         if "plant_availability" in changes:
             for world in (s["world"],s["baseline"]):
@@ -825,6 +857,7 @@ class LiveEngine:
         self._sync_commands()
         self._refresh_offers()
         s["tape"].append({"day":s["day"],"tick":s["tick"],"forecast":sum(s["forecast_rates"].values()),
+            "generated_demand_per_day":sum(s["world"]["last_orders"].values())/dt,
             "actual":sum(s["world"]["last_orders"].values())/dt if fresh else None,
             "fulfilled":sum(s["world"]["last_fulfilled"].values())/dt if fresh else None,
             "contribution":contribution(s["world"]),"baseline":contribution(s["baseline"]),
@@ -833,6 +866,9 @@ class LiveEngine:
             "unfulfilled_rate":s["world"]["last_unfulfilled"]/dt,
             "stock_cover":sum(stock_total(s["world"],p,s["day"]) for p in s["world"]["stock"])/max(1,sum(s["forecast_rates"].values())),
             "capacity":PLANT_CAPACITY*s["world"]["capacity_factor"],
+            "inputs":dict(s["inputs"]),"raw_kg":dict(s["world"]["raw"]),
+            "held_pulp_kg":round(s["world"]["held_raw"]),"writeoffs":round(s["world"]["metrics"]["expired"]),
+            "service_pct":100*s["world"]["metrics"]["fulfilled"]/max(s["world"]["metrics"]["requested"],1),
             "sku":{sku:{"forecast":sum(v for k,v in s["forecast_rates"].items() if k.startswith(sku+"|")),
                 "actual":sum(v for k,v in s["world"]["last_orders"].items() if k.startswith(sku+"|"))/dt if fresh else None}
                 for sku in SKUS}})
@@ -1060,8 +1096,9 @@ class LiveEngine:
         domestic=raw_daily()["dragonfruit"]*.6
         depletion=world["raw"]["dragonfruit"]/max(dragon_required-domestic,1)
         sea=[r["eta"] for r in world["raw_receipts"] if r["material"]=="dragonfruit" and r["mode"]=="SEA" and r["status"]=="IN_TRANSIT"]
-        next_sea=max(0,min(sea)-now) if sea else 42+inputs["import_delay_days"]
-        if inputs["import_delay_days"]>0 and depletion<next_sea+5:
+        dragon_delay=inputs["import_delay_days"] if inputs.get("delayed_material","dragonfruit")=="dragonfruit" else 0
+        next_sea=max(0,min(sea)-now) if sea else 42+dragon_delay
+        if dragon_delay>0 and depletion<next_sea+5:
             pending=sum(r["kg"] for r in world["raw_receipts"] if r["material"]=="dragonfruit" and r["mode"]=="AIR" and r["status"]=="IN_TRANSIT")
             qty=int(min(max(0,(dragon_required-domestic)*min(14,next_sea-depletion+5)-pending),30000,cash/100)//1000*1000)
             if qty>=1000:
@@ -1094,6 +1131,8 @@ class LiveEngine:
                     {"cash":0,"quantity":world["held_raw"]},deadline=2,role="Quality Manager",checks=["Confirm the passing test relates to this held batch"])
         for ident,existing in s["offers"].items():
             if existing["status"]=="PENDING" and ident not in active:
+                if not existing.get("trigger_changed"):
+                    self._event("OFFER_WITHDRAWN",existing["title"]+": current conditions no longer support this recommendation",{"action_id":ident})
                 if s["tick"]<existing.get("review_until_tick",0):
                     existing["trigger_changed"]=True
                 else:
@@ -1417,13 +1456,36 @@ class LiveEngine:
                 "inbound":round(sum(r["kg"] for r in w["raw_receipts"] if r["material"]==material and r["status"]=="IN_TRANSIT"
                     and not (material=="passionfruit" and r["mode"]=="ROAD" and s["inputs"]["road_closed"])))} for material in MATERIALS]
             timestamp=datetime.combine(date.fromisoformat(s["start_date"]),datetime.min.time())+timedelta(days=s["day"])
-            pending=[copy.deepcopy(x) for x in s["offers"].values() if x["status"]=="PENDING"]
+            # Superseded recommendations remain internally auditable during the
+            # review grace period, but are not actionable and should not block
+            # the Decision Desk with a disabled card.
+            pending=[copy.deepcopy(x) for x in s["offers"].values()
+                if x["status"]=="PENDING" and not x.get("trigger_changed",False)]
             for action in pending:
                 action["deadline"]=self._effective_deadline(s,action)
                 action["remaining_days"]=round(max(0,action["deadline"]-s["day"]),3)
                 action["wall_seconds"]=round(action["remaining_days"]/s["days_per_tick"],1)
                 action["operational_remaining"]=round(action.get("operational_deadline",action["deadline"])-s["day"],2)
-                action["available"]=not action.get("trigger_changed",False)
+                action["available"]=True
+            lots=[lot for group in w["stock"].values() for lot in group if lot["qty"]>0]
+            expiry={"fresh_60_plus":round(sum(lot["qty"] for lot in lots if lot["expires"]>=s["day"]+60)),
+                "gt_only_7_to_59":round(sum(lot["qty"] for lot in lots if s["day"]+7<=lot["expires"]<s["day"]+60)),
+                "under_7_days":round(sum(lot["qty"] for lot in lots if s["day"]<=lot["expires"]<s["day"]+7)),
+                "expires_within_30":round(sum(lot["qty"] for lot in lots if s["day"]<=lot["expires"]<s["day"]+30)),
+                "expired_written_off":round(m["expired"]),"finished_goods_life_days":90,
+                "mt_qc_min_remaining_days":60,"gt_min_remaining_days":7}
+            delayed=s["inputs"].get("delayed_material","dragonfruit")
+            supply_lanes=[]
+            for material in MATERIALS:
+                if material=="dragonfruit":
+                    supply_lanes.extend([{"material":material,"source":"Domestic supplier (60%)","mode":"ROAD","normal_lead":3,"applied_delay":0,"status":"OPEN"},
+                        {"material":material,"source":"Imported supplier (40%)","mode":"SEA","normal_lead":42,
+                         "applied_delay":s["inputs"]["import_delay_days"] if delayed==material else 0,"status":"DELAYED" if delayed==material and s["inputs"]["import_delay_days"] else "OPEN"}])
+                else:
+                    blocked=material=="passionfruit" and s["inputs"]["road_closed"]
+                    supply_lanes.append({"material":material,"source":"Passionfruit cooperative" if material=="passionfruit" else "Contracted supplier",
+                        "mode":"ROAD","normal_lead":3,"applied_delay":s["inputs"]["import_delay_days"] if delayed==material else 0,
+                        "status":"BLOCKED" if blocked else "DELAYED" if delayed==material and s["inputs"]["import_delay_days"] else "OPEN"})
             transit=sum(x["quantity"] for x in w["shipments"] if x["status"]=="IN_TRANSIT")
             physical=sum(l["qty"] for lots in w["stock"].values() for l in lots)
             invariant=m["initial_bottles"]+m["produced"]-m["fulfilled"]-m["expired"]-physical-transit
@@ -1449,6 +1511,7 @@ class LiveEngine:
                     "rollout_reserved":s["rollout_reserved"],"held_pulp_kg":round(w["held_raw"]),
                     "bottle_conservation_error":invariant,"produced":m["produced"],"in_transit":transit},
                 "market":market,"forecast_curves":curves,"positions":positions,"materials":materials,
+                "expiry":expiry,"supply_lanes":supply_lanes,
                 "actions":sorted(pending,key=lambda a:a["deadline"]),"decisions":copy.deepcopy(s["decisions"][-50:]),
                 "events":copy.deepcopy(s["events"][-50:]),"tape":copy.deepcopy(s["tape"]),
                 "shipments":[{k:v for k,v in x.items() if k!="lots"} for x in w["shipments"] if x["status"]=="IN_TRANSIT"][-30:],

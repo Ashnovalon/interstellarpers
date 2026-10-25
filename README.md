@@ -1,5 +1,18 @@
 # Pulp Riot Live Operations Control Tower
 
+Disruption visibility: **Disruption studio** now captures operating values before
+and immediately after a change and plots the selected measure as subsequent ticks
+arrive. Quarantine shows held/usable passionfruit and links to the next lab or QA
+decision. Select any ingredient for a supplier delay; the configured-lanes table
+explains the affected route. Increasing a delay shifts booked arrivals; reducing
+it restores normal lead times for new bookings, without reversing existing ETAs.
+The imported dragonfruit preset remains a shortcut to its 40% sea lane.
+**Stock & network** shows finished-goods freshness buckets and expired write-offs.
+GT fulfillment and rescue transfers both require seven days remaining; MT/QC
+requires 60. Raw stock remains aggregated under the six-month-life assumption.
+The Decision Desk only shows currently supported offers; superseded offers are
+recorded as `OFFER_WITHDRAWN` events rather than disabled recommendation cards.
+
 Decision evidence update: comparisons now share live timing and use action-specific
 horizons (32 days for co-packer review), approvals record projected/realized
 outcomes, and Model & evidence includes a paired forecast benchmark. Disruption

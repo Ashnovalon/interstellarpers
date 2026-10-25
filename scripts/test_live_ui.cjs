@@ -26,14 +26,14 @@ w.fetch=async(path,options={})=>{
     {id:'wait',label:'Wait',contribution:100,contribution_vs_wait:0,service_pct:95,unfulfilled:10,writeoffs:0},
     {id:'full',label:'Approve full',contribution:200,contribution_vs_wait:100,service_pct:99,unfulfilled:2,writeoffs:0},
     {id:'half',label:'Approve half',contribution:150,contribution_vs_wait:50,service_pct:97,unfulfilled:5,writeoffs:0},
-    {id:'delay',label:'Wait 2 days then act',contribution:125,contribution_vs_wait:25,service_pct:96,unfulfilled:7,writeoffs:0}]})};
+    {id:'delay',label:'Wait 2 days then act',contribution:125,contribution_vs_wait:25,service_pct:96,unfulfilled:7,writeoffs:0,issue:'The decision window expires before this delayed approval'}]})};
   if(path==='/api/live/decide'){
     mockState.running=mockState.review?.was_running||false;mockState.review=null;mockState.revision++;
   }
   return {ok:true,status:200,json:async()=>structuredClone(mockState)};
 };
 Object.defineProperty(w.HTMLCanvasElement.prototype,'getBoundingClientRect',{value:()=>({width:700,height:260,left:0,top:0})});
-const ctx={scale(){},clearRect(){},beginPath(){},moveTo(){},lineTo(){},stroke(){},fillText(){},setLineDash(){},arc(){},fill(){}};
+const ctx={scale(){},clearRect(){},beginPath(){},moveTo(...v){assert.ok(v.every(Number.isFinite))},lineTo(...v){assert.ok(v.every(Number.isFinite))},stroke(){},fillText(){},setLineDash(){},arc(){},fill(){}};
 w.HTMLCanvasElement.prototype.getContext=()=>ctx;
 w.HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','')};
 w.HTMLDialogElement.prototype.close=function(){this.removeAttribute('open')};
@@ -59,7 +59,23 @@ function push(state){mockState=structuredClone(state);streamController.enqueue(e
   const trend=d.querySelector('[name="trend"]');trend.value='2.3';trend.dispatchEvent(new w.Event('input',{bubbles:true}));
   const next=structuredClone(fixture);next.revision++;next.inputs.trend=5.5;push(next);await wait();
   assert.equal(trend.value,'2.3','Stream must not overwrite an unfinished scenario edit');
-  click('[data-page="decisions"]');click('#decision-cards [data-review]');await wait();
+  next.last_input_change={message:'Heatwave lifts demand',day:next.day-.25,tick:next.tick-1,changes:[{field:'heatwave',before:1,after:1.25}],applied_inputs:{...next.inputs,heatwave:1.25},operating_before:{generated_demand_per_day:100,forecast_per_day:105,unfulfilled_rate:0,expired_bottles:0},operating_after:{generated_demand_per_day:125,forecast_per_day:105,unfulfilled_rate:0,expired_bottles:0}};
+  next.revision++;push(next);await wait();
+  const options=[...d.getElementById('impact-metric').options];
+  assert.equal(options.length,3,'Demand disruption should show three useful outcome measures');
+  assert.equal(new Set(options.map(x=>x.textContent)).size,options.length,'No duplicate measures');
+  assert.match(d.getElementById('impact-legend').textContent,/Observed demand/);
+  const option=options[0];next.revision++;push(next);await wait();
+  assert.equal(d.getElementById('impact-metric').options[0],option,'Stream must preserve the open dropdown');
+  d.getElementById('impact-chart').dispatchEvent(new w.MouseEvent('mousemove',{clientX:300}));
+  d.getElementById('impact-chart').dispatchEvent(new w.MouseEvent('mouseleave'));
+  click('[data-page="decisions"]');
+  const bottomButton=[...d.querySelectorAll('#decision-cards [data-review]')].at(-1);
+  bottomButton.focus();bottomButton.dispatchEvent(new w.MouseEvent('pointerdown',{bubbles:true}));
+  next.revision++;push(next);await wait();
+  assert.equal(d.querySelector(`#decision-cards [data-review="${bottomButton.dataset.review}"]`),bottomButton,'Bottom decision button must survive a snapshot between pointerdown and click');
+  assert.equal(d.activeElement,bottomButton,'Keyboard focus must survive snapshots');
+  bottomButton.click();await wait();
   assert.ok(d.getElementById('review-dialog').open);
   assert.equal(d.querySelectorAll('.branch-card').length,4);
   assert.match(d.getElementById('comparison-title').textContent,/30-day/);
@@ -67,6 +83,8 @@ function push(state){mockState=structuredClone(state);streamController.enqueue(e
   assert.match(d.querySelector('.branch-card').textContent,/30-day contribution/);
   assert.ok(calls.find(x=>x.path==='/api/live/review/open'));
   assert.equal(d.getElementById('toggle-run').textContent,'Paused for review');
+  click('[data-branch="delay"]');assert.match(d.getElementById('review-choice-summary').textContent,/unavailable.*expires/);
+  assert.ok(d.getElementById('approve-action').disabled,'Unavailable delayed branch cannot execute');
   d.getElementById('decision-form').dispatchEvent(new w.Event('submit',{cancelable:true,bubbles:true}));await wait();
   assert.equal(d.getElementById('review-error').hidden,false);
   click('[data-branch="half"]');assert.equal(d.querySelector('[data-branch="half"]').getAttribute('aria-pressed'),'true');

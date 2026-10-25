@@ -112,6 +112,46 @@ class LiveTests(unittest.TestCase):
         self.assertTrue(all(row["factors"]["weather"]==1.25 for row in state["latest_inputs"]["rows"]))
         self.assertEqual(state["last_input_change"]["changes"][0]["field"],"heatwave")
 
+    def test_superseded_offer_is_not_shown_as_an_unavailable_decision(self):
+        old=self.offer("BUFFER")
+        self.engine.inject("closure")
+        self.assertTrue(self.engine.state["offers"][old["id"]]["trigger_changed"])
+        self.assertNotIn(old["id"],{x["id"] for x in self.engine.snapshot()["actions"]})
+
+    def test_quality_disruption_captures_before_after_and_live_trace_values(self):
+        state=self.engine.inject("quality",step_if_paused=True)
+        change=state["last_input_change"]
+        self.assertGreater(change["operating_after"]["held_pulp_kg"],change["operating_before"]["held_pulp_kg"])
+        self.assertLess(change["operating_after"]["usable_raw_kg"]["passionfruit"],change["operating_before"]["usable_raw_kg"]["passionfruit"])
+        self.assertEqual(state["tape"][-1]["held_pulp_kg"],state["metrics"]["held_pulp_kg"])
+        self.assertIn("raw_kg",state["tape"][-1])
+
+    def test_supplier_delay_can_target_any_ingredient_lane(self):
+        self.engine.inputs({"delayed_material":"mango","import_delay_days":5})
+        state=self.step(4)
+        receipt=next(x for x in state["receipts"] if x["material"]=="mango")
+        self.assertEqual(receipt["eta"],9)
+        lane=next(x for x in state["supply_lanes"] if x["material"]=="mango")
+        self.assertEqual(lane["applied_delay"],5)
+        self.assertEqual(lane["status"],"DELAYED")
+
+    def test_snapshot_exposes_finished_goods_expiry_policy_and_buckets(self):
+        expiry=self.engine.snapshot()["expiry"]
+        self.assertEqual(expiry["finished_goods_life_days"],90)
+        self.assertEqual(expiry["mt_qc_min_remaining_days"],60)
+        self.assertEqual(expiry["gt_min_remaining_days"],7)
+        self.assertGreater(expiry["fresh_60_plus"]+expiry["gt_only_7_to_59"]+expiry["under_7_days"],0)
+
+    def test_gt_demand_cannot_consume_stock_with_under_seven_days_left(self):
+        for lot in self.engine.state["world"]["stock"]["Dragon Passion|D1"]:
+            lot["expires"]=6
+        self.step()
+        self.assertEqual(self.engine.state["world"]["last_fulfilled"]["Dragon Passion|D1|GT"],0)
+
+    def test_mango_delay_does_not_trigger_dragonfruit_air_recommendation(self):
+        state=self.engine.inputs({"delayed_material":"mango","import_delay_days":56})
+        self.assertNotIn("AIR_DRAGON",{x["kind"] for x in state["actions"]})
+
     def test_manual_inputs_cancel_future_guided_overrides(self):
         self.engine.control({"action":"reset","scenario":"guided","seed":77})
         self.engine.inject("rumor")

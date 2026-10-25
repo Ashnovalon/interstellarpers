@@ -9,9 +9,22 @@ let state=null,page='board',inputDirty=false,selectedAction=null,selectedBranch=
 let accessToken=sessionStorage.getItem('control-tower-token')||'';
 let lastMarket={};
 let frozenBatch=null,lastInputTableKey='';
+let impactChangeKey='',impactHoverIndex=null;
 let benchmarkEvidence=null,benchmarkLoading=false;
 const dirtyInputs=new Set();
 let reviewOpening=false,decisionSubmitting=false;
+// Additional observability is inserted here so older saved HTML shells can use
+// the richer live state without a migration step.
+const networkGrid=document.querySelector('#page-network .network-grid');
+networkGrid.insertAdjacentHTML('afterend','<article class="panel expiry-panel"><div class="section-head"><div><h2>Product expiry & channel eligibility</h2><span class="subtle">Actual on-hand finished-goods batches, not a forecast</span></div><span id="expiry-policy" class="tag purple"></span></div><div id="expiry-metrics" class="expiry-grid"></div><p class="footnote">Expired bottles are removed before demand is served and charged at the assumed unit-cost write-off. Raw ingredients are aggregated in this simulator; their six-month life is assumed to remain valid through the 112-day season.</p></article>');
+el('preset-grid').insertAdjacentHTML('afterend','<article class="panel disruption-impact"><div class="section-head"><div><h2>Last disruption: before, after, and live effect</h2><span class="subtle">The orange marker is when the change was applied; the line advances with each business tick.</span></div><select id="impact-metric" aria-label="Disruption impact measure"></select></div><div id="impact-summary" class="impact-summary"></div><div class="impact-chart-wrap"><canvas id="impact-chart" role="img" aria-label="Disruption before and after time series"></canvas><div id="impact-empty" class="chart-empty">Apply a disruption to start its impact trace.</div></div><div id="impact-latest" class="chart-foot"></div><div class="impact-links"><button type="button" class="text-button" data-open="datafeed">Inspect affected input batch →</button><button type="button" class="text-button" data-open="network">Inspect stock and expiry →</button></div></article>');
+el('impact-summary').after(Object.assign(document.createElement('div'),{id:'impact-quality-actions'}));
+el('impact-chart').closest('.impact-chart-wrap').insertAdjacentHTML('beforebegin','<div id="impact-legend" class="chart-legend"></div>');
+el('impact-latest').insertAdjacentHTML('afterend','<p id="impact-explanation" class="footnote"></p>');
+const supplierDelay=el('inputs-form').elements.namedItem('import_delay_days');
+supplierDelay.closest('label').firstChild.textContent='Additional supplier receipt delay (days)';
+supplierDelay.closest('label').insertAdjacentHTML('beforebegin','<label>Delayed supplier ingredient<select name="delayed_material" id="input-delay-material"></select></label>');
+el('inputs-form').insertAdjacentHTML('afterend','<article class="panel supply-lane-panel"><div class="section-head"><h2>Configured supply lanes</h2><span class="subtle">What each supply and transport control actually changes</span></div><div id="supply-lanes"></div></article>');
 const freezeButton=document.createElement('button');freezeButton.id='incoming-freeze';freezeButton.className='button';freezeButton.textContent='Freeze table';
 el('input-batch-label').after(freezeButton);
 freezeButton.addEventListener('click',()=>{frozenBatch=frozenBatch?null:structuredClone(state?.latest_inputs||null);lastInputTableKey='';freezeButton.textContent=frozenBatch?'Resume live table':'Freeze table';renderIncoming()});
@@ -68,6 +81,7 @@ function render(next){
     const flavors=state.market.map(x=>x.sku);
     setSelect('chart-flavor',['ALL',...flavors]);setSelect('network-flavor',flavors);
     setSelect('forecast-flavor',flavors);setSelect('input-sku',flavors);setSelect('incoming-sku',['ALL',...flavors]);
+    setSelect('input-delay-material',state.materials.map(x=>x.material));
     renderPresets();inputDirty=false;
   }
   el('business-clock').textContent=state.business_time;
@@ -113,11 +127,34 @@ function actionCard(action,compact=false){
   const urgent=action.remaining_days<=1;
   const progress=Math.max(0,Math.min(100,100*action.remaining_days/Math.max(action.deadline-action.created,.25)));
   const cash=action.params.cash;
-  return `<article class="action-card"><div class="action-top"><h3>${escapeHtml(action.title)}</h3><span class="deadline ${urgent?'urgent':''}">${action.wall_seconds.toFixed(0)}s ${state.running?'left':'on clock'}</span></div>${compact?'':`<p>${escapeHtml(action.why)}</p>`}<progress class="deadline-progress" value="${progress.toFixed(1)}" max="100" aria-label="Decision time remaining"></progress><div class="action-bottom"><span>${cash?money(cash)+' commitment':'Allocation / evidence decision'}${compact?'':`<br>${escapeHtml(action.role)} · lead ${action.lead}d`}</span><button class="button ${urgent?'primary':''}" data-review="${escapeHtml(action.id)}" ${action.available===false?'disabled title="Trigger changed; waiting for a current feasible offer"':''}>${action.available===false?'Awaiting current evidence':'Compare & decide'}</button></div></article>`;
+  return `<article class="action-card"><div class="action-top"><h3>${escapeHtml(action.title)}</h3><span class="deadline ${urgent?'urgent':''}">${action.wall_seconds.toFixed(0)}s ${state.running?'left':'on clock'}</span></div>${compact?'':`<p>${escapeHtml(action.why)}</p>`}<progress class="deadline-progress" value="${progress.toFixed(1)}" max="100" aria-label="Decision time remaining"></progress><div class="action-bottom"><span>${cash?money(cash)+' commitment':'Allocation / evidence decision'}${compact?'':`<br>${escapeHtml(action.role)} · lead ${action.lead}d`}</span><button class="button ${urgent?'primary':''}" data-review="${escapeHtml(action.id)}">Compare & decide</button></div></article>`;
 }
 function renderUrgent(){
-  el('urgent-actions').innerHTML=state.actions.length?state.actions.slice(0,3).map(x=>actionCard(x,true)).join(''):
-    '<div class="empty-state">No pending intervention.<br>Start the clock or introduce a disruption.</div>';
+  renderActionCards(el('urgent-actions'),state.actions.slice(0,3),true);
+}
+function renderActionCards(container,actions,compact=false){
+  const existing=new Map([...container.querySelectorAll('.action-card')].map(card=>[card.querySelector('[data-review]').dataset.review,card]));
+  const active=new Set(actions.map(x=>x.id));
+  for(const [id,card] of existing)if(!active.has(id))card.remove();
+  container.querySelector('.empty-state')?.remove();
+  actions.forEach((action,index)=>{
+    const template=document.createElement('template');template.innerHTML=actionCard(action,compact);
+    const fresh=template.content.firstElementChild;
+    let card=existing.get(action.id);
+    if(!card)card=fresh;
+    else{
+      // Keep the button in place across snapshots, including pointerdown/up
+      // and keyboard focus. Updating a countdown must not cancel a click.
+      for(const selector of ['.action-top h3','.deadline','p','.action-bottom>span']){
+        const target=card.querySelector(selector),source=fresh.querySelector(selector);
+        if(target&&source){target.innerHTML=source.innerHTML;target.className=source.className}
+      }
+      card.querySelector('progress').value=fresh.querySelector('progress').value;
+      card.querySelector('[data-review]').className=fresh.querySelector('[data-review]').className;
+    }
+    if(container.children[index]!==card)container.insertBefore(card,container.children[index]||null);
+  });
+  if(!actions.length)container.innerHTML='<div class="empty-state">No current recommendations in this group.</div>';
 }
 function renderSources(){
   el('source-health').innerHTML=`<span>Orders / stock: <b class="${state.inputs.feed_outage?'negative':'positive'}">${state.inputs.feed_outage?'STOPPED':'OBSERVED'}</b></span><span>Road: <b class="${state.inputs.road_closed?'negative':'positive'}">${state.inputs.road_closed?'CLOSED':'OPEN'}</b></span><span>Managed plant capacity: <b>${Math.round((state.effective_availability??state.inputs.plant_availability)*100)}%</b></span><span>Evidence age: <b>${state.feed_age_days.toFixed(2)}d</b></span>`;
@@ -131,6 +168,7 @@ function renderPage(){
   else if(page==='ledger')renderLedger();
   else if(page==='model')renderModel();
   else if(page==='datafeed')renderIncoming();
+  else if(page==='inputs')renderDisruptionImpact();
 }
 
 function renderInputConfirmation(){
@@ -158,14 +196,14 @@ function renderIncoming(){
     lastInputTableKey=tableKey;
     el('incoming-rows').innerHTML=rows.map(x=>`<tr><td><details><summary>${escapeHtml(x.sku)} · ${escapeHtml(x.city)}</summary><div class="factor-detail">${Object.entries(x.factors).map(([k,v])=>`${escapeHtml(k)} × ${v.toFixed(5)}`).join('<br>')}<br><b>${x.baseline_daily.toFixed(3)} × ${Object.values(x.factors).reduce((a,b)=>a*b,1).toFixed(6)} × ${batch.dt} days = ${x.requested} requested (rounded)</b><br>${escapeHtml(x.id)}</div></details></td><td>${escapeHtml(x.channel)}</td><td>${number(x.baseline_daily)}</td><td>${number(x.daily_rate)}</td><td>${number(x.requested)}</td><td>${number(x.fulfilled)}</td><td>${x.factors.attention.toFixed(2)}</td><td>${x.factors.weather.toFixed(2)}</td><td>${(x.factors.network_regime*x.factors.regional_regime*x.factors.product_regime).toFixed(3)}</td><td>${badge(x.observed?'OBSERVED':'NOT OBSERVED',x.observed?'green':'amber')}</td></tr>`).join('')||'<tr><td colspan="10">No matching incoming records. Start or Step the simulation to generate a batch.</td></tr>';
   }
-  el('incoming-supply').innerHTML=`<p class="subtle">Road ${state.inputs.road_closed?'closed':'open'} · managed plant capacity ${Math.round(state.effective_availability*100)}% · traffic +${state.inputs.traffic_delay_days}d · imported pulp +${state.inputs.import_delay_days}d · held pulp ${number(state.metrics.held_pulp_kg)} kg.</p><div class="table-scroll"><table><thead><tr><th>Ingredient</th><th>Usable kg</th><th>Forecast kg/day</th><th>Cover</th><th>Unblocked inbound kg</th></tr></thead><tbody>${state.materials.map(x=>`<tr><td>${escapeHtml(x.material)}</td><td>${number(x.kg)}</td><td>${number(x.daily)}</td><td>${x.cover.toFixed(2)}d</td><td>${number(x.inbound)}</td></tr>`).join('')}</tbody></table></div>`;
+  el('incoming-supply').innerHTML=`<p class="subtle">Passionfruit road ${state.inputs.road_closed?'closed':'open'} · managed plant capacity ${Math.round(state.effective_availability*100)}% · finished-goods traffic +${state.inputs.traffic_delay_days}d · ${escapeHtml(state.inputs.delayed_material)} supplier +${state.inputs.import_delay_days}d · held passionfruit ${number(state.metrics.held_pulp_kg)} kg.</p><div class="table-scroll"><table><thead><tr><th>Ingredient</th><th>Usable kg</th><th>Forecast kg/day</th><th>Cover</th><th>Unblocked inbound kg</th></tr></thead><tbody>${state.materials.map(x=>`<tr><td>${escapeHtml(x.material)}</td><td>${number(x.kg)}</td><td>${number(x.daily)}</td><td>${x.cover.toFixed(2)}d</td><td>${number(x.inbound)}</td></tr>`).join('')}</tbody></table></div>`;
 }
 function renderDecisions(){
   const selected=el('action-filter').value;
   const groups={TRANSFER:['TRANSFER','GT_TRANSFER'],SUPPLY:['AIR','AIR_DRAGON','BUFFER'],CAPACITY:['REPLAN','COPACKER','REPAIR_PLANT'],QUALITY:['LAB_TEST','RELEASE_QA','RESTORE_FEED']};
   const actions=state.actions.filter(x=>selected==='ALL'||groups[selected]?.includes(x.kind));
   el('decision-count').textContent=`${actions.length} of ${state.actions.length} pending`;
-  el('decision-cards').innerHTML=actions.map(x=>actionCard(x)).join('')||'<div class="empty-state">No current recommendations in this group.</div>';
+  renderActionCards(el('decision-cards'),actions);
 }
 function renderNetwork(){
   const closed=state.inputs.road_closed;
@@ -175,6 +213,61 @@ function renderNetwork(){
   el('material-list').innerHTML=state.materials.map(x=>`<div class="material-row"><div class="material-top"><b>${escapeHtml(x.material)}</b><span class="${x.cover<14?'negative':''}">${x.cover.toFixed(1)} days</span></div><progress class="material-progress ${x.cover<14?'low':''}" max="42" value="${Math.min(42,x.cover)}" aria-label="${escapeHtml(x.material)} cover"></progress><small>${number(x.kg)} kg available · ${number(x.daily)} kg/day · ${number(x.inbound)} kg unblocked inbound</small></div>`).join('');
   const query=el('network-search').value.trim().toLowerCase();
   el('network-rows').innerHTML=state.positions.filter(x=>`${x.sku} ${x.city}`.toLowerCase().includes(query)).sort((a,b)=>a.cover-b.cover).map(x=>`<tr><td>${escapeHtml(x.city)}<br><span class="subtle">${escapeHtml(x.sku)}</span></td><td>${number(x.quantity)}</td><td>${number(x.daily)}</td><td>${x.cover.toFixed(1)} d</td><td>${number(x.eligible)}</td><td>${number(x.inbound)}</td><td>${badge(x.status,x.status==='CRITICAL'?'red':x.status==='STALE'?'amber':'green')}</td></tr>`).join('')||'<tr><td colspan="7">No matching positions</td></tr>';
+  const expiry=state.expiry||{fresh_60_plus:0,gt_only_7_to_59:0,under_7_days:0,expires_within_30:0,expired_written_off:state.metrics.writeoffs||0,finished_goods_life_days:90,mt_qc_min_remaining_days:60,gt_min_remaining_days:7};
+  el('expiry-policy').textContent=`${expiry.finished_goods_life_days}-day life · MT/QC ${expiry.mt_qc_min_remaining_days}d · GT ${expiry.gt_min_remaining_days}d`;
+  el('expiry-metrics').innerHTML=metric('60+ days remaining',number(expiry.fresh_60_plus),'Eligible for MT, QC and GT','positive')+
+    metric('7–59 days remaining',number(expiry.gt_only_7_to_59),'GT only; buyer acceptance required',expiry.gt_only_7_to_59?'neutral':'')+
+    metric('Under 7 days',number(expiry.under_7_days),'Not eligible to serve any channel',expiry.under_7_days?'negative':'')+
+    metric('Expires within 30 days',number(expiry.expires_within_30),'Subset of current on-hand stock',expiry.expires_within_30?'neutral':'')+
+    metric('Expired & written off',number(expiry.expired_written_off),'Cumulative in this run',expiry.expired_written_off?'negative':'');
+}
+
+const impactMetrics={
+  demand:{label:'Demand vs forecast',unit:'bottles/day',before:x=>x.generated_demand_per_day,tape:x=>x.actual},
+  held_pulp_kg:{label:'Quarantined passionfruit',unit:'kg',before:x=>x.held_pulp_kg,tape:x=>x.held_pulp_kg},
+  capacity:{label:'Installed capacity / day',unit:'bottles/day',before:x=>x.plant_capacity_per_day,tape:x=>x.capacity},
+  unfulfilled_rate:{label:'Unfulfilled demand / day',unit:'bottles/day',before:x=>x.unfulfilled_rate,tape:x=>x.unfulfilled_rate},
+  writeoffs:{label:'Expired bottles',unit:'bottles',before:x=>x.expired_bottles,tape:x=>x.writeoffs}
+};
+function renderDisruptionImpact(){
+  const change=state.last_input_change,select=el('impact-metric');
+  el('impact-empty').hidden=Boolean(change);
+  select.disabled=!change;
+  if(!change){el('impact-summary').innerHTML='<p class="subtle">Choose an event above. Its changed inputs and live response will appear here.</p>';select.innerHTML='';el('impact-quality-actions').replaceChildren();el('impact-latest').textContent='';el('impact-legend').textContent='';el('impact-explanation').textContent='';renderSupplyLanes();return}
+  const changed=new Set(change.changes.map(x=>x.field));
+  const quarantine=change.message===state.presets.quality;
+  const supply=quarantine||changed.has('road_closed')||changed.has('import_delay_days')||changed.has('delayed_material');
+  const material=quarantine||changed.has('road_closed')?'passionfruit':change.applied_inputs.delayed_material||'dragonfruit';
+  const rawKey='raw_'+material;
+  impactMetrics[rawKey]={label:'Usable '+material,unit:'kg',before:x=>x.usable_raw_kg?.[material],tape:x=>x.raw_kg?.[material]};
+  const choices=[...(quarantine?['held_pulp_kg']:[]),...(supply?[rawKey]:[]),...(changed.has('plant_availability')?['capacity']:[]),'demand','unfulfilled_rate','writeoffs'];
+  const key=state.run_id+'|'+change.tick+'|'+change.day+'|'+change.message+'|'+JSON.stringify(change.changes);
+  if(key!==impactChangeKey){
+    impactChangeKey=key;impactHoverIndex=null;
+    select.innerHTML=choices.map(id=>`<option value="${id}">${escapeHtml(impactMetrics[id].label)}</option>`).join('');
+    const labels={trend:'Attention',conversion:'Order conversion',heatwave:'Heatwave factor',plant_availability:'Plant availability',traffic_delay_days:'Traffic delay (days)',import_delay_days:'Supplier delay (days)',delayed_material:'Ingredient',road_closed:'Passionfruit road closed',feed_outage:'Feed stopped',competitor_pressure:'Competitor share',region:'Region',target_sku:'Flavor',closure_days:'Closure days',quality_result:'Lab outcome'};
+    const fields=change.changes.map(x=>`<div><small>${escapeHtml(labels[x.field]||x.field.replaceAll('_',' '))}</small><strong>${escapeHtml(x.before)} → ${escapeHtml(x.after)}</strong></div>`).join('');
+    const before=change.operating_before||{},after=change.operating_after||{};
+    const operational=quarantine?`Usable passionfruit ${number(before.usable_raw_kg?.passionfruit)} → ${number(after.usable_raw_kg?.passionfruit)} kg · held ${number(before.held_pulp_kg)} → ${number(after.held_pulp_kg)} kg`:'';
+    el('impact-summary').innerHTML=`<div class="impact-callout"><b>${escapeHtml(change.message)}</b><span>Applied at D${change.day.toFixed(2)}, tick ${change.tick}</span></div>${fields}${operational?`<div><small>Physical stock change</small><strong>${escapeHtml(operational)}</strong></div>`:''}`;
+  }
+  const qualityActions=state.actions.filter(x=>['LAB_TEST','RELEASE_QA'].includes(x.kind));
+  if(qualityActions.length)renderActionCards(el('impact-quality-actions'),qualityActions,true);else el('impact-quality-actions').replaceChildren();
+  el('impact-explanation').textContent=(state.running?'Updating each business tick. ':'Clock paused. Use Step or Start live to advance. ')+(quarantine?'Held pulp cannot enter production. Existing finished stock can cushion service. Approve a lab test, advance one business day, then review QA release.':supply||changed.has('traffic_delay_days')?'Stock and shortages reflect delayed arrivals as the clock advances.':'Demand and forecast use the same observed series as Live Board.');
+  renderSupplyLanes();
+}
+function impactPoints(){
+  const change=state.last_input_change,id=el('impact-metric').value,config=impactMetrics[id];
+  if(!change||!config)return [];
+  const fromTape=x=>({day:x.day,value:config.tape(x),forecast:id==='demand'?x.forecast:null});
+  const before=change.operating_before,after=change.operating_after;
+  const snapshot=x=>({day:change.day,value:x?config.before(x):null,forecast:id==='demand'?x?.forecast_per_day:null});
+  return [...state.tape.filter(x=>x.tick<=change.tick&&x.day<change.day).slice(-30).map(fromTape),
+    snapshot(before),snapshot(after),...state.tape.filter(x=>x.tick>change.tick).map(fromTape)]
+    .filter(x=>Number.isFinite(x.value)||Number.isFinite(x.forecast));
+}
+function renderSupplyLanes(){
+  el('supply-lanes').innerHTML=`<div class="table-scroll"><table><thead><tr><th>Ingredient</th><th>Source / share</th><th>Mode</th><th>Normal lead</th><th>Applied delay</th><th>Status</th></tr></thead><tbody>${(state.supply_lanes||[]).map(x=>`<tr><td>${escapeHtml(x.material)}</td><td>${escapeHtml(x.source)}</td><td>${escapeHtml(x.mode)}</td><td>${x.normal_lead}d</td><td>${x.applied_delay?`+${x.applied_delay}d`:'—'}</td><td>${badge(x.status,x.status==='BLOCKED'?'red':x.status==='DELAYED'?'amber':'green')}</td></tr>`).join('')}</tbody></table></div><p class="footnote">Road closure is specific to the documented passionfruit cooperative corridor. Finished-goods traffic delay affects plant-to-depot and transfer arrivals. Supplier receipt delay applies to the ingredient selected above.</p>`;
 }
 function renderPresets(){
   el('preset-grid').innerHTML=Object.entries(state.presets).map(([id,label],i)=>`<button type="button" class="preset-button" data-preset="${escapeHtml(id)}"><small>EVENT ${String(i+1).padStart(2,'0')}</small>${escapeHtml(label)}</button>`).join('');
@@ -253,17 +346,19 @@ function canvasPlot(canvas,series,xValues,{currency=false,hover=null,markers=[]}
   const values=series.flatMap(s=>s.values).filter(v=>v!=null&&Number.isFinite(v));
   if(!values.length)return;
   let lo=Math.min(...values),hi=Math.max(...values);const span=Math.max(hi-lo,Math.abs(hi)*.04,1);lo=Math.max(currency?-Infinity:0,lo-span*.15);hi+=span*.15;
-  const xDay=day=>padding.left+(day-xValues[0])*pw/Math.max(xValues.at(-1)-xValues[0],.001);
+  const firstDay=xValues[0],lastDay=Math.max(xValues.at(-1),firstDay+(state?.days_per_tick||.25));
+  const xDay=day=>padding.left+(day-firstDay)*pw/(lastDay-firstDay);
   const x=i=>xDay(xValues[i]),y=v=>padding.top+ph-(v-lo)*ph/Math.max(hi-lo,1);
   ctx.font='9px Segoe UI';ctx.textAlign='right';ctx.lineWidth=1;
   for(let i=0;i<4;i++){
     const v=lo+(hi-lo)*i/3,yy=y(v);ctx.strokeStyle='#223047';ctx.beginPath();ctx.moveTo(padding.left,yy);ctx.lineTo(w-padding.right,yy);ctx.stroke();
     ctx.fillStyle='#7185a4';ctx.fillText(currency?money(v):v>=1e5?(v/1e5).toFixed(1)+'L':number(v),padding.left-8,yy+3);
   }
-  ctx.textAlign='center';[0,Math.floor((xValues.length-1)/2),xValues.length-1].forEach(i=>{ctx.fillText(`D${Number(xValues[i]||0).toFixed(1)}`,x(i),h-7)});
+  ctx.textAlign='center';[firstDay,(firstDay+lastDay)/2,lastDay].forEach(day=>{ctx.fillText(`D${Number(day||0).toFixed(2)}`,xDay(day),h-7)});
   for(const item of series){
     ctx.strokeStyle=item.color;ctx.lineWidth=1.9;ctx.setLineDash(item.dashed?[4,4]:[]);ctx.beginPath();let open=false;
     item.values.forEach((v,i)=>{if(v==null){open=false;return}if(!open){ctx.moveTo(x(i),y(v));open=true}else ctx.lineTo(x(i),y(v))});ctx.stroke();ctx.setLineDash([]);
+    if(item.values.filter(v=>v!=null).length===1){const index=item.values.findIndex(v=>v!=null);ctx.fillStyle=item.color;ctx.beginPath();ctx.arc(x(index),y(item.values[index]),3,0,Math.PI*2);ctx.fill()}
   }
   for(const event of markers){
     if(event.day<xValues[0]||event.day>xValues.at(-1))continue;
@@ -302,6 +397,18 @@ function drawCharts(){
     el('chart-events').innerHTML=markers.slice(-8).map(x=>`<span title="${escapeHtml(x.message)}">${x.kind==='DECISION'?'●':'◆'} D${x.day.toFixed(2)} ${escapeHtml(x.message)}</span>`).join('');
     const index=hoverIndex??tape.length-1;
     if(index>=0&&tape[index])el('chart-latest').textContent=mode==='contribution'?`D${tape[index].day.toFixed(2)} · Managed ${money(tape[index].contribution)} · No intervention ${money(tape[index].baseline)}`:mode==='demand'?`D${tape[index].day.toFixed(2)} · Forecast ${number(chosen[index].forecast)} · Observed ${rate(chosen[index].actual)} bottles/day`:`D${tape[index].day.toFixed(2)} · ${currency?money(tape[index][mode]||0):mode==='stock_cover'?Number(tape[index][mode]||0).toFixed(2)+' days':number(tape[index][mode]||0)} · ${(24*(tape[index].dt||state.days_per_tick)).toFixed(1)} business hours`;
+  }else if(page==='inputs'){
+    const change=state.last_input_change;
+    if(change){
+      const id=el('impact-metric').value,config=impactMetrics[id],points=impactPoints();
+      const series=[{values:points.map(x=>x.value),color:'#48d5a1'}];
+      if(id==='demand')series.push({values:points.map(x=>x.forecast),color:'#a293ff'});
+      canvasPlot(el('impact-chart'),series,points.map(x=>x.day),{hover:impactHoverIndex,markers:(state.markers||[]).concat([{day:change.day,kind:'DISRUPTION'}])});
+      el('impact-legend').innerHTML=id==='demand'?'<span class="actual">Observed demand</span><span class="model">Forecast</span>':`<span class="actual">${escapeHtml(config.label)} (${escapeHtml(config.unit)})</span>`;
+      const last=points[impactHoverIndex??points.length-1];
+      const format=v=>v==null?'—':Number(v).toLocaleString('en-IN',{maximumFractionDigits:2});
+      el('impact-latest').innerHTML=last?`<span>D${last.day.toFixed(2)} · ${escapeHtml(config.label)}: <b>${format(last.value)} ${escapeHtml(config.unit)}</b>${id==='demand'?` · Forecast ${format(last.forecast)}`:''}</span><span>${Math.max(0,state.tick-change.tick)} affected tick(s)</span>`:'Waiting for the next observed business tick.';
+    }
   }else if(page==='model'){
     const curve=state.forecast_curves[el('forecast-flavor').value]||[];
     canvasPlot(el('horizon-chart'),[{values:curve,color:'#a293ff'}],curve.map((_,i)=>Math.floor(state.day)+i));
@@ -316,6 +423,14 @@ el('live-chart').addEventListener('mousemove',event=>{
 el('live-chart').addEventListener('mouseleave',()=>{hoverIndex=null;drawCharts()});
 window.addEventListener('resize',drawCharts);
 ['chart-flavor','chart-mode'].forEach(id=>el(id).addEventListener('change',drawCharts));
+el('impact-metric').addEventListener('change',()=>{impactHoverIndex=null;drawCharts()});
+el('impact-chart').addEventListener('mousemove',event=>{
+  const points=impactPoints();if(!points.length)return;
+  const rect=el('impact-chart').getBoundingClientRect(),fraction=Math.max(0,Math.min(1,(event.clientX-rect.left-55)/(rect.width-70)));
+  const day=points[0].day+fraction*Math.max(points.at(-1).day-points[0].day,state.days_per_tick);
+  impactHoverIndex=points.reduce((best,x,i)=>Math.abs(x.day-day)<Math.abs(points[best].day-day)?i:best,0);drawCharts();
+});
+el('impact-chart').addEventListener('mouseleave',()=>{impactHoverIndex=null;drawCharts()});
 el('forecast-flavor').addEventListener('change',()=>{renderModel();drawCharts()});
 el('network-flavor').addEventListener('change',renderNetwork);el('network-search').addEventListener('input',renderNetwork);
 el('action-filter').addEventListener('change',renderDecisions);
@@ -336,7 +451,7 @@ document.addEventListener('click',event=>{
 });
 function readLifecycle(){return {duration_days:Number(el('shock-duration').value),recovery_days:Number(el('shock-recovery').value)}}
 el('restore-inputs').addEventListener('click',async()=>{
-  try{await command('/api/live/inputs',{changes:{trend:1,conversion:.75,target_sku:'Dragon Passion',region:'North',road_closed:false,closure_days:21,traffic_delay_days:0,plant_availability:1,import_delay_days:0,heatwave:1,competitor_pressure:0,feed_outage:false,quality_result:'PASS'},step_if_paused:true});inputDirty=false;dirtyInputs.clear();syncInputs();el('inputs-status').textContent='Normal conditions restored. Existing shipments keep booked arrival dates; held pulp still needs QA.'}catch{}
+  try{await command('/api/live/inputs',{changes:{trend:1,conversion:.75,target_sku:'Dragon Passion',region:'North',road_closed:false,closure_days:21,traffic_delay_days:0,plant_availability:1,delayed_material:'dragonfruit',import_delay_days:0,heatwave:1,competitor_pressure:0,feed_outage:false,quality_result:'PASS'},step_if_paused:true});inputDirty=false;dirtyInputs.clear();syncInputs();el('inputs-status').textContent='Normal conditions restored. Existing shipments keep booked arrival dates; held pulp still needs QA.'}catch{}
 });
 el('inputs-form').addEventListener('input',event=>{if(event.target.name)dirtyInputs.add(event.target.name);inputDirty=true;updateInputLabels();el('inputs-status').textContent='Unsaved scenario changes. Press Apply to introduce them.'});
 el('inputs-form').addEventListener('submit',async event=>{
@@ -350,7 +465,8 @@ el('decision-fraction').closest('label').hidden=true;
 const choiceSummary=document.createElement('div');choiceSummary.id='review-choice-summary';choiceSummary.className='notice';el('branch-results').after(choiceSummary);
 async function openReview(id,recoveredToken=null){
   if(reviewOpening||selectedAction)return;
-  const action=state.actions.find(x=>x.id===id);if(!action)return;
+  const action=state.actions.find(x=>x.id===id);
+  if(!action){showError('That recommendation was withdrawn after conditions changed. Choose one of the current recommendations.');return}
   reviewOpening=true;
   selectedAction=structuredClone(action);
   selectedBranch=null;branchComparison=null;
@@ -364,6 +480,7 @@ async function openReview(id,recoveredToken=null){
   }catch(error){selectedAction=null;showError(error.message);return}finally{reviewOpening=false}
   el('review-title').textContent=action.title;el('review-why').textContent=action.why;
   el('review-evidence').innerHTML=evidenceHtml(action.evidence);
+  el('review-evidence').closest('details').open=false;
   el('review-checks').innerHTML=`<ul>${action.checks.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>`;
   el('review-role').textContent=`Accountable role: ${action.role}`;
   el('decision-actor').value=localStorage.getItem('pulp-live-operator')||'';el('decision-reason').value='';el('decision-checks').checked=false;
@@ -381,13 +498,18 @@ async function openReview(id,recoveredToken=null){
     el('review-evidence').innerHTML=evidenceHtml(result.evidence||action.evidence);
     el('comparison-assumptions').textContent=(result.assumptions||[]).join(' ');
     const best=Math.max(...result.branches.filter(x=>!x.issue).map(x=>x.contribution));
-    el('branch-results').innerHTML=result.branches.map((x,i)=>`<button type="button" data-branch="${escapeHtml(x.id)}" class="branch-card ${x.contribution===best&&!x.issue?'best':''}" aria-pressed="false" ${x.issue?'disabled':''}><b class="branch-tone-${i}">${escapeHtml(x.label)}</b><strong class="${x.contribution_vs_wait>=0?'positive':'negative'}" title="${number(x.contribution_vs_wait)} rupees">${money(x.contribution_vs_wait)}</strong><span>contribution gain vs waiting</span><small>Action cash ${money(x.cash_commitment||0)}</small><small>${result.horizon_days??14}-day contribution ${money(x.contribution)}</small><small>Service ${x.service_pct.toFixed(2)}% · ${number(x.unfulfilled)} unfilled</small><small>${number(x.writeoffs)} expired bottles</small><small>${x.issue?escapeHtml(x.issue):'Click to select this path'}</small></button>`).join('');
+    el('branch-results').innerHTML=result.branches.map((x,i)=>`<button type="button" data-branch="${escapeHtml(x.id)}" class="branch-card ${x.issue?'unavailable':x.contribution===best?'best':''}" aria-pressed="false" aria-disabled="${Boolean(x.issue)}"><b class="branch-tone-${i}">${escapeHtml(x.label)}</b>${x.issue?`<span class="branch-status">Unavailable</span><p class="branch-issue">${escapeHtml(x.issue)}</p><small>Click for details; choose another feasible path.</small>`:`<strong class="${x.contribution_vs_wait>=0?'positive':'negative'}" title="${number(x.contribution_vs_wait)} rupees">${money(x.contribution_vs_wait)}</strong><span>contribution gain vs waiting</span><small>Action cash ${money(x.cash_commitment||0)}</small><small>${result.horizon_days??14}-day contribution ${money(x.contribution)}</small><small>Service ${x.service_pct.toFixed(2)}% · ${number(x.unfulfilled)} unfilled</small><small>${number(x.writeoffs)} expired bottles</small><small>Click to select this path</small>`}</button>`).join('');
     requestAnimationFrame(drawCharts);
   }catch(error){el('branch-results').textContent=error.message}
 }
 function chooseBranch(id){
   const branch=branchComparison?.branches.find(x=>x.id===id);
-  if(!branch||branch.issue)return;
+  if(!branch)return;
+  if(branch.issue){
+    el('review-choice-summary').textContent=`${branch.label} is unavailable: ${branch.issue}. ${selectedBranch?'Your previously selected feasible path remains selected.':'Select a feasible path to continue.'}`;
+    return;
+  }
+  el('review-error').hidden=true;
   selectedBranch=id;
   document.querySelectorAll('[data-branch]').forEach(x=>{x.classList.toggle('selected',x.dataset.branch===id);x.setAttribute('aria-pressed',String(x.dataset.branch===id))});
   el('decision-fraction').value=id==='half'?'0.5':'1';

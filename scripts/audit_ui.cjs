@@ -61,11 +61,14 @@ async function liveAudit(root){
   for(const [preset,field,value] of [['viral','trend',5],['rumor','conversion',0],['closure','road_closed',true],['outage','plant_availability',.65],['traffic','traffic_delay_days',2],['imports','import_delay_days',14],['heatwave','heatwave',1.25],['feed','feed_outage',true],['competitor','competitor_pressure',.25],['quality',null,null]]){
     await reset();click('[data-page="inputs"]');input('#shock-duration',0);input('#shock-recovery',0);
     const r=await post(`#preset-grid [data-preset="${preset}"]`,'/api/live/inject');assert.equal(r.status,200);
-    if(field)assert.equal(r.result.inputs[field],value);else assert.ok(r.result.metrics.held_pulp_kg>0);
+    if(field)assert.equal(r.result.inputs[field],value);else{assert.ok(r.result.metrics.held_pulp_kg>0);assert.match(d.getElementById('impact-summary').textContent,/Usable passionfruit/)}
     assert.equal(r.result.tick,1);
   }
   for(const preset of ['viral','closure','outage','feed']){await reset();click('[data-page="board"]');await post(`.quick-presets [data-preset="${preset}"]`,'/api/live/inject')}
   check('Live: all ten disruption presets and four board shortcuts reach the real engine');
+  click('[data-page="inputs"]');
+  for(const option of [...d.getElementById('impact-metric').options]){input('#impact-metric',option.value,'change');await sleep(20)}
+  assert.ok(d.getElementById('impact-latest').textContent.includes('affected tick'));
   await reset();click('[data-page="inputs"]');input('#shock-duration',1);input('#shock-recovery',1);
   await post('#preset-grid [data-preset="heatwave"]','/api/live/inject');
   input('[name="competitor_pressure"]',.2);input('#shock-duration',0);input('#shock-recovery',0);
@@ -73,15 +76,15 @@ async function liveAudit(root){
   assert.deepEqual(Object.keys(result.body.changes),['competitor_pressure']);
   assert.ok(result.result.lifecycles.some(x=>x.label.includes('Heatwave')&&x.status==='ACTIVE'));
   await step(6);let s=await api('/api/live/state');assert.equal(s.inputs.heatwave,1);
-  for(const [name,value] of [['target_sku','Guava Chilli'],['region','East'],['trend',2],['conversion',.5],['heatwave',1.1],['competitor_pressure',.1],['road_closed',true],['closure_days',3],['traffic_delay_days',1],['plant_availability',.8],['import_delay_days',5],['feed_outage',true],['quality_result','FAIL']])input(`[name="${name}"]`,value);
-  result=await post('#inputs-form button[type="submit"]','/api/live/inputs');assert.equal(Object.keys(result.body.changes).length,13);assert.equal(result.result.inputs.region,'East');
+  for(const [name,value] of [['target_sku','Guava Chilli'],['region','East'],['trend',2],['conversion',.5],['heatwave',1.1],['competitor_pressure',.1],['road_closed',true],['closure_days',3],['traffic_delay_days',1],['plant_availability',.8],['delayed_material','mango'],['import_delay_days',5],['feed_outage',true],['quality_result','FAIL']])input(`[name="${name}"]`,value);
+  result=await post('#inputs-form button[type="submit"]','/api/live/inputs');assert.equal(Object.keys(result.body.changes).length,14);assert.equal(result.result.inputs.region,'East');assert.match(d.getElementById('supply-lanes').textContent,/mango/);
   await post('#restore-inputs','/api/live/inputs');s=await api('/api/live/state');assert.equal(s.inputs.feed_outage,false);assert.equal(s.inputs.heatwave,1);
   input('#shock-duration',0);input('#shock-recovery',2);result=await post('#preset-grid [data-preset="heatwave"]','/api/live/inject');assert.equal(result.status,400);assert.ok(!d.getElementById('app-error').hidden);input('#shock-recovery',0);
   check('Live: every scenario field, timed recovery, independent schedules, reset and invalid-duration feedback');
   click('[data-page="datafeed"]');input('#incoming-channel','QC','change');input('#incoming-sku','Dragon Passion','change');input('#incoming-search','Delhi');assert.equal(d.querySelectorAll('#incoming-rows tr').length,1);
   click('#incoming-rows summary');assert.ok(d.querySelector('#incoming-rows details').open);
   click('#incoming-freeze');const frozen=d.getElementById('input-batch-label').textContent;await step();assert.equal(d.getElementById('input-batch-label').textContent,frozen);click('#incoming-freeze');assert.notEqual(d.getElementById('input-batch-label').textContent,frozen);
-  click('[data-page="network"]');input('#network-flavor','Guava Chilli','change');assert.equal(d.querySelectorAll('.depot-box').length,9);input('#network-search','Delhi');assert.equal(d.querySelectorAll('#network-rows tr').length,5);
+  click('[data-page="network"]');input('#network-flavor','Guava Chilli','change');assert.equal(d.querySelectorAll('.depot-box').length,9);assert.equal(d.querySelectorAll('#expiry-metrics .metric').length,5);input('#network-search','Delhi');assert.equal(d.querySelectorAll('#network-rows tr').length,5);
   click('[data-page="board"]');for(const option of d.getElementById('chart-mode').options){input('#chart-mode',option.value,'change');assert.ok(d.getElementById('chart-title').textContent)}
   input('#chart-mode','demand','change');input('#chart-flavor','Dragon Passion','change');d.getElementById('live-chart').dispatchEvent(new w.MouseEvent('mousemove',{clientX:300}));d.getElementById('live-chart').dispatchEvent(new w.MouseEvent('mouseleave'));w.dispatchEvent(new w.Event('resize'));
   click('[data-page="model"]');input('#forecast-flavor','Guava Chilli','change');assert.match(d.getElementById('horizon-summary').textContent,/Guava Chilli/);await until(()=>d.querySelectorAll('#forecast-benchmarks tbody tr').length===4,'benchmark render');
@@ -90,6 +93,7 @@ async function liveAudit(root){
     await reset();click('[data-page="decisions"]');
     for(const filter of ['TRANSFER','SUPPLY','CAPACITY','QUALITY','ALL'])input('#action-filter',filter,'change');
     s=await api('/api/live/state');const offer=s.actions.find(x=>x.kind==='BUFFER'&&x.available);assert.ok(offer);
+    assert.ok(!d.getElementById('decision-cards').textContent.includes('Awaiting current evidence'));
     await api('/api/live/control',{action:'start'});await until(()=>d.getElementById('toggle-run').textContent.includes('Pause'),'running');
     await post(`[data-review="${offer.id}"]`,'/api/live/review/open');
     await until(()=>d.querySelector('[data-branch="full"]'),'comparison');

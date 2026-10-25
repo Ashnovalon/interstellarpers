@@ -48,9 +48,9 @@ Decision evidence update: comparisons now share live timing and use action-speci
 horizons (32 days for co-packer review), approvals record projected/realized
 outcomes, and Model & evidence includes a paired forecast benchmark. Disruption
 Studio supports timed recovery and the board marks events. Adaptive production
-uses shared-resource allocation. See [Decision evidence and verification](docs/DECISION_EVIDENCE.md)
-for the current calculations, limits and reproduction commands; it supersedes
-the older fixed 14-day comparison descriptions below.
+uses shared-resource allocation. The [forecast model](#forecast-model) and
+[simulation calculations and limits](#simulation-calculations-and-limits)
+sections explain the calculations, evidence and reproduction commands.
 
 A working Python and browser decision system for the Pulp Riot case. The home page is now a **second-by-second operating simulation**: synthetic order batches arrive, model forecasts and stock update, disruptions change the business, and a named user's timed approvals reserve stock, commit cash and execute simulated interventions. Demand and Inventory are the two deep modules; Supply, Distribution and Transportation constrain their decisions.
 
@@ -138,7 +138,19 @@ py -3 scripts/generate_real_records_practice.py
 powershell -ExecutionPolicy Bypass -File scripts/start_real_records.ps1 -Practice
 ```
 
-Open **http://127.0.0.1:3020/operations/real** and confirm **Practice workspace** is visible. In **Import records**, use source `synthetic-practice-pack` and upload files **01–09** from [data/real_records_practice](data/real_records_practice/), in order, choosing the types in [START_HERE.md](data/real_records_practice/START_HERE.md). Preview each file and acknowledge its synthetic provenance.
+Open **http://127.0.0.1:3020/operations/real** and confirm **Practice workspace** is visible. In **Import records**, use source `synthetic-practice-pack` and upload files **01–09** from [data/real_records_practice](data/real_records_practice/) in the order below. Preview each file and acknowledge its synthetic provenance.
+
+| File | Record type |
+|---|---|
+| `01_channel_master.json` | `channel_master` |
+| `02_sku_master.json` | `sku_master` |
+| `03_depot_master.json` | `depot_master` |
+| `04_orders.json` | `order` |
+| `05_finished_batches.json` | `lot` |
+| `06_raw_material_batches.json` | `material_lot` |
+| `07_confirmed_inbound.json` | `inbound` |
+| `08_plant_capacity.json` | `capacity` |
+| `09_open_route.json` | `route` |
 
 The nine baseline files contain **52 rows**; optional files 10–13 add four examples. CSV alternatives are under `csv/`; choose JSON or CSV for each upload. With a fresh baseline and a seven-day horizon:
 
@@ -152,7 +164,13 @@ The nine baseline files contain **52 rows**; optional files 10–13 add four exa
 | South-to-north transfer | 70 bottles |
 | Total allocated / unmet | 600 / 100 bottles |
 
-The recipe uses 0.1 kg/bottle: 40 kg on hand plus ten inbound supports 500 new bottles. Closing the lane before approval reduces allocation to 530 and invalidates the old proposal. The walkthrough also covers reopening, invalid imports, idempotence, duplicate approvals, reconciliation and forecast outcomes. Follow its sequence before adding optional outcome rows, which change the baseline.
+The recipe uses 0.1 kg/bottle: 40 kg on hand plus ten inbound supports 500 new bottles. Wait for **System health** and **Stream current** before planning. The 42 consecutive order days also support the training and held-out evaluation workflow; constant practice demand does not establish real forecast accuracy.
+
+To check disruption handling, keep the first plan pending, then import `checks/route_closed.json` as `route`. After projection, a new seven-day plan should allocate 530 bottles without a transfer; approving the older plan should mark it **STALE**. Import `checks/route_open_again.json` as `route` and generate a new plan to restore the 600-bottle allocation.
+
+Approve the newest plan with a name and reason. It should become **REQUESTED**, with a dispatch request marked **AWAITING_ERP_ADAPTER** and `physical_dispatch: false`. A second approval must not reserve the same stock. To continue, record a reconciled outcome and reimport files 05–08 (plus optional production/shipment files if used) to verify current physical snapshots. Identical content reports **0 changed** while recording verification.
+
+Reimporting `04_orders.json` should leave 42 orders. Preview `checks/invalid_order_rejected.json` as `order` to check rejection of overfulfillment. For forecast monitoring, first open **Live board** to save a prediction, then import `checks/optional_next_day_outcome.json` as `order` and inspect observed outcomes. Do this last: the supplied next-day quantity of 120 changes subsequent demand estimates.
 
 Return to the real workspace or stop practice while retaining data:
 
@@ -197,7 +215,7 @@ Open **http://127.0.0.1:8765** and select **Start live**. Each wall-clock second
 5. **New run** creates a separate seeded season; previous runs remain archived. Restarts resume the latest saved state **paused**. The simulation never resets imported operational records.
 6. **Incoming data** exposes all 135 latest order records, their baseline, generator factors, interval quantities, fulfillment and whether the model actually observed them. Filter by flavor/channel/depot and use **Freeze table** to inspect a record without stopping the business. Every disruption gets an explicit before/after receipt. Applying one while paused produces one affected batch; manual changes switch guided mode to sandbox so later scripted events cannot override your controls.
 
-The board now offers separate cumulative and interval charts. Cumulative gross sales normally rise; interval sales/contribution and unfulfilled-demand rate expose worsening performance. A completed 112-day season cannot advance further—use **New run**. Detailed calculations and model limitations are in `docs/WORKING_AND_NUMBERS.md`.
+The board offers separate cumulative and interval charts. Cumulative gross sales normally rise; interval sales/contribution and unfulfilled-demand rate expose worsening performance. A completed 112-day season cannot advance further—use **New run**. See [simulation calculations and limits](#simulation-calculations-and-limits) for interpretation.
 
 The original operational import/forecast workbench is at **http://127.0.0.1:8765/operations**. Real imported records and the synthetic live run use separate tables; importing a company record does not silently alter a synthetic scenario.
 
@@ -218,7 +236,7 @@ npm.cmd run test:ui
 py -3 scripts/evaluate_live.py --days 28
 ```
 
-`smoke_live.py` advances the active synthetic run for three pushed ticks and restores its previous pause state. The test suite checks conservation, delayed arrivals, approval freshness, budget commitments, fixed plant capacity, 14-day co-packer notice, quality release, feed failure, source authentication and streaming. `evaluate_live.py` exercises ten independent scenario families with an explicitly scripted offline test planner; it is never an auto-approver in the live app. Full guide: `docs/LIVE_GUIDE.md`.
+`smoke_live.py` advances the active synthetic run for three pushed ticks and restores its previous pause state. The test suite checks conservation, delayed arrivals, approval freshness, budget commitments, fixed plant capacity, 14-day co-packer notice, quality release, feed failure, source authentication and streaming. `evaluate_live.py` exercises ten independent scenario families with an explicitly scripted offline test planner; it is never an auto-approver in the live app.
 
 Serving needs Python 3.11+ only. Node/jsdom are development test dependencies. A shared company deployment still needs verified identities/roles, TLS/gateway, managed storage and backups, monitoring and authorized execution adapters. The live mode is a persistent operational rehearsal; its public attention and traffic inputs are explicitly simulated.
 
@@ -296,7 +314,23 @@ The benchmark uses isolated in-memory engines, checks identical request-stream h
 
 Live comparisons share the same origin, interval timing and known disruptions. Their usual horizon is `max(14, action lead + 16)` days; co-packer comparisons currently use 32 days. Season end caps the window. Beyond the model's 14 trained horizons, the app holds the last trained horizon with decaying nowcast influence and labels the extrapolation.
 
-Approval saves evidence and starts a reference world immediately before the action. It receives the same subsequently realized requests and exogenous disruptions without further approvals. Later approvals affect managed results and are flagged, so realized differences cannot be attributed solely to the first action. See [decision evidence](docs/DECISION_EVIDENCE.md) for the evaluation policy and attribution limits.
+Approval saves evidence and starts a reference world immediately before the action. It retains previously approved work and receives the same subsequently realized requests and exogenous disruptions without further approvals. Outcomes stop at the original comparison horizon. Later approvals affect managed results and are flagged, so realized differences cannot be attributed solely to the first action. Historical approvals without saved projections do not receive invented retrospective evidence.
+
+### Simulation calculations and limits
+
+The synthetic baseline is `96,000,000 / 112 × flavor share × depot share × channel share` bottles per day. Each batch multiplies the generated rate by its business interval. Requested quantities, fulfillment, stock and model observations remain separately inspectable in **Incoming data**.
+
+The nowcast consumes observed requested quantities per interval, with smoothing weight `1 − exp(−interval_days / 0.65)`. The current blend uses 35% trained estimate and 65% nowcast; future nowcast influence decays over four days. These are declared calibration choices. Missing or partial days do not become completed zero-demand training days, and hidden future orders and attention-conversion settings are excluded from model features.
+
+Stock conservation is `opening bottles + production = fulfilled + expired + physical stock + in-transit stock`. Raw materials are balanced separately, including quality holds and disposal. Transfers preserve batch identity, manufacturing date and expiry; arrivals require their ETA and channel freshness eligibility. Raw stock is aggregated under a six-month-life assumption within the 112-day season.
+
+Modeled contribution is `fulfilled bottles × ₹19.20 − incremental costs − write-offs`, where ₹19.20 is the case price of ₹60 times the 32% contribution margin. For example, 56,000 extra fulfilled bottles moved at ₹1.50 each add ₹9.912 lakh before any other costs. Buffer working capital is committed separately. Service is `100 × fulfilled / requested`. Neither measure is audited profit or a forecast confidence score.
+
+Branch projections use the current forecast and known disruptions. Delayed actions reserve cash immediately and revalidate physical feasibility at execution. Timed disruptions support active and recovery durations; manual edits supersede recovery schedules for the edited fields. Quality quarantine still requires a lab test and a separate QA release. Restoring conditions does not undo historical losses or booked delays.
+
+Adaptive production uses deterministic weighted progressive filling with shared plant, ingredient and per-position constraints, flooring output to whole bottles. Transfer proposals share donor stock and cash within their portfolio. These rules do not establish a globally optimal commercial plan. Supplier/capacity offers remain alternatives until approved.
+
+The synthetic benchmark covers a declared policy, scenarios and seeds. Its 28-day window cannot establish long-term expiry behavior or company ROI. Discrete simulation intervals approximate within-day sequencing; changing tick speed changes generated request batches. Network stock-cover totals can hide depot shortages. Longer comparisons extrapolate beyond the 14 trained horizons, and projected demand is not a causal model of every scheduled recovery.
 
 ## Operating workflow
 
@@ -461,7 +495,9 @@ docker compose -p pulp-real-records-test -f real_records/compose.yaml -f real_re
 
 The runner refuses writes unless the API on **8020** reports test mode. It exercises CDC/projection, archival history, training/MLflow, Ray, OR-Tools and Temporal with fixtures confined to test volumes. Normal `down` retains volumes. For WSL Docker, prefix Docker commands with `wsl -d Ubuntu-24.04 -u root --` and translate file paths to `/mnt/c/...`.
 
-[real_records/VERIFICATION.md](real_records/VERIFICATION.md) records a previous verification session and its limits; those results do not replace rerunning checks after changes.
+Use current check results when assessing a submission or deployment. DOM tests verify rendering and interactions; visual layout needs a browser inspection. Kubernetes manifests require separate cluster deployment checks.
+
+For the isolated HTTP and DOM workflow audit, run `node scripts/audit_ui.cjs`. Set `PYTHON` to the Python executable if it is not available as `python`. The audit starts its own in-memory server and writes `output/ui_audit.json`; it does not use the company database. `py -3 scripts/verify_ps_alignment.py` runs additional read-only diagnostic probes and reports observations rather than acting as an acceptance suite.
 
 ### Kubernetes development manifests
 
@@ -499,9 +535,6 @@ For practice logs select project `pulp-real-records-practice` with both Compose 
 
 ## Main files
 
-See [the critical audit](docs/CRITICAL_AUDIT.md) for corrected logic defects,
-control coverage, verification commands and remaining simulation limitations.
-
 - `server.py` — local HTTP API, persistent store, authenticated event stream and web serving.
 - `engine/live.py` — server-clocked simulation, conservation, adaptive forecasts, timed decisions, execution and financial counterfactuals.
 - `web/live.*` — live board, disruption studio, decision branches, inventory, outcomes and model evidence.
@@ -511,9 +544,8 @@ control coverage, verification commands and remaining simulation limitations.
 - `engine/replay.py` — daily synthetic counterfactual using the same planner.
 - `web/operations.*` and `web/operations-v2.*` — browser workbench, forecast exploration and guided imports.
 - `tests/test_operations.py` — validation, eligibility, approval-version, connector, replay and HTTP checks.
-- `docs/PRODUCTION_SYSTEM.md` — full system boundaries, calculations and rollout gates.
 
-The original offline model and dashboard remain at `engine/pulp_riot_model.py` and `web/index.html` as legacy references. They are independent of the new operational API.
+The original offline model remains at `engine/pulp_riot_model.py` as a standalone reference, independent of the operational API. Run `py -3 engine/pulp_riot_model.py --test` for its self-test; invoking it without `--test` generates its CSV and JSON reports under `data/` by default.
 
 Additional repository areas:
 
@@ -521,7 +553,7 @@ Additional repository areas:
 - `real_records/frontend/` — Next.js, TypeScript and ECharts dashboard.
 - `real_records/monitoring/` and `real_records/storage/` — observability and storage configuration.
 - `real_records/compose*.yaml` and `real_records/kubernetes.yaml` — development deployments.
-- `data/real_records_practice/` — labeled JSON/CSV practice pack and [walkthrough](data/real_records_practice/START_HERE.md).
+- `data/real_records_practice/` — labeled JSON/CSV practice pack; see [practice instructions](#practice-with-labeled-synthetic-records).
 - `scripts/start_real_records.ps1` and `scripts/stop_real_records.ps1` — real/practice lifecycle helpers.
 - `tests/test_real_records.py` and `tests/test_real_proxy.py` — imported-record validation/planning and offline-proxy checks.
 - `web/assets/` — locally served fonts with their license notices.

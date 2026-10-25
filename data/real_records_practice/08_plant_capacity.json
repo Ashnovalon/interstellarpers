@@ -1,0 +1,11 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-CAPACITY",
+    "facility": "PRACTICE-PLANT",
+    "capacity_bottles": 100,
+    "status": "AVAILABLE"
+  }
+]

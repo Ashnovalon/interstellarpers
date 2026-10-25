@@ -1,0 +1,9 @@
+.git
+output
+data
+node_modules
+.npm-cache
+.real-test-deps
+**/__pycache__
+real_records/frontend
+*.log

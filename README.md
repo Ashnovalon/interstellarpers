@@ -25,6 +25,10 @@ A working Python and browser decision system for the Pulp Riot case. The home pa
 
 **The included data is synthetic and case-constrained.** The case provides no real SKU recipe, actual batch ledger, supplier corridor coordinates, transactions, or API credentials. The sample is for testing the pipeline; its scenario improvements are not measured savings. Nothing in this app orders ingredients, dispatches freight or moves stock.
 
+## Full stack for imported real records
+
+Open **Import real records** from `/operations`. The isolated Next.js/FastAPI platform includes the complete requested service stack, without changing the synthetic run. Start it with `powershell -ExecutionPolicy Bypass -File scripts/start_real_records.ps1`. See [setup, workflow and verification](real_records/README.md).
+
 ## Start the live experience
 
 ```powershell

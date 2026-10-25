@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-QUOTE",
+    "material": "PRACTICE-PULP",
+    "max_kg": 10,
+    "incremental_cost_rupees": 500,
+    "lead_days": 1,
+    "valid_until": "2026-11-01",
+    "cold_chain_confirmed": true
+  }
+]

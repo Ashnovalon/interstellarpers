@@ -10,6 +10,7 @@
 @media(max-width:960px){.impact-summary{grid-template-columns:1fr}.expiry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.expiry-grid .metric:last-child{grid-column:span 2}}
 .branch-tone-0{border-bottom:3px solid #7d90ad}.branch-tone-1{border-bottom:3px solid #48d5a1}.branch-tone-2{border-bottom:3px solid #a293ff}.branch-tone-3{border-bottom:3px solid #ffbf69}
 
+
 /* Controls must wrap within their own panel at desktop, zoomed and phone widths. */
 .section-head>div,.action-top h3,.action-bottom>span,.form-footer>span{min-width:0}
 .section-head,.inline-controls,.simulation-controls,.action-bottom,.form-footer,.impact-links,.dialog-footer,.dialog-footer>div{flex-wrap:wrap}

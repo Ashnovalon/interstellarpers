@@ -1,0 +1,2 @@
+date,synthetic,source_note,id,corridor,from_depot,to_depot,lead_days,status,confirmed
+2026-10-25,true,Generated practice data. Not actual company records.,PRACTICE-ROUTE,PRACTICE-S-N,PRACTICE-S,PRACTICE-N,1,OPEN,true

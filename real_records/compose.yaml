@@ -1,0 +1,251 @@
+name: pulp-real-records
+x-app: &app
+  image: pulp-real-api:local
+  pull_policy: never
+  environment: &env
+    DATABASE_URL: postgresql://real:${POSTGRES_PASSWORD:-local-real-records}@postgres:5432/real_records
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-real-records}
+    REDIS_URL: redis://redis:6379
+    ICEBERG_CATALOG_URL: postgresql+psycopg://real:${POSTGRES_PASSWORD:-local-real-records}@postgres:5432/real_records
+    S3_ENDPOINT: http://objectstore:9000
+    AWS_ACCESS_KEY_ID: realrecords
+    AWS_SECRET_ACCESS_KEY: local-real-history-secret
+    AWS_DEFAULT_REGION: us-east-1
+    MLFLOW_TRACKING_URI: http://mlflow:5000
+    RAY_ADDRESS: ray://ray:10001
+    TEMPORAL_ADDRESS: temporal:7233
+    OTEL_EXPORTER_OTLP_ENDPOINT: http://otel:4318
+    REAL_RECORDS_TOKEN: ${REAL_RECORDS_TOKEN:-}
+    RAY_USAGE_STATS_ENABLED: '0'
+    OMP_NUM_THREADS: '2'
+    OPENBLAS_NUM_THREADS: '2'
+    MKL_NUM_THREADS: '2'
+    PYTHONPATH: /app
+    TZ: Asia/Kolkata
+  restart: unless-stopped
+  depends_on:
+    postgres: {condition: service_healthy}
+
+services:
+  postgres:
+    mem_limit: 384m
+    image: postgres:16.6
+    command: [postgres, -c, wal_level=logical, -c, max_replication_slots=10, -c, max_wal_senders=10]
+    environment:
+      POSTGRES_DB: real_records
+      POSTGRES_USER: real
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-real-records}
+    volumes: [postgres:/var/lib/postgresql/data]
+    healthcheck: {test: [CMD-SHELL, 'pg_isready -U real -d real_records'], interval: 5s, timeout: 5s, retries: 30}
+    restart: unless-stopped
+  redis:
+    mem_limit: 128m
+    image: redis:7.4.1-alpine
+    command: [redis-server, --appendonly, 'yes']
+    volumes: [redis:/data]
+    restart: unless-stopped
+  kafka:
+    mem_limit: 1024m
+    image: apache/kafka:3.9.0
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_NUM_PARTITIONS: 1
+      KAFKA_HEAP_OPTS: -Xms128m -Xmx384m -XX:ActiveProcessorCount=2
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+    volumes: [kafka:/var/lib/kafka/data]
+    healthcheck: {test: [CMD-SHELL, '/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list'], interval: 10s, timeout: 10s, retries: 30}
+    restart: unless-stopped
+  connect:
+    mem_limit: 1024m
+    image: quay.io/debezium/connect:3.0.0.Final
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: real-record-connect
+      CONFIG_STORAGE_TOPIC: real-connect-config
+      OFFSET_STORAGE_TOPIC: real-connect-offsets
+      STATUS_STORAGE_TOPIC: real-connect-status
+      CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      STATUS_STORAGE_REPLICATION_FACTOR: 1
+      KAFKA_HEAP_OPTS: -Xms128m -Xmx384m -XX:ActiveProcessorCount=2
+    depends_on:
+      kafka: {condition: service_healthy}
+      postgres: {condition: service_healthy}
+    restart: unless-stopped
+  bootstrap:
+    <<: *app
+    command: [python, -m, real_records.bootstrap]
+    restart: on-failure
+    depends_on:
+      postgres: {condition: service_healthy}
+      connect: {condition: service_started}
+  jobmanager:
+    mem_limit: 1024m
+    image: pulp-real-flink:local
+    build: {context: .., dockerfile: real_records/flink/Dockerfile}
+    command: jobmanager
+    environment: &flink-env
+      FLINK_PROPERTIES: |
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
+        jobmanager.memory.process.size: 768m
+        taskmanager.memory.process.size: 1024m
+        python.executable: /opt/pyflink/bin/python
+        python.client.executable: /opt/pyflink/bin/python
+        state.checkpoints.dir: file:///checkpoints
+        execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION
+        restart-strategy.type: fixed-delay
+        restart-strategy.fixed-delay.attempts: 20
+        restart-strategy.fixed-delay.delay: 5s
+    volumes: [flink:/checkpoints]
+    restart: unless-stopped
+  taskmanager:
+    mem_limit: 1536m
+    image: pulp-real-flink:local
+    pull_policy: never
+    command: taskmanager
+    environment: *flink-env
+    volumes: [flink:/checkpoints]
+    depends_on: [jobmanager]
+    restart: unless-stopped
+  flink-submit:
+    image: pulp-real-flink:local
+    pull_policy: never
+    environment: *flink-env
+    entrypoint: [/bin/bash, -ec]
+    command:
+      - |
+        until curl -fsS http://jobmanager:8081/overview >/dev/null; do sleep 3; done
+        until curl -fsS http://connect:8083/connectors/real-record-outbox/status | python3 -c 'import json,sys; d=json.load(sys.stdin); sys.exit(0 if d.get("connector",{}).get("state")=="RUNNING" and d.get("tasks") and all(t["state"]=="RUNNING" for t in d["tasks"]) else 1)'; do sleep 3; done
+        if ! curl -fsS http://jobmanager:8081/jobs/overview | python3 -c 'import json,sys; sys.exit(0 if any(j["state"]=="RUNNING" for j in json.load(sys.stdin)["jobs"]) else 1)'; then
+          flink run -d -m jobmanager:8081 -py /app/real_records/flink/job.py
+        fi
+    depends_on:
+      kafka: {condition: service_healthy}
+      taskmanager: {condition: service_started}
+      bootstrap: {condition: service_completed_successfully}
+    restart: on-failure
+  objectstore:
+    mem_limit: 384m
+    image: chrislusf/seaweedfs:3.85
+    command: [server, '-dir=/data', '-ip=objectstore', -s3, '-s3.port=9000', '-s3.config=/etc/seaweedfs/s3.json', '-volume.max=5']
+    volumes: ['objectstore:/data', './storage/s3.json:/etc/seaweedfs/s3.json:ro']
+    restart: unless-stopped
+  clickhouse:
+    mem_limit: 768m
+    image: clickhouse/clickhouse-server:24.8.12.28-alpine
+    environment:
+      CLICKHOUSE_SKIP_USER_SETUP: '1'
+    volumes: [clickhouse:/var/lib/clickhouse, './storage/clickhouse.xml:/etc/clickhouse-server/config.d/local.xml:ro']
+    restart: unless-stopped
+  api:
+    <<: *app
+    build: {context: .., dockerfile: real_records/Dockerfile}
+    mem_limit: 768m
+    ports: ['127.0.0.1:8010:8000']
+    healthcheck: {test: [CMD, curl, -fsS, 'http://localhost:8000/health'], interval: 10s, timeout: 5s, retries: 30}
+  projector:
+    <<: *app
+    mem_limit: 768m
+    command: [python, -m, real_records.projector]
+    depends_on:
+      api: {condition: service_healthy}
+      kafka: {condition: service_healthy}
+      objectstore: {condition: service_started}
+      clickhouse: {condition: service_started}
+  temporal:
+    user: '0:0'
+    mem_limit: 384m
+    environment: {GOMAXPROCS: '2'}
+    image: temporalio/temporal:1.9.1
+    command: [server, start-dev, --ip, 0.0.0.0, --db-filename, /data/temporal.db]
+    volumes: [temporal:/data]
+    restart: unless-stopped
+  temporal-worker:
+    <<: *app
+    mem_limit: 384m
+    command: [python, -m, real_records.workflows]
+    depends_on:
+      api: {condition: service_healthy}
+      temporal: {condition: service_started}
+  ray:
+    <<: *app
+    mem_limit: 1536m
+    command: [ray, start, --head, --dashboard-host=0.0.0.0, --ray-client-server-port=10001, --num-cpus=2, --object-store-memory=200000000, --block]
+    shm_size: 1gb
+  mlflow:
+    <<: *app
+    mem_limit: 768m
+    command: [mlflow, server, --host, 0.0.0.0, --port, '5000', --workers, '1', --backend-store-uri, 'sqlite:////mlflow/tracking.db', --artifacts-destination, /mlflow/artifacts, --serve-artifacts]
+    volumes: [mlflow:/mlflow]
+  airflow:
+    mem_limit: 1024m
+    image: apache/airflow:2.10.4-python3.11
+    command: standalone
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'false'
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__PARALLELISM: '2'
+      AIRFLOW__WEBSERVER__WORKERS: '1'
+      REAL_RECORDS_TOKEN: ${REAL_RECORDS_TOKEN:-}
+    volumes: [airflow:/opt/airflow, './airflow:/opt/airflow/dags:ro']
+    depends_on:
+      api: {condition: service_healthy}
+    restart: unless-stopped
+  frontend:
+    mem_limit: 384m
+    image: pulp-real-frontend:local
+    build: {context: ./frontend}
+    environment:
+      API_URL: http://api:8000
+      REAL_RECORDS_TOKEN: ${REAL_RECORDS_TOKEN:-}
+    ports: ['127.0.0.1:3010:3000']
+    depends_on:
+      api: {condition: service_healthy}
+    restart: unless-stopped
+  otel:
+    mem_limit: 128m
+    image: otel/opentelemetry-collector-contrib:0.116.1
+    command: [--config=/etc/otel.yaml]
+    volumes: ['./monitoring/otel.yaml:/etc/otel.yaml:ro']
+    restart: unless-stopped
+  prometheus:
+    mem_limit: 192m
+    image: prom/prometheus:v3.0.1
+    volumes: ['./monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml:ro', 'prometheus:/prometheus']
+    restart: unless-stopped
+  grafana:
+    mem_limit: 256m
+    image: grafana/grafana:11.4.0
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-local-real-monitoring}
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+    ports: ['127.0.0.1:3011:3000']
+    volumes: ['grafana:/var/lib/grafana', './monitoring/grafana:/etc/grafana/provisioning:ro']
+    depends_on: [prometheus]
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  redis:
+  kafka:
+  flink:
+  objectstore:
+  clickhouse:
+  temporal:
+  mlflow:
+  airflow:
+  prometheus:
+  grafana:

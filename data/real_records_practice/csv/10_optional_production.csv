@@ -1,0 +1,2 @@
+date,synthetic,source_note,id,sku,facility,depot,bottles,production_on,eta_depot,status
+2026-10-25,true,Generated practice data. Not actual company records.,PRACTICE-PRODUCTION,PRACTICE-MANGO,PRACTICE-PLANT,PRACTICE-N,20,2026-10-26,2026-10-27,PLANNED

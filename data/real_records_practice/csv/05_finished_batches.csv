@@ -1,0 +1,3 @@
+date,synthetic,source_note,id,sku,depot,quantity,manufactured,expires
+2026-10-25,true,Generated practice data. Not actual company records.,PRACTICE-LOT-N,PRACTICE-MANGO,PRACTICE-N,30,2026-10-20,2027-02-02
+2026-10-25,true,Generated practice data. Not actual company records.,PRACTICE-LOT-S,PRACTICE-MANGO,PRACTICE-S,70,2026-10-20,2027-02-02

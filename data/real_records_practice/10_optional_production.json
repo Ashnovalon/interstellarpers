@@ -1,0 +1,15 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-PRODUCTION",
+    "sku": "PRACTICE-MANGO",
+    "facility": "PRACTICE-PLANT",
+    "depot": "PRACTICE-N",
+    "bottles": 20,
+    "production_on": "2026-10-26",
+    "eta_depot": "2026-10-27",
+    "status": "PLANNED"
+  }
+]

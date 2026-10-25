@@ -1,0 +1,4 @@
+apiVersion: 1
+providers:
+  - name: Real records
+    options: {path: /etc/grafana/provisioning/dashboards}

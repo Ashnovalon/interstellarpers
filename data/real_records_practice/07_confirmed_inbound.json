@@ -1,0 +1,13 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-INBOUND",
+    "material": "PRACTICE-PULP",
+    "quantity_kg": 10,
+    "eta": "2026-10-26",
+    "status": "CONFIRMED",
+    "mode": "ROAD"
+  }
+]

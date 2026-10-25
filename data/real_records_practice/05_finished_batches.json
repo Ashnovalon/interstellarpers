@@ -1,0 +1,24 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-LOT-N",
+    "sku": "PRACTICE-MANGO",
+    "depot": "PRACTICE-N",
+    "quantity": 30,
+    "manufactured": "2026-10-20",
+    "expires": "2027-02-02"
+  },
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-LOT-S",
+    "sku": "PRACTICE-MANGO",
+    "depot": "PRACTICE-S",
+    "quantity": 70,
+    "manufactured": "2026-10-20",
+    "expires": "2027-02-02"
+  }
+]

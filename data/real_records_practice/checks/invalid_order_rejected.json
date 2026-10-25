@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-INVALID",
+    "sku": "PRACTICE-MANGO",
+    "depot": "PRACTICE-N",
+    "channel": "PRACTICE-GT",
+    "requested": 100,
+    "fulfilled": 101,
+    "in_stock": true
+  }
+]

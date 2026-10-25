@@ -1,0 +1,15 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-SHIPMENT",
+    "sku": "PRACTICE-MANGO",
+    "from_depot": "PRACTICE-S",
+    "to_depot": "PRACTICE-N",
+    "bottles": 10,
+    "eta": "2026-10-27",
+    "expires": "2027-02-02",
+    "status": "CANCELLED"
+  }
+]

@@ -1,0 +1,8 @@
+global: {scrape_interval: 15s}
+scrape_configs:
+  - job_name: real-records-api
+    static_configs: [{targets: ['api:8000']}]
+  - job_name: otel
+    static_configs: [{targets: ['otel:8889']}]
+  - job_name: prometheus
+    static_configs: [{targets: ['localhost:9090']}]

@@ -1,0 +1,7 @@
+# MLflow 2.19 imports a pool class removed by SQLAlchemy 2.1.
+SQLAlchemy==2.0.36
+# Match the supported sklearn estimator protocol of XGBoost 2.1.
+scikit-learn==1.5.2
+numpy==1.26.4
+scipy==1.14.1
+pandas==2.2.3

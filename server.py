@@ -18,6 +18,8 @@ from datetime import date
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 
 from engine.external import poll_all
 from engine.operations import KINDS, Store, demo_records, iso_day, local_today, plan, seed_demo
@@ -34,7 +36,11 @@ ASSETS = {"/": ("live.html", "text/html; charset=utf-8"),
           "/operations.js": ("operations.js", "application/javascript; charset=utf-8"),
           "/operations.css": ("operations.css", "text/css; charset=utf-8"),
           "/operations-v2.js": ("operations-v2.js", "application/javascript; charset=utf-8"),
-          "/operations-v2.css": ("operations-v2.css", "text/css; charset=utf-8")}
+          "/operations-v2.css": ("operations-v2.css", "text/css; charset=utf-8"),
+          "/experience.css": ("experience.css", "text/css; charset=utf-8"),
+          "/experience.js": ("experience.js", "application/javascript; charset=utf-8"),
+          "/assets/syne-variable.ttf": ("assets/syne-variable.ttf", "font/ttf"),
+          "/assets/dm-sans-variable.ttf": ("assets/dm-sans-variable.ttf", "font/ttf")}
 
 
 class AppServer(ThreadingHTTPServer):
@@ -77,6 +83,42 @@ class AppServer(ThreadingHTTPServer):
 
 
 class Handler(BaseHTTPRequestHandler):
+    def _real_records_proxy(self):
+        """Only the isolated real-records UI is forwarded; live APIs are unchanged."""
+        target = os.getenv("REAL_RECORDS_UI_URL", "http://127.0.0.1:3010").rstrip("/")
+        length = int(self.headers.get("Content-Length", "0"))
+        if length < 0 or length > 5_000_000:
+            self._send({"error": "Maximum upload size is 5 MB"}, 413)
+            return
+        body = self.rfile.read(length) if length else None
+        headers = {key: self.headers[key] for key in ("Content-Type", "Authorization", "Accept") if key in self.headers}
+        request = Request(target + self.path, data=body, headers=headers, method=self.command)
+        try:
+            try:
+                response = urlopen(request, timeout=190)
+            except HTTPError as exc:
+                response = exc
+            with response:
+                raw = response.read()
+                self.send_response(response.status)
+                for key in ("Content-Type", "Cache-Control", "Location"):
+                    if response.headers.get(key):
+                        self.send_header(key, response.headers[key])
+                self.send_header("Content-Length", str(len(raw)))
+                self.send_header("X-Content-Type-Options", "nosniff")
+                self.end_headers()
+                self.wfile.write(raw)
+        except (URLError, TimeoutError, OSError):
+            if "/api/" in urlparse(self.path).path:
+                self._send({"detail": "Real-records services are offline. Run scripts/start_real_records.ps1."}, 503)
+                return
+            raw = (ROOT / "web" / "real-records-offline.html").read_bytes()
+            self.send_response(503)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(raw)))
+            self.end_headers()
+            self.wfile.write(raw)
+
     def log_message(self, fmt, *args):
         print(f"{self.address_string()} - {fmt % args}")
 
@@ -148,6 +190,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = urlparse(self.path).path
+        if path == "/operations/real" or path.startswith("/operations/real/"):
+            self._real_records_proxy()
+            return
         if path in ASSETS:
             name, mime = ASSETS[path]
             raw = (ROOT / "web" / name).read_bytes()
@@ -227,6 +272,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         path = urlparse(self.path).path
+        if path.startswith("/operations/real/api/"):
+            self._real_records_proxy()
+            return
         if not self._authorized():
             self._send({"error": "unauthorized"}, 401)
             return

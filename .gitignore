@@ -8,3 +8,7 @@ dist/
 .vscode/
 
 output/
+.npm-cache/
+.real-test-deps/
+.next/
+*.tsbuildinfo

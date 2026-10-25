@@ -1,0 +1,12 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-SIGNAL",
+    "sku": "PRACTICE-MANGO",
+    "source": "CAMPAIGN",
+    "value": 100,
+    "baseline": 100
+  }
+]

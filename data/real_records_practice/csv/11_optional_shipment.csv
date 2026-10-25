@@ -1,0 +1,2 @@
+date,synthetic,source_note,id,sku,from_depot,to_depot,bottles,eta,expires,status
+2026-10-25,true,Generated practice data. Not actual company records.,PRACTICE-SHIPMENT,PRACTICE-MANGO,PRACTICE-S,PRACTICE-N,10,2026-10-27,2027-02-02,CANCELLED

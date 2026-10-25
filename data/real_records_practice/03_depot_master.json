@@ -1,0 +1,18 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-N",
+    "city": "Bengaluru",
+    "region": "Practice north"
+  },
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-S",
+    "city": "Mysuru",
+    "region": "Practice south"
+  }
+]

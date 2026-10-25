@@ -1,0 +1,19 @@
+# Dedicated test project only; no volumes or ports overlap the real workspace.
+services:
+  jobmanager:
+    environment:
+      REAL_RECORDS_TEST_MODE: '1'
+  taskmanager:
+    environment:
+      REAL_RECORDS_TEST_MODE: '1'
+  flink-submit:
+    environment:
+      REAL_RECORDS_TEST_MODE: '1'
+  api:
+    environment:
+      REAL_RECORDS_TEST_MODE: '1'
+    ports: !override ['127.0.0.1:8020:8000']
+  frontend:
+    ports: !override ['127.0.0.1:3020:3000']
+  grafana:
+    ports: !override ['127.0.0.1:3021:3000']

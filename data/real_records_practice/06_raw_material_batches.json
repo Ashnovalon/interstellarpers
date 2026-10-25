@@ -1,0 +1,11 @@
+[
+  {
+    "date": "2026-10-25",
+    "synthetic": true,
+    "source_note": "Generated practice data. Not actual company records.",
+    "id": "PRACTICE-RAW",
+    "material": "PRACTICE-PULP",
+    "quantity_kg": 40,
+    "expires": "2027-02-02"
+  }
+]

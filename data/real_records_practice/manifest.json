@@ -1,0 +1,97 @@
+{
+  "synthetic": true,
+  "as_of": "2026-10-25",
+  "target": "Isolated practice workspace only (port 3020)",
+  "files": [
+    {
+      "file": "01_channel_master.json",
+      "kind": "channel_master",
+      "records": 1,
+      "optional": false
+    },
+    {
+      "file": "02_sku_master.json",
+      "kind": "sku_master",
+      "records": 1,
+      "optional": false
+    },
+    {
+      "file": "03_depot_master.json",
+      "kind": "depot_master",
+      "records": 2,
+      "optional": false
+    },
+    {
+      "file": "04_orders.json",
+      "kind": "order",
+      "records": 42,
+      "optional": false
+    },
+    {
+      "file": "05_finished_batches.json",
+      "kind": "lot",
+      "records": 2,
+      "optional": false
+    },
+    {
+      "file": "06_raw_material_batches.json",
+      "kind": "material_lot",
+      "records": 1,
+      "optional": false
+    },
+    {
+      "file": "07_confirmed_inbound.json",
+      "kind": "inbound",
+      "records": 1,
+      "optional": false
+    },
+    {
+      "file": "08_plant_capacity.json",
+      "kind": "capacity",
+      "records": 1,
+      "optional": false
+    },
+    {
+      "file": "09_open_route.json",
+      "kind": "route",
+      "records": 1,
+      "optional": false
+    },
+    {
+      "file": "10_optional_production.json",
+      "kind": "production",
+      "records": 1,
+      "optional": true
+    },
+    {
+      "file": "11_optional_shipment.json",
+      "kind": "shipment",
+      "records": 1,
+      "optional": true
+    },
+    {
+      "file": "12_optional_freight_quote.json",
+      "kind": "freight_quote",
+      "records": 1,
+      "optional": true
+    },
+    {
+      "file": "13_optional_signal.json",
+      "kind": "signal",
+      "records": 1,
+      "optional": true
+    }
+  ],
+  "expected": {
+    "core_records": 52,
+    "all_records": 56,
+    "daily_forecast": 100,
+    "seven_day_demand": 700,
+    "usable_stock": 100,
+    "production_bottles": 500,
+    "confirmed_procurement_kg": 10,
+    "transfer_bottles": 70,
+    "allocation_open_route": 600,
+    "allocation_closed_route": 530
+  }
+}
